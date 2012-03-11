@@ -1,2 +1,0 @@
-[04-Mar-2012 06:24:22] PHP Warning:  copy() [<a href='function.copy'>function.copy</a>]: The first argument to copy() function cannot be a directory in /home/square18/public_html/zoofaroo.com/classes/photoCommitAction.php on line 26
-[04-Mar-2012 06:24:22] PHP Warning:  unlink(../photos/tempPhotos/) [<a href='function.unlink'>function.unlink</a>]: Is a directory in /home/square18/public_html/zoofaroo.com/classes/photoCommitAction.php on line 32
