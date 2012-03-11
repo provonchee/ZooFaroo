@@ -1,0 +1,21 @@
+AuthName "squaretally"
+AuthUserFile "/home/square18/.htpasswds/public_html/passwd"
+AuthType Basic
+require valid-user
+RewriteEngine on <br>
+RewriteRule ^/?post.html$ index.php?pg=post [L]
+RewriteRule ^/?home.html$ index.php [L]
+RewriteRule ^/?search.html$ index.php?pg=search [L]
+RewriteRule ^/?about.html$ index.php?pg=about [L]
+RewriteRule ^/?register.html$ index.php?pg=register [L]
+RewriteRule ^/?contact.html$ index.php?pg=contact [L]
+RewriteRule ^/?forget.html$ index.php?pg=forget [L]
+RewriteRule ^/?edit.html$ index.php?pg=edit [L]
+RewriteRule ^/?donate.html$ index.php?pg=donate [L]
+RewriteRule ^/?reviews/([0-9]{1,2}).html$ index.php?pg=reviews&userID=$1 [L]
+RewriteRule ^/?([a-zA-Z_]+).html$ index.php?pg=state&regionName=North_America&state=$1 [L]
+RewriteRule ^/?([a-zA-Z_-]+)/([a-zA-Z_-]+).html$ index.php?pg=city&regionName=North_America&state=$1&city=$2 [L]
+RewriteRule ^/?([a-zA-Z_]+)/([a-zA-Z_]+)/([a-zA-Z_]+)/([a-zA-Z_-]+).html$ index.php?pg=postList&regionName=North_America&state=$1&city=$2&offerNeed=$3&category=$4 [L]
+RewriteRule ^/?([a-zA-Z_]+)/([a-zA-Z_]+)/([a-zA-Z_]+)/([a-zA-Z_-]+)/([0-9]{1,2}).html$ index.php?pg=thePost&regionName=North_America&state=$1&city=$2&offerNeed=$3&category=$4&postingID=$5 [L]
+RewriteRule ^/?pactivation/([a-zA-Z_0-9]+)/([a-zA-Z_0-9]+).html$ index.php?pg=activatePost&user=$1&key=$2
+RewriteRule ^/?uactivation/([a-zA-Z_0-9]+)/([a-zA-Z_0-9]+).html$ index.php?pg=activateUser&user=$1&key=$2
