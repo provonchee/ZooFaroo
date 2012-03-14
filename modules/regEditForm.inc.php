@@ -1,5 +1,5 @@
 <div id="register-form">
-	<div class="boxBare registerBase3">
+	<div class="registerBase3" style="width:450px;">
     
      <div class="registerBase3 maxLengthMsg"></div>
 

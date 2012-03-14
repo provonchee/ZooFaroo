@@ -18,7 +18,9 @@ if (!defined('BASE_URL')) {
 <div class="sectionHeaderFormat blueHeader"><h2 id="about-title">What is ZooFaroo?</h2></div>
 <div id="about-content">
 ZooFaroo is a simple by design online social marketplace and resource where neighbors and small businesses can trade, buy, sell, barter, and promote themselves within in their community.
-<br/><br/>
+<br/>
+<center><a href="http://www.zoofaroo.com/Oregon/Portland.html">To see some active posts click here for ZooFaroo Portland</a></center>
+<br/>
 
 ZooFaroo has many uses:
 <ol>

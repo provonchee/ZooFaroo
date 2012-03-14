@@ -97,9 +97,6 @@ var page = '<? echo $p; ?>';
 $('#post-form').load('modules/loginForm.php');
 $('.postBase1:eq(0)').hide();
 
-/*$('#usernameInput').val('');
-$('#passwordInput').val('');*/
-
 var offerMakeOffer;
 var needMakeOffer;
 
@@ -409,7 +406,7 @@ function photoCancelLoad(whichOne){
 	}
 }
 var divLocale = null;
-var pOrE = null
+var pOrE = null;
 function photoListen(whichOne, postOrEdit){
 	pOrE = postOrEdit;
 	if(pOrE=='edit'){
@@ -510,7 +507,6 @@ $("#post-"+whichKind+"Forms .post-"+whichKind+"Separator:eq("+whichOne+")").load
 																								$("#post-"+whichKind+"Forms .post-"+whichKind+"Separator:eq("+whichOne+") #post-"+whichKind+"FormPhoto").empty();
 																								}
 																		$("#post-"+whichKind+"Forms .post-"+whichKind+"Separator:eq("+whichOne+") #post-"+whichKind+"FormBottom #"+whichKind+"Money").fadeIn('fast');
-																	 //$("#post-"+whichKind+"Forms .post-"+whichKind+"Separator:eq("+whichOne+") #post-"+whichKind+"FormBottom #"+whichKind+"Money input[name="+whichKind+"Money"+whichOne+"]").is(':checked');
 											 
 											 }});//animate opening
 											 
@@ -563,7 +559,7 @@ $("#post-"+whichKind+"Forms .post-"+whichKind+"Separator:eq("+whichOne+")").load
 								 //activate the button that allows user to fill in another offer/need form
 								  activateAdditionalBtn(whichKind, whichOne);
 });
-};<!--formPopulate-->
+};//formPopulate
 
 
 function displayCategories(parsedCategories){
@@ -864,11 +860,11 @@ function activateAdditionalBtn(whichKind, whichOne){
 					$("#post-"+whichKind+"Forms").append("<div class='boxBasic post-"+whichKind+"Separator' name='"+nextOne+"'>Loading, please wait...<img src='images/loaderSm.gif'/></div><!--post-"+whichKind+"Separator "+nextOne+"-->");
 					formPopulate(whichKind, nextOne);//adds the next form graphically
 				}
-	});<!--post-"+whichKind+"Additional click-->
+	});
 	
 	$(".post-"+whichKind+"Additional .noThanksBtn").unbind("click").click(function(){
 		$(".post-"+whichKind+"Additional").children().fadeOut('fast', function(){});
-	});<!--post-"+whichKind+"Additional click-->
+	});
 }
 
 function newFormAction(whichKind, lastSeparator){
@@ -893,7 +889,7 @@ function newFormAction(whichKind, lastSeparator){
 							//the collapsed filled out form now shows the options of deleting or editing the form
 							$("#post-"+whichKind+"Forms .post-"+whichKind+"Separator:eq("+lastSeparator+") #post-formEdit").fadeIn('fast');
 							$("#post-"+whichKind+"Forms .post-"+whichKind+"Separator:eq("+lastSeparator+") #post-formDelete").fadeIn('fast');
-							activateDeleteBtns(whichKind, lastSeparator)
+							activateDeleteBtns(whichKind, lastSeparator);
 							activateEditBtns(whichKind, lastSeparator);
 }
 
@@ -1001,10 +997,6 @@ function postDelete(whichKind, whichOne){
 		clearIt(whichKind, lastSeparator, false);
 		$(".post-"+whichKind+"Additional").css({'margin-top':'0px'}).show();
 		$("#post-"+whichKind+"Forms .post-"+whichKind+"Separator:eq("+($("#post-"+whichKind+"Forms .post-"+whichKind+"Separator").length-1)+")").remove();
-		/*$(".post-"+whichKind+"Additional").hide();
-		nextOne = lastSeparator+1;
-		$("#post-"+whichKind+"Forms").append("<div class='boxBasic post-"+whichKind+"Separator' name='"+nextOne+"'>Loading, please wait...<img src='images/loaderSm.gif'/></div><!--post-"+whichKind+"Separator "+nextOne+"-->");
-		formPopulate(whichKind, nextOne);*///adds the next form graphically
 	}
 	}//1
 }

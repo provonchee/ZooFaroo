@@ -31,7 +31,7 @@ if (!defined('BASE_URL')) {
 	<div class='buttonWrap regEditSubmitBtn' style="margin-right: 100px; margin-top:-75px;">Submit Form</div>
     </div>
 
-<script>$('.maxLengthMsg').html('<u>PLEASE NOTE</u>:&nbsp;&nbsp;The <b>Password</b> must be between 8-12 characters and must contain <b>both</b> letters and numbers.');</script>	
+<script>$('.maxLengthMsg').html('<u>PLEASE NOTE</u>:&nbsp;&nbsp;The <b>Password</b> must be between 8-12 characters and must contain <b>both</b> letters and numbers.').css({'margin-left':'500px'});</script>	
  
 
 </div>

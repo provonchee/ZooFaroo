@@ -114,20 +114,25 @@ function submitSearchAction(){
 		$('.searchBase3 .secondListBase').empty();
 		$('.searchBase3').hide();
 		$('#search-searchBtn').html('Checking form, please wait...<img src="images/loaderSm.gif"/>').css({'color':'#990000', 'font-size': '0.9em' });
-											
-	var checkFormArray = {'state':drpDwnStateID, 'city':drpDwnCityID, 'category':drpDwnCategoryAlt, 'offer-need':drpDwnOfferNeed};
-		
-		for (var child in checkFormArray){
-			if(checkFormArray[child]==null || checkFormArray[child]=='' || checkFormArray[child]=='undefined' || checkFormArray[child]=='please choose...'){
-				alertObject.alertBox('EMPTY FORM!', 'Please make sure that '+child+' is filled out/chosen!', 'alert', null, null, null);
-				 $('#search-searchBtn').html('<div class="buttonWrap">Search</div>').css({'color':'#333', 'font-size': '1em' });
-				 $('#postsPerPageBtns').empty();
-				break;
-			}else if(child=='offer-need'){
-				sendData(drpDwnStateID, drpDwnCityID, drpDwnCategoryID, drpDwnOfferNeed, search_keyword);										
-				$('#search-searchBtn').html('Please wait...<img src="images/loaderSm.gif"/>').css({'color':'#990000', 'font-size': '0.9em' });
+	if($("#stateDrop").is(':visible') || $("#cityDrop").is(':visible') || $("#search_categories").is(':visible') || $("#search-categoryList input[name=search_goodService]").is(':visible')){
+		alertObject.alertBox('EMPTY FORM!', 'Please make sure a state, city, and category is chosen.', 'alert', null, null, null);
+		$('#search-searchBtn').html('<div class="buttonWrap">Search</div>').css({'color':'#333', 'font-size': '1em' });
+		$('#postsPerPageBtns').empty();
+	}else{
+		var checkFormArray = {'state':drpDwnStateID, 'city':drpDwnCityID, 'category':drpDwnCategoryAlt, 'offer-need':drpDwnOfferNeed};
+			
+			for (var child in checkFormArray){
+				if(checkFormArray[child]==null || checkFormArray[child]=='' || checkFormArray[child]=='undefined' || checkFormArray[child]=='please choose...'){
+					alertObject.alertBox('EMPTY FORM!', 'Please make sure that '+child+' is filled out/chosen!', 'alert', null, null, null);
+					 $('#search-searchBtn').html('<div class="buttonWrap">Search</div>').css({'color':'#333', 'font-size': '1em' });
+					 $('#postsPerPageBtns').empty();
+					break;
+				}else if(child=='offer-need'){
+					sendData(drpDwnStateID, drpDwnCityID, drpDwnCategoryID, drpDwnOfferNeed, search_keyword);										
+					$('#search-searchBtn').html('Please wait...<img src="images/loaderSm.gif"/>').css({'color':'#990000', 'font-size': '0.9em' });
+				}
 			}
-		}
+	}
 														
 }
 

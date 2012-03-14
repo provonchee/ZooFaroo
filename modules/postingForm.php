@@ -47,7 +47,7 @@ $postNumber = $whichOne+1;
   
 <div id="post-<? echo $whichKind ?>FormMiddle">
      <br/>
-     <div class="maxLengthMsg" style="margin-top:50px;"></div>
+     <div class="maxLengthMsg"></div>
      <script>$('.maxLengthMsg').html('<u>PLEASE NOTE</u>:<br/>The Title must not be longer than 75 characters and the Description must not be longer than 600 characters.');</script>
      <div id="<? echo $whichKind ?>Categories"></div><!--categories-->
     <br/>

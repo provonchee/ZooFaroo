@@ -280,7 +280,6 @@ function reseter(){window.open(''+baseHref+chosenState+'/'+chosenCity+'/'+chosen
 				}	
 				if(thePostInfo[14]=='2'){
 					$('.thePostBase '+whichThePostBase+' .moneyOption').unbind('click').click(function(){alertObject.alertBox('OPEN TO OFFERS', window["acceptMoney"+cappedKind+""], 'alert', null, null, null);});
-					//$('.thePostBase '+whichThePostBase+' .moneyOption').attr({ title:"This user is open to money exchange", alt:"money offers"});
 				}
 
 				$('.thePostBase '+whichThePostBase+' .abuseReport').unbind('click').click(function(){alertObject.alertBox('ALERT!', reportConfirm, 'decision', sendReport, thePostInfo[16], kind);});
@@ -301,7 +300,7 @@ function reseter(){window.open(''+baseHref+chosenState+'/'+chosenCity+'/'+chosen
 			 	 userLink = '<a href="user/'+thePostInfo[1]+'.html" style="text-decoration:none"><div class="buttonWrap reviewLink">'+thePostInfo[1]+'('+userRatingCount+')&nbsp;<b>'+userRatingPercent+'</b></div></a>';					
 				 //secondary tally
 					$('.thirdListBase #reviews-greeting').html(''+userLink+'&nbsp;has&nbsp;<div id="list-'+kind+'Tag">'+numOfSecondaries+'&nbsp; '+kind+'</div> postings.').css({'font-size':'inherit'});
-					postSection = "<div id='list-"+kind+"Title'><div id='list-"+kind+"Icon'><div id='list-"+kind+"Tag'>"+kind+"ed</div></div><div id='list-"+kind+"Link'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+thePostInfo[12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+thePostInfo[7]+"/"+thePostInfo[5]+"/"+cappedKind+"ed/"+thePostInfo[12].replace(/ /g, '_')+"/"+thePostInfo[16]+".html'> <div id='"+kind+"Title'>"+thePostInfo[13]+"</div></a></div>"+mOfferObject.mOffer(thePostInfo[14], kind)+"<div id='hasPic'>"+hasPhoto+"</div></div>"
+					postSection = "<div id='list-"+kind+"Title'><div id='list-"+kind+"Icon'><div id='list-"+kind+"Tag'>"+kind+"ed</div></div><div id='list-"+kind+"Link'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+thePostInfo[12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+thePostInfo[7]+"/"+thePostInfo[5]+"/"+cappedKind+"ed/"+thePostInfo[12].replace(/ /g, '_')+"/"+thePostInfo[16]+".html'> <div id='"+kind+"Title'>"+thePostInfo[13]+"</div></a></div>"+mOfferObject.mOffer(thePostInfo[14], kind)+"<div id='hasPic'>"+hasPhoto+"</div></div>";
 		   			$('.thePostBase '+whichThePostBase+'').prepend('<div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><span style="float:left;">Posted by:&nbsp;&nbsp;</span>'+userLink+'<div id="post-postedDate">Posted on:&nbsp;&nbsp;<span >'+dateAdjusted+'</span></div><div id="headerFooter-city">Post Location:&nbsp;&nbsp;'+thePostInfo[18]+'&nbsp;&nbsp;(<a class="aLink" href="'+baseHref+'/'+thePostInfo[7]+'/'+thePostInfo[5]+'.html">'+thePostInfo[5].replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a class="aLink"  href="'+baseHref+'/'+thePostInfo[7]+'.html">'+thePostInfo[7].replace(/_/g, ' ')+'</a></div>)<div class="buttonWrap abuseReport">!</div></div>'+postSection+'');
 					
 					if(thePostInfo[5]==thePostInfo[7]){//city and state are the same as in Maine/Maine for states that only have one section
@@ -311,7 +310,6 @@ function reseter(){window.open(''+baseHref+chosenState+'/'+chosenCity+'/'+chosen
 					
 					if(thePostInfo[14]=='2'){
 					$('.thePostBase '+whichThePostBase+' .moneyOption').unbind('click').click(function(){alertObject.alertBox('OPEN TO OFFERS', window["acceptMoney"+cappedKind+""], 'alert', null, null, null);});
-					//$('.thePostBase '+whichThePostBase+' .moneyOption').attr({ title:"This user is open to money exchange", alt:"money offers"});
 					}
 					$('.thePostBase '+whichThePostBase+' .abuseReport').unbind('click').click(function(){alertObject.alertBox('ALERT!', reportConfirm, 'decision', sendReport, thePostInfo[16], kind);});
 			}

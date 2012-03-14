@@ -827,6 +827,7 @@ font-size:0.9em;
 	 border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+	border: 1px solid #DDD;
 }
 
 #preloader
@@ -1778,6 +1779,7 @@ font-size:0.9em;
 #register-terms {
 	font-size: 0.9em;
     padding-top: 10px;
+	width: 900px;
 }
 
 #register-alert {
@@ -1798,10 +1800,10 @@ font-size:0.9em;
 
 .maxLengthMsg {
 	color: #990000;
-    float: right;
     font-size: 0.9em;
     width: 180px;
-	margin-top: 135px;
+	position:absolute;
+	margin-left:750px;
 }
 
 #activation-successful {
@@ -2103,7 +2105,7 @@ font-size: 1.1em;
  
  #search-searchBtn{
 	float: left;
-    margin-left: 620px;
+    margin-left: 700px;
     margin-top: -30px;
  }
  
@@ -2227,4 +2229,3 @@ font-size: 1.1em;
 }
 
 /* CSS Document */
-

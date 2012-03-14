@@ -261,7 +261,7 @@ var editObject = {
 								
 								$('.mainBase .postBaseEdit #post-'+whichKind+'FormPhoto').hide();
 																																	
-								$(".mainBase .postBaseEdit #"+whichKind+"Categories").html("Listing category: <select name='"+whichKind+"GoodsCategory' id='"+whichKind+"GoodsCategory' style='display: inline;'></select><select name='"+whichKind+"ServicesCategory' id='"+whichKind+"ServicesCategory' style='display: inline;'></select>").css({"color": "#333333", "font-size": "1em"});
+								$(".mainBase .postBaseEdit #"+whichKind+"Categories").html("Listing category: <select name='"+whichKind+"GoodsCategory' id='"+whichKind+"GoodsCategory' style='display: inline;'></select><select name='"+whichKind+"ServicesCategory' id='"+whichKind+"ServicesCategory' style='display: inline;'></select>").css({"color": "#333333", "font-size": "1em", "margin-top":"30px"});
 								$(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory").prepend("<option value='please choose...'>please choose...</option>");
 								$(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory").prepend("<option value='please choose...'>please choose...</option>");
 									
@@ -404,7 +404,7 @@ var editObject = {
 				$('.mainBase .postBaseEdit .postBaseEdit2').load("modules/regEditForm.inc.php", function(){
 					$('.mainBase .postBaseEdit .postBaseEdit2 #register-terms').hide();
 					$('.mainBase .postBaseEdit .postBaseEdit2').prepend('<div class="sectionHeaderFormat blueHeader sectionHeader1"><span style="color:#FFFFFF;">Edit Your Account Information</span></div>');
-					$('.maxLengthMsg').html('<u>NOTE</u>:&nbsp;&nbsp;Username cannot be changed.  The Password must be between 8 and 12 characters long and must contain both letters and numbers.');
+					$('.maxLengthMsg').html('<u>NOTE</u>:&nbsp;&nbsp;Username cannot be changed.  The Password must be between 8 and 12 characters long and must contain both letters and numbers.').css({'margin-left':'500px'});
 					$('#username-input').remove();
 					$('.secCodeRefresh').css({'margin-left':'400px', 'margin-top':'110px'});
 					$('.editCancelBtn').css({'margin-top':'0px'});
@@ -415,7 +415,7 @@ var editObject = {
 					fetchStateObject.fetchStateArray('edit');
 					$('.mainBase .postBaseEdit .postBaseEdit2').css({'width':'98%', 'height':'880px'});
 					$('.mainBase .postBaseEdit #index-ZooFaroo').html(''+alertHdrImg+'');
-					$('.mainBase .postBaseEdit #register-option:eq(3)').append(''+greetingUserName+'').css({'margin-right':'285px'});;//username cannot be changed
+					$('.mainBase .postBaseEdit #register-option:eq(3)').append(''+greetingUserName+'').css({'margin-right':'125px'});;//username cannot be changed
 					$('.mainBase .postBaseEdit #password-input').val(editPSO);
 					$('.mainBase .postBaseEdit #passwordConfirm').val(editPSO);
 					$('.mainBase .postBaseEdit #email').val(editEmail);

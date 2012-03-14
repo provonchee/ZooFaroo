@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
 <head>
-<base href="http://localhost:8888/ZooFarooMAMP/"/>
+<base href="http://localhost:8888/ZooFaroo/"/>
 <meta charset="UTF-8" />
 <META NAME="description" CONTENT="<?php echo $page_title; ?> the online social marketplace for the free exchange of goods or services through trade, barter, or money.">
 <META NAME="keywords" CONTENT="barter, exchange, goods, services, offered, needed, fair, equal, money">
@@ -64,8 +64,8 @@ localStorage.clear();
 /////REMOVE!!!!!
 
 
-var baseHref = 'http://localhost:8888/ZooFarooMAMP/';
-<? $baseHref = 'http://localhost:8888/ZooFarooMAMP/'; ?>
+var baseHref = 'http://localhost:8888/ZooFaroo/';
+<? $baseHref = 'http://localhost:8888/ZooFaroo/'; ?>
 </script>
 
 </head>
