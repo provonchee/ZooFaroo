@@ -45,7 +45,7 @@ class grabPosts{
 			$this->fetchedArray[$pl][14] = $this->orow[14];//Money
 			$this->fetchedArray[$pl][15] = $this->orow[15];//Empty
 			$this->fetchedArray[$pl][16] = $this->orow[16];//postingID
-			$this->fetchedArray[$pl][17] =  mb_convert_encoding($this->orow[17], "UTF-8", "HTML-ENTITIES");//Posting
+			$this->fetchedArray[$pl][17] =  mb_convert_encoding(nl2br($this->orow[17]), "UTF-8", "HTML-ENTITIES");//Posting
 			$this->fetchedArray[$pl][18] =  mb_convert_encoding($this->orow[18], "UTF-8", "HTML-ENTITIES");//specificLocale
 			$this->fetchedArray[$pl][19] =  userLinkInfo::reviewTallies($this->orow[0]);//user link info
 			$this->fetchedArray[$pl][20] = $this->numRows;//number of total postings with said criteria
