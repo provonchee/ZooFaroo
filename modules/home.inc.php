@@ -12,21 +12,6 @@ if (!defined('BASE_URL')) {
 	
 } // End of defined() IF.
 ?>
-<script>
-if(localeObject.localeAction('state')){
-	chosenStateAlt = localeObject.localeAction('state');
-	if(localeObject.localeAction('city')){
-		chosenCityAlt = localeObject.localeAction('city');
-		window.open(''+baseHref+chosenStateAlt+'/'+chosenCityAlt+'.html', '_self');
-				localStorage.removeItem('zoofaroo_chosenState');
-				localStorage.removeItem('zoofaroo_chosenCity');
-	}else{
-		window.open(''+baseHref+chosenStateAlt+'.html', '_self');
-				localStorage.removeItem('zoofaroo_chosenState');
-				localStorage.removeItem('zoofaroo_chosenCity');
-	}
-}
-</script>
 <div class="boxBasic homeBase">
 <div class="sectionHeaderFormat blueHeader"><h2 id="index-title">Welcome to ZooFaroo - the online barter community.</h2></div>
 
@@ -40,32 +25,7 @@ if(localeObject.localeAction('state')){
 </div><!--separator-->
 </div><!--mainBase-->
 <script>
-
-		   var myImagePR = new Image;
-		   myImagePR.src = "images/preloader.gif";
-		   myImagePR.id = "preload";
-		   $('.homeBase #preloader').append(myImagePR);
-		   $('.homeBase #preloader').show();
-			$('.homeBase #index-menu').empty().hide();
-			
-			fetchStateObject.fetchStateArray('home');
-			
-			function displayStates(sArray){
-			
-				var t=1;
-					   for($i=0; $i<51; $i++){
-						    if(t<6){
-					   			$('.homeBase #index-menu').append('<div style="display:inline;"><a href="'+sArray[$i][1]+'.html"style="text-decoration:underline;">'+sArray[$i][1].replace(/_/g, " ")+'</a></div>&nbsp;&nbsp;');
-								t++;
-					   		}else{
-								$('.homeBase #index-menu').append('<div style="display:inline;"><a href="'+sArray[$i][1]+'.html"style="text-decoration:underline;">'+sArray[$i][1].replace(/_/g, " ")+'</a></div>&nbsp;&nbsp;<br/>');
-								t=1;
-							}
-					   }
-					   $('.homeBase #preloader').empty();
-					   $('.homeBase #index-menu').fadeIn('fast');	   
-			}
-			
+if(localeObject.localeAction('state')){ chosenStateAlt = localeObject.localeAction('state'); if(localeObject.localeAction('city')){ chosenCityAlt = localeObject.localeAction('city'); window.open(''+baseHref+chosenStateAlt+'/'+chosenCityAlt+'.html', '_self'); localStorage.removeItem('zoofaroo_chosenState'); localStorage.removeItem('zoofaroo_chosenCity'); }else{ window.open(''+baseHref+chosenStateAlt+'.html', '_self'); localStorage.removeItem('zoofaroo_chosenState'); localStorage.removeItem('zoofaroo_chosenCity'); }} var myImagePR = new Image; myImagePR.src = "images/preloader.gif"; myImagePR.id = "preload"; $('.homeBase #preloader').append(myImagePR); $('.homeBase #preloader').show(); $('.homeBase #index-menu').empty().hide(); fetchStateObject.fetchStateArray('home'); function displayStates(sArray){ var t=1; for($i=0; $i<51; $i++){ if(t<6){ $('.homeBase #index-menu').append('<div style="display:inline;"><a href="'+sArray[$i][1]+'.html"style="text-decoration:underline;">'+sArray[$i][1].replace(/_/g, " ")+'</a></div>&nbsp;&nbsp;'); t++; }else{ $('.homeBase #index-menu').append('<div style="display:inline;"><a href="'+sArray[$i][1]+'.html"style="text-decoration:underline;">'+sArray[$i][1].replace(/_/g, " ")+'</a></div>&nbsp;&nbsp;<br/>'); t=1; } } $('.homeBase #preloader').empty(); $('.homeBase #index-menu').fadeIn('fast'); } 		
 </script>
 <map name="map_usa" id="map_usa">
 <area alt="AL" href="Alabama.html" coords="322,214,320,209,342,205,342,191,332,165,312,167,313,214,320,216,322,214" shape="poly" />

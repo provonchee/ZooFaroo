@@ -1,3 +1,5 @@
+var bcObject = {
+	bcInjector:function(){
 if(chosenPage!='state' && chosenPage!='city' && chosenPage!='postList' && chosenPage!='thePost' && chosenPage!='post' && chosenPage!='search' && chosenPage!='searchAdvanced'){
 if(localeObject.localeAction('state')||localeObject.localeAction('city')){
 	var bcCity = localeObject.localeAction('city');
@@ -16,3 +18,5 @@ if($('#bcState').text()==$('#bcCity').text()){
 }
 
 $("#breadCrumbs .backBtn").unbind("click").click(function(){history.go(-1)});
+	}
+}

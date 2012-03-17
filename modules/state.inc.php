@@ -68,7 +68,7 @@ var myImagePR = new Image;
 				   s=1;
 			   }
 			   if(citiesArray[i][4]!=null){
-			   $('#state-image #m_'+citiesArray[i][0]+'').append('<area shape="rect" coords="'+citiesArray[i][4]+'" href="'+citiesArray[i][1]+'/'+citiesArray[i][3]+'.html" target="_self" title="'+citiesArray[i][3]+', '+citiesArray[i][1]+'" alt="'+citiesArray[i][3]+', '+citiesArray[i][1]+'" />');
+			   $('#state-image #m_'+citiesArray[i][0]+'').append('<area shape="rect" coords="'+citiesArray[i][4]+'" href="'+citiesArray[i][1]+'/'+citiesArray[i][3]+'.html" target="_self" title="'+citiesArray[i][3].replace(/__/g, '/').replace(/_/g, ' ')+', '+citiesArray[i][1].replace(/__/g, '/').replace(/_/g, ' ')+'" alt="'+citiesArray[i][3].replace(/__/g, '/').replace(/_/g, ' ')+', '+citiesArray[i][1]+'" />');
 			   }
 		   }
 		    var stateMenuMarginLeft = 500-($('.stateBase #state-menu').width()/2);

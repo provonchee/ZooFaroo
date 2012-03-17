@@ -16,70 +16,24 @@
 <!--[if lt IE 8]>
 <script>window.open('http://www.zoofaroo.com/comingSoon.html', '_self');</script>
 <![endif]-->
-
 <script src="js/SD.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/modernizr.js"></script>
-<script src="js/variables.js"></script>
-<script src="js/confirmUser.js"></script>
-<script src="js/fetchCategoryArray.js"></script>
-<script src="js/fetchCityArray.js"></script>
-<script src="js/fetchStateArray.js"></script>
-<script src="js/displayCities.js"></script>
-<script src="js/displayStates.js"></script>
-<script src="js/quickSearch.js"></script>
-<script src="js/listDisplay.js"></script>
-<script src="js/alertBox.js"></script>
-<script src="js/editBox.js"></script>
-<script src="js/shareBox.js"></script>
-<script src="js/mOffer.js"></script>
-<script src="js/localeAction.js"></script>
-<script src="js/loginAction.js"></script>
-<script src="js/ajaxUpload.js"></script>
-<script src="js/genTimer.js"></script>
-<script src="js/abuseReport.js"></script>
-
+<script src="js/zoofaroo.js"></script>
 <link rel="stylesheet" type="text/css" href="css/barter.css" />
-
 <script type="text/javascript">
-/*$.getJSON('http://api.wipmania.com/jsonp?callback=?', function (data) { 
-   if(data.address.country!='United States'){
-	   window.open(''+baseHref+'comingSoon.html', '_self');
-   }
-});*/
-  /*  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-29626133-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();*/
-
-/////REMOVE!!!!!  
-/*if(Modernizr.localstorage){//if browser supports localStorage
-localStorage.clear();
-};*/
-/////REMOVE!!!!!
-
-
 var baseHref = 'http://localhost:8888/ZooFaroo/';
 <? $baseHref = 'http://localhost:8888/ZooFaroo/'; ?>
+chosenPage = '<? echo $p; ?>';
 </script>
-
 </head>
-
 <body>
-<script>chosenPage = '<? echo $p; ?>';function pageRefresh(){window.location.reload();}</script>
-<div id="fb-root"></div>
 <script src="js/fb.js"></script>
-
+<div id="fb-root"></div>
 <div id="alertScreen"></div>
 <div class="boxGradientDrop  postBaseShare"></div>
 <div class="boxDrop alert"><div id="alertHdrImg"></div><div id="alertHdr"></div><div id="alertMsg"></div></div>
-
-<script>$('html, body').animate({scrollTop:0});</script>
+<script>$('html, body').animate({scrollTop:0});function pageRefresh(){window.location.reload();}</script>
 <div class="wrapper">
 <div class="boxBasic sideBar">
 <div id='shareBtns'>
@@ -91,7 +45,7 @@ var baseHref = 'http://localhost:8888/ZooFaroo/';
 <!--Twitter-->
 <a href="https://twitter.com/ZooFaroo" target="_blank"><img src="images/twitterFollow.png" height="25" alt="Follow us on Twitter!" style="border:none;"/></a>
 </div>
-
+<!--Google-->
 <div id="plus1">
 <link href="https://plus.google.com/103958829492703792482" rel="publisher" />
 <a href="https://plus.google.com/103958829492703792482?prsrc=3" style="text-decoration: none;"><img src="images/googlePlusFollow.png" height="25" alt="Follow us on Twitter!" style="border:none;"/></a>
