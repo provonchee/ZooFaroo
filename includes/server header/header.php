@@ -58,7 +58,7 @@
 <div id="header-menu">
 <div class="buttonWrap header-menuBtn" aux="home.html">home</div>
 <div class="buttonWrap header-menuBtn" aux="register.html">register</div>
-<div class="buttonWrap header-menuBtn" aux="edit.html">eidt your account</div>
+<div class="buttonWrap header-menuBtn" aux="edit.html">edit your account</div>
 <div class="buttonWrap header-menuBtn" aux="contact.html">contact us</div>
 <div class="buttonWrap header-menuBtn" aux="blog/">blog</div>
 <div class="buttonWrap header-menuBtn" aux="login.html">login</div>
