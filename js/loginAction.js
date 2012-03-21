@@ -177,7 +177,7 @@
 												}else if(returned=='alrdyraMatch'){//user has left a rating BUT NOT a review for this user
 															$('.reviewFormBase2 #ratePositive').empty();
 															$('.reviewFormBase2 #rateNegative').empty();
-															$('.reviewFormBase2 #reviews-greeting:eq(0)').empty();
+															$('.reviewFormBase2 .reviews-greeting:eq(0)').empty();
 															$('.reviewFormBase2 #reviews-recommend').html('Our records show that you\'ve left a rating for this user but not a review.  Why not leave a review too?').css({'color':'#669900', 'font-size':'1em', 'text-align':'center'});
 															recUser = 'alrdyraMatch';
 															

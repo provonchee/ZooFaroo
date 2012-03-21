@@ -55,9 +55,10 @@ class grabPosts{
 			if($queryParam2=='offered'){
 				$getTallies->offerNeedTally($this->fetchedArray[$pl][0], 'needed');
 				$this->fetchedArray[$pl][21] = $getTallies->offerNeedsCount;
+				$this->fetchedArray[$pl][22] = 'offer';
 			}else{
 				$getTallies->offerNeedTally($this->fetchedArray[$pl][0], 'offered');
-				$this->fetchedArray[$pl][21] = $getTallies->offerNeedsCount;
+				$this->fetchedArray[$pl][22] = 'need';
 			}
 			
 			$pl++;

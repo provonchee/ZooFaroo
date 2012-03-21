@@ -215,28 +215,28 @@ switch ($p) {
 		$page = 'state.inc.php';
 		$pageSpec = '?regionName='.$regionName.'&state='.$state.'';
 		$page_title = ''.$stateDisplay.' | ZooFaroo - Be social.  Trade local.';
-		$breadCrumbs = '<div class="buttonWrap backBtn">&lArr;&nbsp;Back</div>&nbsp;&nbsp;&nbsp;&nbsp;<b><u><div id="bcRegion"><a href="login.html">'.$regionNameDisplay.'</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'.$state.'.html">'.$stateDisplay.'</a></div></u></b>';
+		$breadCrumbs = '<div class="buttonWrap backBtn">&lArr;&nbsp;Back</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="bcRegion"><a href="login.html">'.$regionNameDisplay.'</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'.$state.'.html">'.$stateDisplay.'</a></div>';
 		break;
 		
 	case 'city':
 		$page = 'city.inc.php';
 		$pageSpec = '?regionName='.$regionName.'&state='.$state.'&city='.$city.'';
 		$page_title = ''.$cityDisplay.' | '.$stateDisplay.' | ZooFaroo - Be social.  Trade local.';
-		$breadCrumbs = '<div class="buttonWrap backBtn">&lArr;&nbsp;Back</div>&nbsp;&nbsp;&nbsp;&nbsp;<b><u><div id="bcRegion"><a href="login.html">'.$regionNameDisplay.'</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'.$state.'.html">'.$stateDisplay.'</a></div><div id="bcCity">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'.html">'.$cityDisplay.'</a></div></u></b>';
+		$breadCrumbs = '<div class="buttonWrap backBtn">&lArr;&nbsp;Back</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="bcRegion"><a href="login.html">'.$regionNameDisplay.'</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'.$state.'.html">'.$stateDisplay.'</a></div><div id="bcCity">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'.html">'.$cityDisplay.'</a></div>';
 		break;
 		
 	case 'postList':
 		$page = 'postList.inc.php';
 		$pageSpec = '?regionName='.$regionName.'&state='.$state.'&city='.$city.'&offerNeed='.$offerNeed.'&category='.$category.'';
 		$page_title = ''.$categoryDisplay.' | '.$cityDisplay.' | '.$stateDisplay.' | ZooFaroo';
-		$breadCrumbs = '<div class="buttonWrap backBtn">&lArr;&nbsp;Back</div>&nbsp;&nbsp;&nbsp;&nbsp;<b><u><div id="bcRegion"><a href="login.html">'.$regionNameDisplay.'</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'.$state.'.html">'.$stateDisplay.'</a></div><div id="bcCity">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'.html">'.$cityDisplay.'</a></div><div id="bcOfferNeed">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'.html">'.$offerNeedDisplay.'</a></div><div id="bcCategory">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'/'.$offerNeed.'/'.$category.'.html">'.$categoryDisplay.'</a></div></u></b>';
+		$breadCrumbs = '<div class="buttonWrap backBtn">&lArr;&nbsp;Back</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="bcRegion"><a href="login.html">'.$regionNameDisplay.'</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'.$state.'.html">'.$stateDisplay.'</a></div><div id="bcCity">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'.html">'.$cityDisplay.'</a></div><div id="bcOfferNeed">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'.html">'.$offerNeedDisplay.'</a></div><div id="bcCategory">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'/'.$offerNeed.'/'.$category.'.html">'.$categoryDisplay.'</a></div>';
 		break;
 		
 	case 'thePost':
 		$page = 'thePost.inc.php';
 		$pageSpec = '?regionName='.$regionName.'&state='.$state.'&city='.$city.'&offerNeed='.$offerNeed.'&category='.$category.'&postingID='.$postingID.'';
 		$page_title = ''.$categoryDisplay.' | '.$cityDisplay.' | '.$stateDisplay.' | ZooFaroo';
-		$breadCrumbs = '<div class="buttonWrap backBtn">&lArr;&nbsp;Back</div>&nbsp;&nbsp;&nbsp;&nbsp;<b><u><div id="bcRegion"><a href="login.html">'.$regionNameDisplay.'</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'.$state.'.html">'.$stateDisplay.'</a></div><div id="bcCity">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'.html">'.$cityDisplay.'</a></div><div id="bcOfferNeed">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'.html">'.$offerNeedDisplay.'</a></div><div id="bcCategory">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'/'.$offerNeed.'/'.$category.'.html">'.$categoryDisplay.'</a></div></u></b>';
+		$breadCrumbs = '<div class="buttonWrap backBtn">&lArr;&nbsp;Back</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="bcRegion"><a href="login.html">'.$regionNameDisplay.'</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'.$state.'.html">'.$stateDisplay.'</a></div><div id="bcCity">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'.html">'.$cityDisplay.'</a></div><div id="bcOfferNeed">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'.html">'.$offerNeedDisplay.'</a></div><div id="bcCategory">&nbsp;&hArr;&nbsp;<a href="'.$state.'/'.$city.'/'.$offerNeed.'/'.$category.'.html">'.$categoryDisplay.'</a></div>';
 		break;
 		
 	case 'user':

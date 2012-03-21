@@ -15,8 +15,8 @@ if (!defined('BASE_URL')) {
 <div class="boxBasic smarterBase1">
 <div id="breadCrumbs"><? echo $breadCrumbs; ?></div><!--breadCrumbs-->
 <div class="boxGradientDrop aboutBase2">
-<div class="sectionHeaderFormat blueHeader"><h2 id="about-title">Barter Smarter!</h2></div>
-<div id="about-content">
+<hgroup class="sectionHeaderFormat blueHeader"><h2 class="about-title">Barter Smarter!</h2></hgroup>
+<div class="about-content">
 Barter Smarter!&nbsp;Always use a common sense approach to your bartering activities.<br/><br/>
 We’ve met many great people with many great services to offer, and we created ZooFaroo to give you all a means to get together.<br/>
 Meeting great people and finding valuable exchanges through ZooFaroo can be fun and rewarding, but still we recommend taking common sense precautions to protect yourself. 

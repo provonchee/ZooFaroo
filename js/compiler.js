@@ -206,11 +206,11 @@ if(localeObject.localeAction('state')||localeObject.localeAction('city')){
 	var bcCity = localeObject.localeAction('city');
 	var bcState = localeObject.localeAction('state');
 	if(bcCity&&bcState&& bcCity!=bcState){
-		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<b><u><div id="bcRegion"><a href="login.html">United States</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'.html">'+bcState.replace(/_/g, " ")+'</a></div>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'/'+localeObject.localeAction('city')+'.html">'+bcCity.replace(/_/g, " ")+'</a></u></b>');
+		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<div id="bcRegion"><a href="login.html">United States</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'.html">'+bcState.replace(/_/g, " ")+'</a></div>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'/'+localeObject.localeAction('city')+'.html">'+bcCity.replace(/_/g, " ")+'</a>');
 	}else if(bcCity&&bcState && bcCity==bcState){
-		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<b><u><div id="bcRegion"><a href="login.html">United States</a></div>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'/'+localeObject.localeAction('city')+'.html">'+bcCity.replace(/_/g, " ")+'</a></u></b>');
+		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<div id="bcRegion"><a href="login.html">United States</a></div>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'/'+localeObject.localeAction('city')+'.html">'+bcCity.replace(/_/g, " ")+'</a>');
 	}else if(bcState){
-		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<b><u><a href="login.html">United States</a>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'.html">'+bcState.replace(/_/g, " ")+'</a></u></b>');
+		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<a href="login.html">United States</a>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'.html">'+bcState.replace(/_/g, " ")+'</a>');
 	}
 }
 }
@@ -385,7 +385,7 @@ var editObject = {
 			$('.mainBase .postBaseEdit').load("modules/postingForm.php?whichKind="+whichKind+"&whichOne="+whichOne+"&postOrEdit=edit", function(){
 						
 																								  
-						$('.mainBase .postBaseEdit').prepend('<div id="index-ZooFaroo" style="float:none;">'+alertHdrImg+'</div>');
+						$('.mainBase .postBaseEdit').prepend('<div class="index-ZooFaroo" style="float:none;">'+alertHdrImg+'</div>');
 						$(".mainBase .postBaseEdit input[value='"+window[""+whichKind+"GSWArray"][whichOne]+"']").attr('checked', true);
 						$(".mainBase .postBaseEdit #post-"+whichKind+"formTop").css({'margin-top':'20px'});
 		
@@ -615,7 +615,7 @@ var editObject = {
 						
 						$('.mainBase .postBaseEdit .postBaseEdit2').prepend('<div class="sectionHeaderFormat blueHeader sectionHeader1"><span style="color:#FFFFFF;">Edit Your Posting</span></div>');
 						
-						$('.mainBase .postBaseEdit #index-ZooFaroo').html(''+alertHdrImg+'');
+						$('.mainBase .postBaseEdit .index-ZooFaroo').html(''+alertHdrImg+'');
 						
 								$(".mainBase .postBaseEdit input[value='"+reviewsArrayParsed[oORn][whichSubList][9]+"']").attr('checked', true);
 								
@@ -780,8 +780,8 @@ var editObject = {
 					$('#passwordConfirm').focus(function() {$(this).val('')});
 					fetchStateObject.fetchStateArray('edit');
 					$('.mainBase .postBaseEdit .postBaseEdit2').css({'width':'98%', 'height':'880px'});
-					$('.mainBase .postBaseEdit #index-ZooFaroo').html(''+alertHdrImg+'');
-					$('.mainBase .postBaseEdit #register-option:eq(3)').append(''+greetingUserName+'').css({'margin-right':'125px'});;//username cannot be changed
+					$('.mainBase .postBaseEdit .index-ZooFaroo').html(''+alertHdrImg+'');
+					$('.mainBase .postBaseEdit .register-option:eq(3)').append(''+greetingUserName+'').css({'margin-right':'125px'});;//username cannot be changed
 					$('.mainBase .postBaseEdit #password-input').val(editPSO);
 					$('.mainBase .postBaseEdit #passwordConfirm').val(editPSO);
 					$('.mainBase .postBaseEdit #email').val(editEmail);
@@ -1687,7 +1687,7 @@ var localeObject = {
 												}else if(returned=='alrdyraMatch'){//user has left a rating BUT NOT a review for this user
 															$('.reviewFormBase2 #ratePositive').empty();
 															$('.reviewFormBase2 #rateNegative').empty();
-															$('.reviewFormBase2 #reviews-greeting:eq(0)').empty();
+															$('.reviewFormBase2 .reviews-greeting:eq(0)').empty();
 															$('.reviewFormBase2 #reviews-recommend').html('Our records show that you\'ve left a rating for this user but not a review.  Why not leave a review too?').css({'color':'#669900', 'font-size':'1em', 'text-align':'center'});
 															recUser = 'alrdyraMatch';
 															

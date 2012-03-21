@@ -19,7 +19,7 @@ var editObject = {
 			$('.mainBase .postBaseEdit').load("modules/postingForm.php?whichKind="+whichKind+"&whichOne="+whichOne+"&postOrEdit=edit", function(){
 						
 																								  
-						$('.mainBase .postBaseEdit').prepend('<div id="index-ZooFaroo" style="float:none;">'+alertHdrImg+'</div>');
+						$('.mainBase .postBaseEdit').prepend('<div class="index-ZooFaroo" style="float:none;">'+alertHdrImg+'</div>');
 						$(".mainBase .postBaseEdit input[value='"+window[""+whichKind+"GSWArray"][whichOne]+"']").attr('checked', true);
 						$(".mainBase .postBaseEdit #post-"+whichKind+"formTop").css({'margin-top':'20px'});
 		
@@ -249,7 +249,7 @@ var editObject = {
 						
 						$('.mainBase .postBaseEdit .postBaseEdit2').prepend('<div class="sectionHeaderFormat blueHeader sectionHeader1"><span style="color:#FFFFFF;">Edit Your Posting</span></div>');
 						
-						$('.mainBase .postBaseEdit #index-ZooFaroo').html(''+alertHdrImg+'');
+						$('.mainBase .postBaseEdit .index-ZooFaroo').html(''+alertHdrImg+'');
 						
 								$(".mainBase .postBaseEdit input[value='"+reviewsArrayParsed[oORn][whichSubList][9]+"']").attr('checked', true);
 								
@@ -414,8 +414,8 @@ var editObject = {
 					$('#passwordConfirm').focus(function() {$(this).val('')});
 					fetchStateObject.fetchStateArray('edit');
 					$('.mainBase .postBaseEdit .postBaseEdit2').css({'width':'98%', 'height':'880px'});
-					$('.mainBase .postBaseEdit #index-ZooFaroo').html(''+alertHdrImg+'');
-					$('.mainBase .postBaseEdit #register-option:eq(3)').append(''+greetingUserName+'').css({'margin-right':'125px'});;//username cannot be changed
+					$('.mainBase .postBaseEdit .index-ZooFaroo').html(''+alertHdrImg+'');
+					$('.mainBase .postBaseEdit .register-option:eq(3)').append(''+greetingUserName+'').css({'margin-right':'125px'});;//username cannot be changed
 					$('.mainBase .postBaseEdit #password-input').val(editPSO);
 					$('.mainBase .postBaseEdit #passwordConfirm').val(editPSO);
 					$('.mainBase .postBaseEdit #email').val(editEmail);

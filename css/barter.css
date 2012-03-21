@@ -87,10 +87,10 @@ a:hover {
 	color: #6699ff;
 }
 
-#fMenuBtn:link,  #fMenuBtn:active, #fMenuBtn:visited{
+.fMenuBtn:link,  .fMenuBtn:active, .fMenuBtn:visited{
 	color:#333;
 }
-#fMenuBtn:hover{
+.fMenuBtn:hover{
 	color:#cccccc;
 }
 
@@ -541,6 +541,7 @@ font-size:0.9em;
 	float:left;
 	 margin-left: 30px;
 	 width:45%;
+	 margin-top:20px;
 }
 
 .reviewsBase1 {
@@ -712,7 +713,7 @@ font-size:0.9em;
  
 .ltGrayHeader {
 	border:1px solid #ffffff;
-	background: #f1f1f1;
+	background: #dddddd;
 	color:#333333;
 	text-shadow:0 1px 0 #ffffff;	
  }
@@ -902,7 +903,7 @@ font-size:0.9em;
 	border-color:#b5b5b5;
 }
 
-#index-ZooFaroo {
+.index-ZooFaroo {
 	float:left;
 	background-color:#ffffff;
 }
@@ -924,6 +925,7 @@ font-size:0.9em;
 	margin-top:30px;
 	margin-left: 260px;
 	  line-height: 1em;
+	  border:0;
 }
 #index-title{
 	font-size: 1em;
@@ -948,21 +950,22 @@ font-size:0.9em;
 	padding:10px;
 }
 
-#state-image {
+.state-image {
 	margin-top:30px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	border:0;
 	
 }
 
 
-#state-menu
+.state-menu
 {
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-	 	border-radius: 5px;
-		background-color:#ffffff;
 		font-family:Arial, Helvetica, sans-serif;
 		font-size:1em;
 		padding:10px;
+		text-align:center;
 }
 
 #dynamicSubHeader{
@@ -1478,23 +1481,14 @@ font-size:0.9em;
 	float:left;
 	margin-top: 4px;
 	padding-right:10px;
+	border:0;
 }
 #postShare-twitter {
 	float:left;
 	margin-top: 4px;
 	padding-right:10px;
+	border:0;
 }
-#postShare-google {
-	float:left;
-	margin-top: 4px;
-	padding-right:10px;
-}
-#postShare-email {
-	float:left;
-	cursor:pointer;
-}
-
-
 
 #thePost-offerTag {
 		border:2px solid;
@@ -1732,24 +1726,24 @@ font-size:0.9em;
 	text-align:left;
 }
 
-#register-option {
+.register-option {
 	padding: 10px;
     text-align: right;
 }
 
-#register-optional {
+.register-optional {
 	margin-left: 30px;
 	padding: 10px;
 	text-align: left;
 	font-size:0.9em;
 }
 
-#register-preaddress {
+.register-preaddress {
 	color: #6292BF;
     display: inline;
 }
 
-#register-optionalInfo{
+.register-optionalInfo{
 	font-size: 0.9em;
 	color: #6292BF;
 	margin: 10px;
@@ -1840,7 +1834,7 @@ font-size:0.9em;
 #welcomeMsg,
 #edit-postingTally,
 #review-account-greeting,
-#reviews-greeting,
+.reviews-greeting,
 #review-postings-greeting
 {
 	display: inline-block;
@@ -1980,15 +1974,18 @@ width: 550px;
 	margin-top:5px;
 }
 
-#about-title {
+.about-title {
 	font-size: 1em;
     font-weight: normal;
     line-height: 0;
 	 text-align:center;
 }
 
+.about-image{
+	margin-left:150px;
+}
 
-#about-content {
+.about-content {
 	padding:20px;
 }
 
@@ -2012,7 +2009,9 @@ font-size:0.9em;
 }
 
 #donate-content {
-	margin-left: 75px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
     margin-top: 10px;
     text-align: center;
     width: 650px;
@@ -2170,7 +2169,7 @@ font-size: 1.1em;
 	font-size: 0.85em; 
  }
  
- #userNameSearch{
+ .userNameSearch{
 	float: right;
 	margin-right: 120px;
 	margin-top: 15px;
@@ -2186,7 +2185,7 @@ font-size: 1.1em;
     padding: 2px;
  }
  
-  #userSearchTxt {
+  .userSearchTxt {
 	 margin-left:5px;
 	 display:inline-block;
 	 margin-top: 1px;
@@ -2226,6 +2225,10 @@ font-size: 1.1em;
 #siteMap-categories{
 	 margin-left: 80px;
 	 margin-top:10px;
+}
+
+#usa {
+	border:0;
 }
 
 /* CSS Document */
