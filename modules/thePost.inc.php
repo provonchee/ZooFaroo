@@ -11,7 +11,7 @@ if (!defined('BASE_URL')) {
 	exit;
 	
 } // End of defined() IF.
-
+include_once('modules/editBox.inc.php');
 ?>
 
 <script>
@@ -74,8 +74,6 @@ $('#post-postForm').hide();
 
 
 </div><!--thePostBase-->
-
-
 
 </div><!--secondBase(header)-->
 </div><!--mainBase(header)-->

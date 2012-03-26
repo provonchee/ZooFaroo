@@ -43,21 +43,25 @@ class grabPosts{
 			$this->fetchedArray[$pl][12] = $this->orow[12];//Category
 			$this->fetchedArray[$pl][13] = mb_convert_encoding($this->orow[13], "UTF-8", "HTML-ENTITIES");//Title
 			$this->fetchedArray[$pl][14] = $this->orow[14];//Money
-			$this->fetchedArray[$pl][15] = $this->orow[15];//Empty
-			$this->fetchedArray[$pl][16] = $this->orow[16];//postingID
-			$this->fetchedArray[$pl][17] =  mb_convert_encoding(nl2br($this->orow[17]), "UTF-8", "HTML-ENTITIES");//Posting
-			$this->fetchedArray[$pl][18] =  mb_convert_encoding($this->orow[18], "UTF-8", "HTML-ENTITIES");//specificLocale
-			$this->fetchedArray[$pl][19] =  userLinkInfo::reviewTallies($this->orow[0]);//user link info
-			$this->fetchedArray[$pl][20] = $this->numRows;//number of total postings with said criteria
+			$this->fetchedArray[$pl][15] = $this->orow[16];//postingID
+			$this->fetchedArray[$pl][16] =  mb_convert_encoding(nl2br($this->orow[17]), "UTF-8", "HTML-ENTITIES");//Posting
+			$this->fetchedArray[$pl][17] =  mb_convert_encoding($this->orow[18], "UTF-8", "HTML-ENTITIES");//specificLocale
+			$this->fetchedArray[$pl][18] =  userLinkInfo::reviewTallies($this->orow[0]);//user link info
+			$this->fetchedArray[$pl][19] = $this->numRows;//number of total postings with said criteria
 			
 			//grabs the tally number of the opposite, offer or need, so as to show on the list and search pages
 			$getTallies = new getTallies();
 			if($queryParam2=='offered'){
+				$getTallies->offerNeedTally($this->fetchedArray[$pl][0], 'offered');
+				$this->fetchedArray[$pl][20] = $getTallies->offerNeedsCount;
 				$getTallies->offerNeedTally($this->fetchedArray[$pl][0], 'needed');
 				$this->fetchedArray[$pl][21] = $getTallies->offerNeedsCount;
 				$this->fetchedArray[$pl][22] = 'offer';
 			}else{
 				$getTallies->offerNeedTally($this->fetchedArray[$pl][0], 'offered');
+				$this->fetchedArray[$pl][20] = $getTallies->offerNeedsCount;
+				$getTallies->offerNeedTally($this->fetchedArray[$pl][0], 'needed');
+				$this->fetchedArray[$pl][21] = $getTallies->offerNeedsCount;
 				$this->fetchedArray[$pl][22] = 'need';
 			}
 			

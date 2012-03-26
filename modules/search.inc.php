@@ -61,8 +61,10 @@ if (!defined('BASE_URL')) {
 </div><!--mainBase-->
 <script>
 var searchType = '<? echo $sType; ?>';
+var searchSid = '<? echo $sID; ?>';
+var searchCid = '<? echo $cID; ?>';
+var searchCatid = '<? echo $catID; ?>';
+var searchOn = '<? echo $oN; ?>';
+var searchKw = '<? echo $kW; ?>';
 $.getScript('js/search.mod.js');
-if(searchType=='b'){
-sendData('<? echo $sID; ?>', '<? echo $cID; ?>', '<? echo $catID; ?>', '<? echo $oN; ?>', '<? echo $kW; ?>');	
-}
 </script>

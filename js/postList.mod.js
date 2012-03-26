@@ -38,7 +38,6 @@ $.ajax({
 	   success: function(postListArray){
 		 if(postListArray!='X10'){
 		   postListArrayParsed = jQuery.parseJSON(postListArray);
-		  
 			if(postListArrayParsed[0][0]=='X10'){
 					alertObject.alertBox('ALERT!', errorAlrt, 'ferror', errorReset, null, null);//url mismatch, redirects home
 			}else if(postListArrayParsed[0][0]=='empty'){
@@ -47,7 +46,7 @@ $.ajax({
 						$('.listBase').css('height', menuHeight+'px');
 						$('.listBase #preloader').fadeOut('fast', function(){
 						$('.listBase  #preloader').remove();
-						$('.listBase .secondListBase').fadeIn('fast');
+						//$('.listBase .secondListBase').fadeIn('fast');
 						});
 		   }else{
 						
@@ -58,8 +57,8 @@ $.ajax({
 						chosenCityID = postListArrayParsed[0][4];
 						chosenCity =  postListArrayParsed[0][5].replace(/_/g, " ");
 						chosenCityAlt = postListArrayParsed[0][5];
-						chosenSpecificLocale = postListArrayParsed[0][18];
-						postCount = postListArrayParsed[0][20];
+						chosenSpecificLocale = postListArrayParsed[0][17];
+						postCount = postListArrayParsed[0][19];
 						if(Modernizr.localstorage){
 							try{
 							localStorage.setItem('zoofaroo_chosenState',chosenStateAlt); 
@@ -67,7 +66,7 @@ $.ajax({
 							} catch (e) {
 								}
 						}
-						postListArrayParsed[0][20]=null;
+						postListArrayParsed[0][19]=null;
 						
 						$('#postsPerPageBtns').html('Postings found:&nbsp;&nbsp;<b><u>'+postCount+'</u></b>').css('margin-left', '90px');
 
@@ -83,12 +82,8 @@ $.ajax({
 						//begin cycle - sends offer title to function to be adjusted
 						uniqueArrayParsed = postListArrayParsed;
 						populateList(uniqueArrayParsed[listTicker][13], offerNeed);
-						$('.listBase #preloader').fadeOut('fast', function(){
-						$('.listBase  #preloader').remove();
-						$('.listBase #postsPerPageBtns').fadeIn('fast');
-						$('.listBase .secondListBase').fadeIn('fast');
-						});
-						
+						$('.listBase #preloader').fadeOut('fast');
+						$('.listBase #postsPerPageBtns').fadeIn('slow');
 			}
 		 }else{
 			alertObject.alertBox('ALERT!', errorAlrt, 'ferror', errorReset, null, null);  

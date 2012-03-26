@@ -12,10 +12,13 @@ if (!defined('BASE_URL')) {
 	
 } // End of defined() IF.
 $user = $_GET['user'];
+include_once('modules/editBox.inc.php');
 ?>
 <script> var RecaptchaOptions = {
     theme : 'clean'
- };</script><div id="review-account-greeting-btns"></div>
+ };</script>
+
+ <div id="review-account-greeting-btns"></div>
 <div class="boxBasic reviewsBase1" style="padding:0px;">
 <div id="breadCrumbs"><? echo $breadCrumbs; ?></div><!--breadCrumbs-->
 <div id="preloader"></div>

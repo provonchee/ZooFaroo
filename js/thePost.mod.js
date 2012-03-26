@@ -9,6 +9,12 @@ var userBusiness = null;
 var userRatingCount = null;
 var userRatingPercent = null;
 var userLink = null;
+var theSelectedPostInfo=null;
+var categoriesArray = new Array();
+var categoriesArrayAlt = new Array();
+var goodsCategoryID = new Array();
+var servicesCategoryID = new Array();
+
 $('#postShare-layout').hide();
 $('#postShare-layout #postReply-form').load('modules/loginForm.php');
 if(chosenOfferNeed=='Needed'){
@@ -78,14 +84,14 @@ function reseter(){window.open(''+baseHref+chosenState+'/'+chosenCity+'/'+chosen
 		if(kind=='offer'){
 			emailOfferTitleAdj=tAdjusted.replace(/\\/g, "");
 			//adjust the need title
-			getTitleAdjusted(thePostingArrayParsed[17], thePostingArrayParsed[18], 65, emailAdjusted, 'need');
+			getTitleAdjusted(thePostingArrayParsed[16], thePostingArrayParsed[17], 65, emailAdjusted, 'need');
 		}else if(kind=='need'){
 			emailNeedTitleAdj=tAdjusted.replace(/\\/g, "");
 			
 			oC=thePostingArrayParsed[11];//ocategory
 			oT=thePostingArrayParsed[12];//otitle
-			nC=thePostingArrayParsed[17];//ncategory
-			nT=thePostingArrayParsed[18];//ntitle
+			nC=thePostingArrayParsed[16];//ncategory
+			nT=thePostingArrayParsed[17];//ntitle
 			
 			shareObject.shareBox(encodeURIComponent(emailOfferTitleAdj), encodeURIComponent(emailNeedTitleAdj), encodeURIComponent(urli), encodeURIComponent(oC), encodeURIComponent(oT), encodeURIComponent(nC), encodeURIComponent(nT));
 		}
@@ -100,7 +106,7 @@ function reseter(){window.open(''+baseHref+chosenState+'/'+chosenCity+'/'+chosen
 	
 	
 	function sortPosting(whichPostingKind, thePostInfo, kind, whichThePostBase){
-			
+			theSelectedPostInfo = thePostInfo; 
 			postTitleAdj=thePostInfo[13].replace(/\\/g, "");
 			
 			var year = thePostInfo[3].substring(0,4);
@@ -137,10 +143,10 @@ function reseter(){window.open(''+baseHref+chosenState+'/'+chosenCity+'/'+chosen
 					
 			//DISPLAY THE PRIMARY POSTING
 			function displayPrimary(cappedKind){
-				 if(thePostInfo[19][0]!='0'){
-				 		 userRatingCount = thePostInfo[19][0];
-			 	 		 userRatingPercent = "<span style='color:#669900;'>"+thePostInfo[19][1]+"%</span>";
-						 userBusiness = thePostInfo[19][2];
+				 if(thePostInfo[18][0]!='0'){
+				 		 userRatingCount = thePostInfo[18][0];
+			 	 		 userRatingPercent = "<span style='color:#669900;'>"+thePostInfo[18][1]+"%</span>";
+						 userBusiness = thePostInfo[18][2];
 					 }else{
 						userRatingCount = '0'; 
 						
@@ -149,8 +155,14 @@ function reseter(){window.open(''+baseHref+chosenState+'/'+chosenCity+'/'+chosen
 				
 			 	 userLink = '<a href="user/'+thePostInfo[1]+'.html" style="text-decoration:none"><div class="buttonWrap reviewLink">'+thePostInfo[1]+'('+userRatingCount+')&nbsp;<b>'+userRatingPercent+'</b></div></a>';
 				 
-				postSection = '<div id="post-'+kind+'Posting"><div id="post-'+kind+'Icon"><div id="thePost-'+kind+'Tag">'+kind+'ed</div></div><div id="post-'+kind+'Title"><div id="titleCategory">&nbsp;<span style="color:#bbbbbb;">&#187;</span>&nbsp;'+thePostInfo[12].replace(/_/g, ' ')+'&nbsp;<span style="color:#bbbbbb;">&#187;</span>&nbsp;</div><b><div id="'+kind+'Title">'+postTitleAdj+'</b>'+mOfferObject.mOffer(thePostInfo[14], kind)+'</div></div><br/><div id="post-'+kind+'Desc">'+thePostInfo[17]+'</div><div id="post-'+kind+'Photo"></div></div>';
-		   		$('.thePostBase '+whichThePostBase+'').prepend('<div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><span style="float:left;">Posted by:&nbsp;&nbsp;</span>'+userLink+'<div id="post-postedDate">Posted on:&nbsp;&nbsp;<span >'+dateAdjusted+'</span></div><div id="headerFooter-city">Post Location:&nbsp;&nbsp;'+thePostInfo[18]+'&nbsp;&nbsp;(<a class="aLink" href="'+baseHref+'/'+thePostInfo[7]+'/'+thePostInfo[5]+'.html">'+thePostInfo[5].replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a class="aLink"  href="'+baseHref+'/'+thePostInfo[7]+'.html">'+thePostInfo[7].replace(/_/g, ' ')+'</a></div>)<div class="buttonWrap abuseReport">!</div></div>'+postSection+'');
+				postSection = '<div id="post-'+kind+'Posting"><div id="post-'+kind+'Icon"><div id="thePost-'+kind+'Tag">'+kind+'ed</div></div><div id="post-'+kind+'Title"><div id="titleCategory">&nbsp;<span style="color:#bbbbbb;">&#187;</span>&nbsp;'+thePostInfo[12].replace(/_/g, ' ')+'&nbsp;<span style="color:#bbbbbb;">&#187;</span>&nbsp;</div><b><div id="'+kind+'Title">'+postTitleAdj+'</b>'+mOfferObject.mOffer(thePostInfo[14], kind)+'</div></div><br/><div id="post-'+kind+'Desc">'+thePostInfo[16]+'</div><div id="post-'+kind+'Photo"></div></div>';
+		   		
+				//if(thePostInfo[1]!=userName){//not logged in
+				$('.thePostBase '+whichThePostBase+'').prepend('<div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><span style="float:left;">Posted by:&nbsp;&nbsp;</span>'+userLink+'<div id="post-postedDate">Posted on:&nbsp;&nbsp;<span >'+dateAdjusted+'</span></div><div id="headerFooter-city">Post Location:&nbsp;&nbsp;'+thePostInfo[17]+'&nbsp;&nbsp;(<a class="aLink" href="'+baseHref+'/'+thePostInfo[7]+'/'+thePostInfo[5]+'.html">'+thePostInfo[5].replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a class="aLink"  href="'+baseHref+'/'+thePostInfo[7]+'.html">'+thePostInfo[7].replace(/_/g, ' ')+'</a></div>)<div class="buttonWrap abuseReport">!</div></div>'+postSection+'');
+				/*}else if(thePostInfo[1]==userName&&passWord!=null){//logged in
+				$('.thePostBase '+whichThePostBase+'').prepend('<div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><span style="float:left;">Posted by:&nbsp;&nbsp;</span>'+userLink+'<div id="post-postedDate">Posted on:&nbsp;&nbsp;<span >'+dateAdjusted+'</span></div><div id="headerFooter-city">Post Location:&nbsp;&nbsp;'+thePostInfo[17]+'&nbsp;&nbsp;(<a class="aLink" href="'+baseHref+'/'+thePostInfo[7]+'/'+thePostInfo[5]+'.html">'+thePostInfo[5].replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a class="aLink"  href="'+baseHref+'/'+thePostInfo[7]+'.html">'+thePostInfo[7].replace(/_/g, ' ')+'</a></div>)<div class="buttonWrap deletePostColor list-deletePost" postID="'+thePostInfo[15]+'" aux="'+0+'" type="offer" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+thePostInfo[15]+'" aux="'+0+'" type="offer" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+postSection+'');
+				}*/
+				
 				if(thePostInfo[5]==thePostInfo[7]){//city and state are the same as in Maine/Maine for states that only have one section
 					//hide the state in the header
 					$('.thePostBase '+whichThePostBase+' .sectionHeader1 #headerFooter-state').hide();
@@ -158,22 +170,22 @@ function reseter(){window.open(''+baseHref+chosenState+'/'+chosenCity+'/'+chosen
 				
 				//photo display, if there is one
 				if(thePostInfo[8]!='1' && kind=='offer'){
-				$('.thePostBase '+whichThePostBase+' #post-offerPosting #post-offerPhoto').html('<img src="'+baseHref+'photos/'+chosenStateID+'/'+thePostInfo[8]+'" alt="'+thePostInfo[0]+'/'+thePostInfo[4]+'/'+thePostInfo[6]+'/'+thePostInfo[16].replace(/_/g, ' ')+'"/>');
+				$('.thePostBase '+whichThePostBase+' #post-offerPosting #post-offerPhoto').html('<img src="'+baseHref+'photos/'+chosenStateID+'/'+thePostInfo[8]+'" alt="'+thePostInfo[0]+'/'+thePostInfo[4]+'/'+thePostInfo[6]+'/'+thePostInfo[15].replace(/_/g, ' ')+'"/>');
 				}	
 				if(thePostInfo[14]=='2'){
 					$('.thePostBase '+whichThePostBase+' .moneyOption').unbind('click').click(function(){alertObject.alertBox('OPEN TO OFFERS', window["acceptMoney"+cappedKind+""], 'alert', null, null, null);});
 				}
 
-				$('.thePostBase '+whichThePostBase+' .abuseReport').unbind('click').click(function(){alertObject.alertBox('ALERT!', reportConfirm, 'decision', sendReport, thePostInfo[16], kind);});
+				$('.thePostBase '+whichThePostBase+' .abuseReport').unbind('click').click(function(){alertObject.alertBox('ALERT!', reportConfirm, 'decision', sendReport, thePostInfo[15], kind);});
 				
 			}
 			
 			//DISPLAY THE SECONDARY POSTING
 			function displaySecondary(cappedKind, hasPhoto){
-				if(thePostInfo[19][0]!='0'){
-						 userRatingCount = thePostInfo[19][0];
-			 	 		 userRatingPercent = "<span style='color:#669900;'>"+thePostInfo[19][1]+"%</span>";
-						 userBusiness = thePostInfo[19][2];
+				if(thePostInfo[18][0]!='0'){
+						 userRatingCount = thePostInfo[18][0];
+			 	 		 userRatingPercent = "<span style='color:#669900;'>"+thePostInfo[18][1]+"%</span>";
+						 userBusiness = thePostInfo[18][2];
 					 }else{
 						userRatingCount = '0'; 
 						
@@ -181,10 +193,21 @@ function reseter(){window.open(''+baseHref+chosenState+'/'+chosenCity+'/'+chosen
 					 }
 			 	 userLink = '<a href="user/'+thePostInfo[1]+'.html" style="text-decoration:none"><div class="buttonWrap reviewLink">'+thePostInfo[1]+'('+userRatingCount+')&nbsp;<b>'+userRatingPercent+'</b></div></a>';					
 				 //secondary tally
-					$('.thirdListBase .reviews-greeting').html(''+userLink+'&nbsp;has&nbsp;<div id="list-offerTag">'+numOfOffers+'&nbsp;offer</div> postings and <div id="list-needTag">'+numOfNeeds+'&nbsp;need</div> postings.').css({'font-size':'inherit'});
-					postSection = "<div id='list-"+kind+"Title'><div id='list-"+kind+"Icon'><div id='list-"+kind+"Tag'>"+kind+"ed</div></div><div id='list-"+kind+"Link'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+thePostInfo[12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+thePostInfo[7]+"/"+thePostInfo[5]+"/"+cappedKind+"ed/"+thePostInfo[12].replace(/ /g, '_')+"/"+thePostInfo[16]+".html'> <div id='"+kind+"Title'>"+thePostInfo[13]+"</div></a></div>"+mOfferObject.mOffer(thePostInfo[14], kind)+"<div id='hasPic'>"+hasPhoto+"</div></div>";
-		   			$('.thePostBase '+whichThePostBase+'').prepend('<div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><span style="float:left;">Posted by:&nbsp;&nbsp;</span>'+userLink+'<div id="post-postedDate">Posted on:&nbsp;&nbsp;<span >'+dateAdjusted+'</span></div><div id="headerFooter-city">Post Location:&nbsp;&nbsp;'+thePostInfo[18]+'&nbsp;&nbsp;(<a class="aLink" href="'+baseHref+'/'+thePostInfo[7]+'/'+thePostInfo[5]+'.html">'+thePostInfo[5].replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a class="aLink"  href="'+baseHref+'/'+thePostInfo[7]+'.html">'+thePostInfo[7].replace(/_/g, ' ')+'</a></div>)<div class="buttonWrap abuseReport">!</div></div>'+postSection+'');
-					
+					$('.thirdListBase .reviews-greeting').html(''+userLink+'&nbsp;also&nbsp;has&nbsp;<div id="list-offerTag">'+numOfOffers+'&nbsp;other&nbsp;offer</div> postings and <div id="list-needTag">'+numOfNeeds+'&nbsp;other&nbsp;need</div> postings.').css({'font-size':'inherit'});
+					postSection = "<div id='list-"+kind+"Title'><div id='list-"+kind+"Icon'><div id='list-"+kind+"Tag'>"+kind+"ed</div></div><div id='list-"+kind+"Link'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+thePostInfo[12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+thePostInfo[7]+"/"+thePostInfo[5]+"/"+cappedKind+"ed/"+thePostInfo[12].replace(/ /g, '_')+"/"+thePostInfo[15]+".html'> <div id='"+kind+"Title'>"+thePostInfo[13]+"</div></a></div>"+mOfferObject.mOffer(thePostInfo[14], kind)+"<div id='hasPic'>"+hasPhoto+"</div></div>";
+		   			
+					//if(thePostInfo[1]!=userName){//not logged in
+						$('.thePostBase '+whichThePostBase+'').prepend('<div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><span style="float:left;">Posted by:&nbsp;&nbsp;</span>'+userLink+'<div id="post-postedDate">Posted on:&nbsp;&nbsp;<span >'+dateAdjusted+'</span></div><div id="headerFooter-city">Post Location:&nbsp;&nbsp;'+thePostInfo[17]+'&nbsp;&nbsp;(<a class="aLink" href="'+baseHref+'/'+thePostInfo[7]+'/'+thePostInfo[5]+'.html">'+thePostInfo[5].replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a class="aLink"  href="'+baseHref+'/'+thePostInfo[7]+'.html">'+thePostInfo[7].replace(/_/g, ' ')+'</a></div>)<div class="buttonWrap abuseReport">!</div></div>'+postSection+'');
+						$('.thePostBase '+whichThePostBase+' .abuseReport').unbind('click').click(function(){alertObject.alertBox('ALERT!', reportConfirm, 'decision', sendReport, thePostInfo[15], kind);});
+					/*}else if(thePostInfo[1]==userName&&passWord!=null){//logged in
+						$('.thePostBase '+whichThePostBase+'').prepend('<div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><span style="float:left;">Posted by:&nbsp;&nbsp;</span>'+userLink+'<div id="post-postedDate">Posted on:&nbsp;&nbsp;<span >'+dateAdjusted+'</span></div><div id="headerFooter-city">Post Location:&nbsp;&nbsp;'+thePostInfo[17]+'&nbsp;&nbsp;(<a class="aLink" href="'+baseHref+'/'+thePostInfo[7]+'/'+thePostInfo[5]+'.html">'+thePostInfo[5].replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a class="aLink"  href="'+baseHref+'/'+thePostInfo[7]+'.html">'+thePostInfo[7].replace(/_/g, ' ')+'</a></div>)<div class="buttonWrap deletePostColor list-deletePost" postID="'+thePostInfo[15]+'" aux="'+$('.thePostBase '+whichThePostBase+'').index()+'" type="'+kind+'" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+thePostInfo[15]+'" aux="'+$('.thePostBase '+whichThePostBase+'').index()+'" type="'+kind+'" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+postSection+'');
+						//EDIT BUTTONS
+						//var editBtnsPosi = $('.secondListBase .listPost').length-1;
+								$('.thePostBase '+whichThePostBase+' .list-editPost').unbind('click').click(function(){editObject.editBox($(this).attr('type'), 0, $(this).attr('postID'), $(this).attr('aux'), 'editPost');});
+								  $('.thePostBase '+whichThePostBase+' .list-deletePost').unbind('click').click(function(){								
+											editObject.editBox($(this).attr('type'), 0, $(this).attr('postID'), 'delete', 'editPost');
+									});
+					}*/
 					if(thePostInfo[5]==thePostInfo[7]){//city and state are the same as in Maine/Maine for states that only have one section
 					//hide the state in the header
 					$('.thePostBase '+whichThePostBase+' .sectionHeader1 #headerFooter-state').hide();
@@ -193,7 +216,8 @@ function reseter(){window.open(''+baseHref+chosenState+'/'+chosenCity+'/'+chosen
 					if(thePostInfo[14]=='2'){
 					$('.thePostBase '+whichThePostBase+' .moneyOption').unbind('click').click(function(){alertObject.alertBox('OPEN TO OFFERS', window["acceptMoney"+cappedKind+""], 'alert', null, null, null);});
 					}
-					$('.thePostBase '+whichThePostBase+' .abuseReport').unbind('click').click(function(){alertObject.alertBox('ALERT!', reportConfirm, 'decision', sendReport, thePostInfo[16], kind);});
+					
+					//$('.thePostBase '+whichThePostBase+' .abuseReport').unbind('click').click(function(){alertObject.alertBox('ALERT!', reportConfirm, 'decision', sendReport, thePostInfo[15], kind);});
 			}
 					
 			
@@ -266,7 +290,6 @@ function thePoster(){
 		   if(thePostingArray!='X10'){
 		   //THE POSTING IN AN ARRAY
 		   thePostingArrayParsed = jQuery.parseJSON(thePostingArray);
-		   
 		   if(thePostingArrayParsed[0]!='X10'){
 			
 			
@@ -288,21 +311,19 @@ function thePoster(){
 //			[12]//Category
 //			[13]//Title
 //			[14]//Money
-//			[15]//Empty
-//			[16]//postingID
-//			[17]//Posting
-//			[18]//specificLocale
-//			[19]//user reviews
+//			[15]//postingID
+//			[16]//Posting
+//			[17]//specificLocale
+//			[18]//user reviews
 			
 			//find the post with the postingID--this is the one that will display prominently
 			
 				if(chosenOfferNeed=='Offered'){
 					for(i=0; i<thePostingArrayParsed[0].length; i++){
-						if(thePostingArrayParsed[0][i][16]==chosenPostingID){
+						if(thePostingArrayParsed[0][i][15]==chosenPostingID){
 							chosenPost = thePostingArrayParsed[0][i];//primary post
-							thePostingArrayParsed[0].splice(i,1);
 							secondaryPosts = thePostingArrayParsed[1].concat(thePostingArrayParsed[0]);
-							numOfOffers = thePostingArrayParsed[0].length;
+							numOfOffers = thePostingArrayParsed[0].length-1;//minnus one because the one we minus is the primary post
 							numOfNeeds= thePostingArrayParsed[1].length;
 							if(thePostingArrayParsed[0][i][14]=='1'){
 								$('#terteiryHouse').show();
@@ -311,17 +332,17 @@ function thePoster(){
 								$('#terteiryHouse').show();
 								$('#terteiryHouse .thePostBaseMsg #postHint').html('Looks like this user is only interested in money for this particular offer.&nbsp;&nbsp;Best not to bug them with non-monetary offers.');
 							}
-							if(thePostingArrayParsed[1][0]){//in case the user has no needs
-							for(r=0; r<secondaryPosts.length; r++){
-							$('#secondaryHouse').append('<div class="boxGradient secondaryThePostBase"></div><!--secondaryThePostBase-->');
-							sortPosting('secondary', secondaryPosts[r], secondaryPosts[r][22], '.secondaryThePostBase:eq('+r+')');//secondary posts
-							}
+							if(secondaryPosts.length>1){//in case the user has no needs and no more offers
+								secondaryPosts.splice(i+thePostingArrayParsed[1].length,1);//remove the primary post from this array so that it does not show in the bottom list
+								for(r=0; r<secondaryPosts.length; r++){
+										$('#secondaryHouse').append('<div class="boxGradient secondaryThePostBase"></div><!--secondaryThePostBase-->');
+										sortPosting('secondary', secondaryPosts[r], secondaryPosts[r][22], '.secondaryThePostBase:eq('+r+')');//secondary posts
+								}
 							}else{
-							$('.thirdListBase .reviews-greeting').html('This user has&nbsp;<div id="list-needTag">0&nbsp; need</div> postings.');	
+								$('.thirdListBase .reviews-greeting').html('This user has&nbsp;<div id="list-needTag">0&nbsp;other&nbsp;need</div> postings and&nbsp;<div id="list-offerTag">0&nbsp;other&nbsp;offer</div> postings.').css({'font-size':'inherit'});	
 							}
 							
 							
-							console.log(secondaryPosts.length);
 							//breadcrumbs
 							getTitleAdjusted(chosenPost[12], chosenPost[13], 45, breadCrumbs, 'bc');
 							sortPosting('primary',chosenPost, 'offer', '.primaryThePostBase');//primary post
@@ -332,20 +353,22 @@ function thePoster(){
 					
 				}else if(chosenOfferNeed=='Needed'){
 					for(i=0; i<thePostingArrayParsed[1].length; i++){
-						if(thePostingArrayParsed[1][i][16]==chosenPostingID){
+						if(thePostingArrayParsed[1][i][15]==chosenPostingID){
 							chosenPost = thePostingArrayParsed[1][i];//primary post
-							secondaryPosts = thePostingArrayParsed[0];
+							secondaryPosts = thePostingArrayParsed[0].concat(thePostingArrayParsed[1]);
 							numOfOffers = thePostingArrayParsed[0].length;
-							numOfNeeds= thePostingArrayParsed[1].length;
+							numOfNeeds= thePostingArrayParsed[1].length-1;//minnus one because the one we minus is the primary post
 								$('#terteiryHouse').show();
 								$('#terteiryHouse .thePostBaseMsg #postHint').html('Do you have what they need but don\'t need what they\'re offering?&nbsp;&nbsp;Contact them with what you\'re looking for, you might be suprised.');
-							if(thePostingArrayParsed[0][0]){//in case the user has no offers
-							for(r=0; r<thePostingArrayParsed[0].length; r++){
-							$('#secondaryHouse').append('<div class="boxGradient secondaryThePostBase"></div><!--secondaryThePostBase-->');
-							sortPosting('secondary', secondaryPosts[r], 'offer', '.secondaryThePostBase:eq('+r+')');//secondary posts
-							}
+								
+							if(secondaryPosts.length>1){//in case the user has no needs and no more offers
+								secondaryPosts.splice(i+thePostingArrayParsed[0].length,1);//remove the primary post from this array so that it does not show in the bottom list
+								for(r=0; r<secondaryPosts.length; r++){
+									$('#secondaryHouse').append('<div class="boxGradient secondaryThePostBase"></div><!--secondaryThePostBase-->');
+									sortPosting('secondary', secondaryPosts[r], secondaryPosts[r][22], '.secondaryThePostBase:eq('+r+')');//secondary posts
+								}
 							}else{
-							$('.thirdListBase .reviews-greeting').html('This user has&nbsp;<div id="list-offerTag">0&nbsp; offer</div> postings.');	
+								$('.thirdListBase .reviews-greeting').html('This user has&nbsp;<div id="list-offerTag">0&nbsp;other&nbsp;offer</div> postings&nbsp;and&nbsp;<div id="list-needTag">0&nbsp;other&nbsp;need</div> postings.').css({'font-size':'inherit'});	
 							}
 							
 							//breadcrumbs

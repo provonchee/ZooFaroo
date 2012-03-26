@@ -91,7 +91,6 @@ function loginConfirmed(sdata, iddata, un){
 	$('.submitBtn').unbind('click').click(function(){
 			checkForm();									   
 	 });//review-submitBtn
-	
 	break;
 	
 	case 'login':

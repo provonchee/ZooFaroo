@@ -79,7 +79,7 @@ function submitSearchAction(){
 		$('#search-startOverBtn').hide();
 		$('.searchBase3').empty();
 		$('.searchBase3').hide();
-				sendData(drpDwnStateID, drpDwnCityID, user_keyword, bus_keyword);										
+				sendDataU(drpDwnStateID, drpDwnCityID, user_keyword, bus_keyword);										
 				$('#search-searchBtn').html('Please wait...<img src="images/loaderSm.gif"/>').css({'color':'#990000', 'font-size': '0.9em' });
 }
 
@@ -92,7 +92,7 @@ function noMatchFound(){
 	$('.searchBase3').fadeIn('fast');
 }
 var percentage = null;
-function sendData(stateID, cityID, kWord, busName){
+function sendDataU(stateID, cityID, kWord, busName){
 	
 												//cleanSlate();
 												

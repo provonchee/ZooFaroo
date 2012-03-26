@@ -19,9 +19,11 @@ class getPostList {
 	
 			if($offerNeed=='Offered'){
 				$primary = 'offered';
+				$primNumber = '20';
 				$secondary = 'needed';
 			}else if($offerNeed=='Needed'){
 				$primary = 'needed';
+				$primNumber = '21';
 				$secondary = 'offered';
 			}
 			
@@ -36,7 +38,7 @@ class getPostList {
 			
 				$chosenArray = $listRetrieval->fetchedArray;
 				
-				if($chosenArray[0][20]!=0){
+				if($chosenArray[0][$primNumber]!=0){
 					
 					$this->postListArray = $chosenArray;				
 					

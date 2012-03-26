@@ -11,21 +11,8 @@ if (!defined('BASE_URL')) {
 	exit;
 	
 } // End of defined() IF.
+include_once('modules/editBox.inc.php');
 ?>
-
-<div class="boxGradientDrop  postBaseEdit">
-	<div class="index-ZooFaroo"></div><div class="boxBare postBaseEdit2"></div>
-	<script>$('#post-postForm').hide();var RecaptchaOptions = {theme : 'clean'};function secCodeRefresh(){Recaptcha.reload();}</script>
-  	<div id="post-captcha">
-        <div class='secCodeRefresh'>Refresh Code</div>
-        <? require_once('lib/recaptchalib.php');
-           echo recaptcha_get_html($publickey);
-        ?>
-        <div id="refreshCodeMsg">Having trouble reading the security code?&nbsp;&nbsp;Refresh it!</div>
-        <div class='buttonWrap editCancelBtn'>Cancel</div>
-        <div class='buttonWrap regEditSubmitBtn'>Save and Continue</div>
-    </div>
-</div><!--postBaseEdit-->
 <div class="boxBare editBase1">
 	<div id="breadCrumbs"><? echo $breadCrumbs; ?></div>
 	<div class="boxGradient loginBase2">

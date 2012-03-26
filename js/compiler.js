@@ -1,11 +1,3 @@
-$.getJSON('http://api.wipmania.com/jsonp?callback=?', function (data) { 
-   if(data.address.country!='United States'){
-var cform = new Array();
-cform = {'di':'confirm', 's1':data.address.country};
-$.post("control/formValidate.php", {form:cform});
-	   window.open(''+baseHref+'comingSoon.html', '_self');
-   }
-});
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-29626133-1']);
   _gaq.push(['_trackPageview']);
@@ -1962,6 +1954,7 @@ var chosenTitle = null;
 var chosenPostingID = null;
 var chosenUserID = null;
 var chosenUser = null;
+var chosenAgent = null;
 var chosenStateArray = null;
 var chosenCategoryArray = null;
 var genericTimer = null;

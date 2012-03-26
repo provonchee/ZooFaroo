@@ -4,6 +4,7 @@ html,body {
   padding: 0;
   border: 0;
 background: #ffffff;
+font-family:Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 body{
@@ -13,7 +14,7 @@ body{
 	overflow-y:scroll;
 	color:#333;
 	background-color:#aaaaaa;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:Helvetica Neue, Helvetica, Arial, sans-serif;
 	/*background-image:url(../images/header.png);*/
 	overflow-x:hidden;
 	background: #ffffff; /* Old browsers */
@@ -38,7 +39,7 @@ body{
 	-webkit-box-shadow: 1px 1px 2px #333333 inset;
     height: 18px;
 	padding-left:5px;
-	font-family:Arial, Helvetica, sans-serif; 
+	font-family:Helvetica Neue, Helvetica, Arial, sans-serif; 
 	font-size:0.9em;
 }
 
@@ -52,7 +53,7 @@ body{
 	-o-box-shadow: 1px 1px 2px #333333 inset;
 	-webkit-box-shadow: 1px 1px 2px #333333 inset;
 	padding:5px;
-	font-family:Arial, Helvetica, sans-serif; 
+	font-family:Helvetica Neue, Helvetica, Arial, sans-serif; 
 	font-size:0.9em;
 	
 }
@@ -350,7 +351,7 @@ h2 {
 {
 	padding: 0 0 10px 2px;
 	color:#333;
-	margin-top:10px;
+	margin-top:20px;
 }
 
 .thirdListBase
@@ -700,7 +701,7 @@ font-size:0.9em;
 .blueHeader,
 .mainHeader {
 	color:#ffffff;
-	background:#4F789D;
+	background:#6292BF;
 	border:1px solid #cccccc;
 	/*background: #6292BF;*/
 }
@@ -714,13 +715,6 @@ font-size:0.9em;
 .ltGrayHeader {
 	border:1px solid #ffffff;
 	background: #dddddd;
-	color:#333333;
-	text-shadow:0 1px 0 #ffffff;	
- }
-
-.ltBlueHeader {
-	border:1px solid #ffffff;
-	background: #E1E8ED;
 	color:#333333;
 	text-shadow:0 1px 0 #ffffff;	
  }
@@ -829,6 +823,7 @@ font-size:0.9em;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border: 1px solid #DDD;
+	margin-top: 0.2em;
 }
 
 #preloader
@@ -897,7 +892,7 @@ font-size:0.9em;
 
 .listPostingBtn {
 	margin-left: 55em;
-    margin-top: 1em;
+    margin-top: 0.5em;
     position: absolute;
     width: 11.5em;
 	border-color:#b5b5b5;
@@ -941,7 +936,7 @@ font-size:0.9em;
 	 	border-radius: 5px;
 		background-color:#fff;
         position:absolute;
-		font-family:Arial, Helvetica, sans-serif;
+		font-family:Helvetica Neue, Helvetica, Arial, sans-serif;
 		font-size:1em;
 		text-align: center;
 }
@@ -962,7 +957,7 @@ font-size:0.9em;
 
 .state-menu
 {
-		font-family:Arial, Helvetica, sans-serif;
+		font-family:Helvetica Neue, Helvetica, Arial, sans-serif;
 		font-size:1em;
 		padding:10px;
 		text-align:center;
@@ -1202,30 +1197,18 @@ font-size:0.9em;
     margin-top: 15px;
 	text-decoration:none;
 }
-.editPostColor{
-	color:#ffffff;
-	text-shadow:0 1px 0 #333;
+.editPostColor, .deletePostColor{
+	color:#333333;
+	text-shadow:0 1px 0 #fff;
+	border: 1px solid #990000;
 	background: #fafafa; /* Old browsers */
-	background: -moz-linear-gradient(top, #666666 0%, #333333 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#666666), color-stop(100%,#333333)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #666666 0%,#333333 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #666666 0%,#333333 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #666666 0%,#333333 100%); /* IE10+ */
-	background: linear-gradient(top, #666666 0%,#333333 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#666666', endColorstr='#333333',GradientType=0 ); /* IE6-9 */
-}
-
-.deletePostColor{
-	color:#ffffff;
-	text-shadow:0 1px 0 #333;
-	background: #fafafa; /* Old browsers */
-	background: -moz-linear-gradient(top, #990000 0%, #7E0101 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#990000), color-stop(100%,#7E0101)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #990000 0%,#7E0101 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #990000 0%,#7E0101 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #990000 0%,#7E0101 100%); /* IE10+ */
-	background: linear-gradient(top, #990000 0%,#7E0101 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#990000', endColorstr='#7E0101',GradientType=0 ); /* IE6-9 */
+	background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
 }
 
 .list-accountInfo {
@@ -1706,6 +1689,13 @@ font-size:0.9em;
     margin-top: 10px;
 }
 
+#post-captchaEdit {
+	/*width: 450px;*/
+	float:left;
+	margin-left: 100px;
+    margin-top: 10px;
+}
+
 #refreshCodeMsg {
 	color: #990000;
     font-size: 0.9em;
@@ -2132,7 +2122,7 @@ font-size: 1.1em;
 	color:#666;
  }
  #postsPerPageBtns {
-	  color: #990000;
+	  color: #666666;
  }
  #advancedBtn {
 	 margin-right: 430px;
@@ -2230,5 +2220,22 @@ font-size: 1.1em;
 #usa {
 	border:0;
 }
-
+.recentBlogPost{
+	margin-top:15px;
+}
+.recentBlogWrap {
+	padding:20px;
+	font-size:0.95em;
+}
+#bTitle{
+	font-weight:bold;	
+}
+#bAuthor{
+	font-style:italic;
+	font-size:0.9em;
+	display: inline;
+}
+#bPost{
+	margin-top:15px;
+}
 /* CSS Document */

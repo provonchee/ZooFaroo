@@ -201,16 +201,13 @@ var editObject = {
 																												  
 							});
 		
-		}else if(chosenPage=='edit'){///IF EDIT PAGE
+		}else{///IF EDIT PAGE
+		
 		//RESET EDIT BOX BUTTONS
 			function btnReset(action){
-				Recaptcha.reload();
-				
 				$(".editCancelBtn").unbind('click').click(function(){tempPhotoEdit[5] = 'cancel';editFormPhotoAction(tempPhotoEdit, tempPhotoEdit[0], tempPhotoEdit[2]);$('.mainBase .postBaseEdit .postBaseEdit2').empty(); $('#alertScreen').css({'display':'none'});$('.postBaseEdit').css({'display':'none'});});
 				$(".regEditSubmitBtn").html('Save and Continue');	
-			
 				$('.regEditSubmitBtn').unbind('click').click(function(){action();});
-				$(".secCodeRefresh").unbind('click').click(function(){Recaptcha.reload();});
 			}
 			
 			function editRefresh(){
@@ -221,6 +218,7 @@ var editObject = {
 				//EDITING A POSTING
 			case 'editPost':
 				if(aux!='delete'){
+					
 					screenAndAlert();
 					$(window).scrollTop(0);
 					if(navigator.appName=='Microsoft Internet Explorer'){
@@ -235,6 +233,12 @@ var editObject = {
 							oORn = 0;
 						}else if(whichKind=='need'){
 							oORn = 1;
+						}
+						var theChosenArray = null;
+						if(chosenPage=='thePost'){
+							theChosenArray = theSelectedPostInfo;
+						}else{
+							theChosenArray = reviewsArrayParsed[oORn][whichSubList];
 						}
 					
 					$('.mainBase .postBaseEdit').css({'margin-left':'-8px'});
@@ -251,7 +255,7 @@ var editObject = {
 						
 						$('.mainBase .postBaseEdit .index-ZooFaroo').html(''+alertHdrImg+'');
 						
-								$(".mainBase .postBaseEdit input[value='"+reviewsArrayParsed[oORn][whichSubList][9]+"']").attr('checked', true);
+								$(".mainBase .postBaseEdit input[value='"+window[''+theChosenArray+'[9]']+"']").attr('checked', true);
 								
 				
 								$('.mainBase .postBaseEdit #w').hide();
@@ -290,20 +294,20 @@ var editObject = {
 													}
 																																				 });
 									
-								if(reviewsArrayParsed[oORn][whichSubList][9]=='g'){
+								if(theChosenArray[9]=='g'){
 									$(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory").hide();
-									$(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory").val(''+reviewsArrayParsed[oORn][whichSubList][11]+'');
+									$(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory").val(''+theChosenArray[11]+'');
 								}
-								if(reviewsArrayParsed[oORn][whichSubList][9]=='s'){
+								if(theChosenArray[9]=='s'){
 									$(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory").hide();
-									$(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory").val(''+reviewsArrayParsed[oORn][whichSubList][11]+'');
+									$(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory").val(''+theChosenArray[11]+'');
 								}	
 																																
-								$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(''+reviewsArrayParsed[oORn][whichSubList][13]+'');
-								$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(''+reviewsArrayParsed[oORn][whichSubList][17]+'');
+								$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(''+theChosenArray[13]+'');
+								$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(''+theChosenArray[16]+'');
 								
-								$(".mainBase .postBaseEdit input[value='"+reviewsArrayParsed[oORn][whichSubList][10]+"']").attr('checked', true);
-									if(reviewsArrayParsed[oORn][whichSubList][14]=='2'){
+								$(".mainBase .postBaseEdit input[value='"+theChosenArray[10]+"']").attr('checked', true);
+									if(theChosenArray[14]=='2'){
 										$(".mainBase .postBaseEdit #post-"+whichKind+"FormBottom #"+whichKind+"Money input[value='2']").attr('checked', true);
 									}else{
 										$(".mainBase .postBaseEdit #post-"+whichKind+"FormBottom #"+whichKind+"Money input[value='2']").attr('checked', false);
@@ -320,7 +324,7 @@ var editObject = {
 									divLocale = '.mainBase .postBaseEdit';
 									pOrE = 'edit';
 																							
-									if(reviewsArrayParsed[oORn][whichSubList][8]=='1'){
+									if(theChosenArray[8]=='1'){
 										tempPhotoEdit[0] = '0';//offer
 										tempPhotoEdit[1] = '0';//arrived empty or full, '0' or '1'
 										tempPhotoEdit[2] = ''+whichSubList+'';//which number in the list of offers/needs
@@ -336,12 +340,12 @@ var editObject = {
 										tempPhotoEdit[1] =  '1';//arrived empty or full, '0' or '1'
 										tempPhotoEdit[2] = ''+whichSubList+'';//which number in the list of offers/needs
 										tempPhotoEdit[3] = 'empty';//photoname new
-										tempPhotoEdit[4] = reviewsArrayParsed[oORn][whichSubList][8];//photoname old
+										tempPhotoEdit[4] = theChosenArray[8];//photoname old
 										tempPhotoEdit[5] = '1';//what kind of action, save, change, cancel
 										$('.mainBase .postBaseEdit #post-offerFormPhoto #post-offerPhoto').hide();
 										$('.mainBase .postBaseEdit .post-offerChangePhoto').unbind('click').show();
 										
-										$('.mainBase .postBaseEdit #post-offerActPhoto').html('<img id="'+tempPhotoEdit[4]+'" src="photos/'+reviewsArrayParsed[oORn][whichSubList][6]+'/'+tempPhotoEdit[4]+'" name="100"/>');
+										$('.mainBase .postBaseEdit #post-offerActPhoto').html('<img id="'+tempPhotoEdit[4]+'" src="photos/'+theChosenArray[6]+'/'+tempPhotoEdit[4]+'" name="100"/>');
 										photoListen(whichOne, 'edit');
 									}
 									
@@ -352,8 +356,7 @@ var editObject = {
 									tempPhotoEdit[2] = ''+whichSubList+'';//which number in the list of offers/needs
 								}
 												
-								$(".secCodeRefresh").unbind('click').click(function(){Recaptcha.reload();});																						
-								$(".mainBase .postBaseEdit #post-captcha .editCancelBtn").unbind('click').click(function(){
+								$(".mainBase .postBaseEdit #post-captchaEdit .editCancelBtn").unbind('click').click(function(){
 																										tempPhotoEdit[5] = 'cancel';
 																										editFormPhotoAction(tempPhotoEdit, tempPhotoEdit[0], tempPhotoEdit[2]);
 																										$(".mainBase .postBaseEdit .postBaseEdit2").empty();
@@ -361,11 +364,67 @@ var editObject = {
 																										$('.postBaseEdit').css({'display':'none'});
 																										
 									});
-								$(".mainBase .postBaseEdit #post-captcha .regEditSubmitBtn").unbind('click').click(function(){editSave();});
+								$(".mainBase .postBaseEdit #post-captchaEdit .regEditSubmitBtn").unbind('click').click(function(){editSave();});
 								//SAVING A POSTING
 								function editSave(){
 									
-									 $(".mainBase .postBaseEdit #post-captcha .regEditSubmitBtn").unbind('click'); $(".mainBase .postBaseEdit #post-captcha .regEditSubmitBtn").html('Please wait...<img src="images/loaderSm.gif"/>'); var checkFormArray = new Array(); checkFormArray = { 'Title':$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(), 'Posting':$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(), 'arrayEnd':'arrayEnd' }; if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='g'){ checkFormArray['Category'] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); }else{ checkFormArray['Category'] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); } for (var child in checkFormArray){ if(checkFormArray[child]==null || checkFormArray[child]=='' || checkFormArray[child]=='undefined' || checkFormArray[child]=='please choose...'){ alertObject.alertBox('EMPTY FORM!', 'Please make sure that '+child+' is filled out/chosen!', 'gerrorPlus', btnReset, '.postBaseEdit', editSave); break; }else if(checkFormArray[child]=='arrayEnd'){ subMitEditPostAccountForm(); } } function subMitEditPostAccountForm() {genTimerObject.genTimer(); var response = $('#recaptcha_response_field').val(); var challenge = $('#recaptcha_challenge_field').val(); $.ajax({ type: "POST", url:'control/verifyUser.php', data: "type=advanced&user="+userName+"&pass="+passWord+"&ssSec="+editssSec+"&response="+response+"&challenge="+challenge+"", success: function(confirmi){clearTimeout(genericTimer); confirmi = $.trim(confirmi); if(confirmi!='X11' && confirmi!='X10'){ editssSec = confirmi; if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='g'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 'g'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); if(reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } }else if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='s'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 's'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); if(reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } } if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val().length==0){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = null; }else{ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(); } if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val().length==0){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][17] = null; }else{ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][17] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(); } if($(".mainBase .postBaseEdit input[name='"+whichKind+"EmailNotes"+whichOne+"']").is(':checked')){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '2'; }else{ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '1'; } if(whichKind=='need'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = '2'; } if($(".mainBase .postBaseEdit input[name="+whichKind+"Money"+whichOne+"]").is(':checked')){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '2'; }else{ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '1'; } var specificPostingStateID = reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][6]; if(whichKind=='offer'){ tempPhotoEdit[5] = 'save'; editFormPhotoAction(tempPhotoEdit, whichSubList, whichSubList);} var theArray = new Array(); theArray = {'s1':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9], 's2':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11], 's3':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13], 's4':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][17], 's5':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10], 's6':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8], 's7':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14], 's8':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][15], 's9':whichKind}; genTimerObject.genTimer(); var form = new Array(); form = {'di':'edit', 'd2':'editPost', 'i1':postID, 's2':userName, 's3':passWord, 's4':editssSec, 'i2':specificPostingStateID, 'a1': theArray}; $.post("control/formValidate.php", {form:form}, function(confirmation){ clearTimeout(genericTimer); var confirmate = $.trim(confirmation); if(confirmate=='X10'){ alertObject.alertBox('ALERT!', errorAlrt, 'ferror', editRefresh, null, null); }else{ Recaptcha.reload(); $('.mainBase .postBaseEdit .postBaseEdit2').empty(); $('#alertScreen').css({'display':'none'}); $('.postBaseEdit').css({'display':'none'}); alertObject.alertBox('SUCCESS!', updatePostSuccess, 'ferror', editRefresh, null, null); } }); }else if(confirmi=='X10'){ alertObject.alertBox('ALERT!', invalidUP, 'ferror', editRefresh, null, null); }else if(confirmi=='X11'){ alertObject.alertBox('ALERT!', codeAlrt, 'gerrorPlus', btnReset, '.postBaseEdit', editSave); } } }); }
+									 $(".mainBase .postBaseEdit #post-captchaEdit .regEditSubmitBtn").unbind('click'); $(".mainBase .postBaseEdit #post-captchaEdit .regEditSubmitBtn").html('Please wait...<img src="images/loaderSm.gif"/>'); var checkFormArray = new Array(); checkFormArray = { 'Title':$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(), 'Posting':$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(), 'arrayEnd':'arrayEnd' }; if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='g'){ checkFormArray['Category'] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); }else{ checkFormArray['Category'] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); } for (var child in checkFormArray){ if(checkFormArray[child]==null || checkFormArray[child]=='' || checkFormArray[child]=='undefined' || checkFormArray[child]=='please choose...'){ alertObject.alertBox('EMPTY FORM!', 'Please make sure that '+child+' is filled out/chosen!', 'gerrorPlus', btnReset, '.postBaseEdit', editSave); break; }else if(checkFormArray[child]=='arrayEnd'){ subMitEditPostAccountForm(); } } 
+									 
+									 function subMitEditPostAccountForm() {
+										 genTimerObject.genTimer();
+										 $.ajax({ type: "POST", url:'control/verifyUser.php', data: "type=basic&user="+userName+"&pass="+passWord+"&ssSec="+editssSec+"", success: function(confirmi){
+											 clearTimeout(genericTimer); confirmi = $.trim(confirmi); 
+											 if(confirmi!='X11' && confirmi!='X10'){ 
+											 editssSec = confirmi; 
+											 if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='g'){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 'g'; 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); 
+											 if(reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } 
+											 }else if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='s'){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 's'; 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); 
+											 if(reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } } 
+											 if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val().length==0){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = null; 
+											 }else{ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(); } 
+											 if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val().length==0){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][16] = null; 
+											 }else{ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][16] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(); } 
+											 if($(".mainBase .postBaseEdit input[name='"+whichKind+"EmailNotes"+whichOne+"']").is(':checked')){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '2'; 
+											 }else{ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '1'; 
+											 } 
+											 if(whichKind=='need'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = '2'; } 
+											 if($(".mainBase .postBaseEdit input[name="+whichKind+"Money"+whichOne+"]").is(':checked')){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '2'; 
+											 }else{ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '1'; 
+											 } 
+											 var specificPostingStateID = reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][6]; 
+											 if(whichKind=='offer'){ tempPhotoEdit[5] = 'save'; 
+											 editFormPhotoAction(tempPhotoEdit, whichSubList, whichSubList);
+											 } 
+											 var theArray = new Array(); 
+											 theArray = {'s1':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9], 's2':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11], 's3':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13], 's4':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][16], 's5':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10], 's6':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8], 's7':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14], 's8':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][15], 's9':whichKind}; 
+											 genTimerObject.genTimer(); 
+											 var form = new Array(); form = {'di':'edit', 'd2':'editPost', 'i1':postID, 's2':userName, 's3':passWord, 's4':editssSec, 'i2':specificPostingStateID, 'a1': theArray}; 
+											 $.post("control/formValidate.php", {form:form}, function(confirmation){ 
+											 clearTimeout(genericTimer); 
+											 var confirmate = $.trim(confirmation); 
+											 if(confirmate=='X10'){ alertObject.alertBox('ALERT!', errorAlrt, 'ferror', editRefresh, null, null); 
+											 }else{
+												 $('.mainBase .postBaseEdit .postBaseEdit2').empty(); 
+												 $('#alertScreen').css({'display':'none'}); 
+												 $('.postBaseEdit').css({'display':'none'}); 
+												 alertObject.alertBox('SUCCESS!', updatePostSuccess, 'ferror', editRefresh, null, null); } }); 
+											}else if(confirmi=='X10'){ 
+												 alertObject.alertBox('ALERT!', invalidUP, 'ferror', editRefresh, null, null); 
+											}else if(confirmi=='X11'){ 
+												 alertObject.alertBox('ALERT!', codeAlrt, 'gerrorPlus', btnReset, '.postBaseEdit', editSave); } } }); }
 											
 							}//editSave;
 																						  
@@ -377,6 +436,7 @@ var editObject = {
 					   alertObject.alertBox('ALERT!', deleteConfirm, 'decision', editDelete, whichOne, postID);
 				   }
 						   function editDelete(whichOne, postID){
+							  
 							    genTimerObject.genTimer();//start the timeout timer
 								 $('.list-deletePost:eq('+whichOne+')').html('Please wait...<img src="images/loaderSm.gif"/>');
 												 var form = new Array();
@@ -433,11 +493,8 @@ var editObject = {
 					$('.mainBase .postBaseEdit #busName').show().val(editBusName);
 					}
 					$(".mainBase .postBaseEdit #recaptcha_widget_div").css({'margin-left':'55px'});
-					//////////////////////////if you want to reinstate the capchta
-					$(".mainBase .postBaseEdit #recaptcha_widget_div").hide();
-					$(".mainBase .postBaseEdit #refreshCodeMsg").hide();
-					////////////////////////////
-					$(".mainBase .postBaseEdit .editCancelBtn").unbind('click').click(function(){Recaptcha.reload();$('.mainBase .postBaseEdit .postBaseEdit2').empty(); $('#alertScreen').css({'display':'none'});$('.postBaseEdit').css({'display':'none'});});
+	
+					$(".mainBase .postBaseEdit .editCancelBtn").unbind('click').click(function(){$('.mainBase .postBaseEdit .postBaseEdit2').empty(); $('#alertScreen').css({'display':'none'});$('.postBaseEdit').css({'display':'none'});});
 					
 				
 					$(".mainBase .postBaseEdit .regEditSubmitBtn").unbind('click').click(function(){accountSave()});//regEditSubmitBtn
@@ -495,15 +552,12 @@ var editObject = {
 							}
 									
 						function subMitEditAccountForm(){
-						//////REDUNDANT SEE EDIT POST ABOVE
 						genTimerObject.genTimer();//start the timeout timer
-						var response = $('#recaptcha_response_field').val();
-						var challenge = $('#recaptcha_challenge_field').val();
 																											
 							$.ajax({
 							type: "POST",
 							url:'control/verifyUser.php',
-							data: "type=basic&user="+userName+"&pass="+passWord+"&ssSec="+editssSec+"&response="+response+"&challenge="+challenge+"",
+							data: "type=basic&user="+userName+"&pass="+passWord+"&ssSec="+editssSec+"",
 							success: function(confirmi){
 								clearTimeout(genericTimer);
 								confirmi = $.trim(confirmi);
@@ -526,7 +580,8 @@ var editObject = {
 																	alertObject.alertBox('ALERT!', userNameInUse, 'gerrorPlus', btnReset, '.postBaseEdit', accountSave);
 															   }else{//form is filled out properly, moving on
 																		
-																Recaptcha.reload();$('.mainBase .postBaseEdit .postBaseEdit2').empty(); 
+																
+																$('.mainBase .postBaseEdit .postBaseEdit2').empty(); 
 																$('#alertScreen').css({'display':'none'});$('.postBaseEdit').css({'display':'none'});
 																alertObject.alertBox('SUCCESS!', updateSuccess, 'ferror', clearUser, null, null);
 					

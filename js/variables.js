@@ -16,6 +16,7 @@ var chosenTitle = null;
 var chosenPostingID = null;
 var chosenUserID = null;
 var chosenUser = null;
+var chosenAgent = null;
 var chosenStateArray = null;
 var chosenCategoryArray = null;
 var genericTimer = null;

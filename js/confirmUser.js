@@ -14,7 +14,7 @@ confirmUser:function(){
 						//declare password
 						var retrievedPassword = localStorage.getItem('zoofaroo_password');
 						//open logform
-						lValidate(retrievedUsername, retrievedPassword, 'storage');
+						lValidate(retrievedUsername, retrievedPassword,'storage');
 						//break;
 					}else{//if they have been logged in for more than two hours and stagnant, then log them out
 						clearUser();	

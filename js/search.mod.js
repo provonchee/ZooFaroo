@@ -153,7 +153,7 @@ function sendData(stateID, cityID, categoryID, ofNe, kWord){
 																			
 																			if(searchListArrayParsed[0]!='noMatches' && searchListArrayParsed[1]=='noMatches'){//offers found
 																					needPostCount=0;
-																					offerPostCount = searchListArrayParsed[0][0][20];
+																					offerPostCount = searchListArrayParsed[0][0][19];
 																					postCountPaginator(offerPostCount,needPostCount);
 																					uniqueArrayParsed = searchListArrayParsed[0];
 																					populateList(uniqueArrayParsed[listTicker][13], 'Offered');
@@ -161,14 +161,14 @@ function sendData(stateID, cityID, categoryID, ofNe, kWord){
 																			}else if(searchListArrayParsed[0]=='noMatches' && searchListArrayParsed[1]!='noMatches'){//needs found
 																			
 																					offerPostCount=0;
-																					needPostCount = searchListArrayParsed[1][0][20];
+																					needPostCount = searchListArrayParsed[1][0][19];
 																					postCountPaginator(offerPostCount,needPostCount);
 																					uniqueArrayParsed = searchListArrayParsed[1];
 																					populateList(uniqueArrayParsed[listTicker][13], 'Needed');
 																					
 																			}else if(searchListArrayParsed[0]!='noMatches' && searchListArrayParsed[1]!='noMatches'){//both found
-																					offerPostCount=searchListArrayParsed[0][0][20];
-																					needPostCount = searchListArrayParsed[1][0][20];
+																					offerPostCount=searchListArrayParsed[0][0][19];
+																					needPostCount = searchListArrayParsed[1][0][19];
 																					postCountPaginator(offerPostCount,needPostCount);
 																					uniqueArrayParsed = searchListArrayParsed[0];
 																					populateList(uniqueArrayParsed[listTicker][13], 'Offered');
@@ -232,4 +232,7 @@ function displayCategories(parsedCategories){
 									$('#search-categoryList').html(''+chosenGS[0]+':&nbsp;&nbsp;<b>'+drpDwnCategory+'</b>&nbsp;&nbsp;<div id="changeSelection">change selection</div>');
 									changeActivate();
 																			   });
+}
+if(searchType=='b'){
+sendData(searchSid,searchCid,searchCatid,searchOn,searchKw);	
 }

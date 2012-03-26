@@ -4,7 +4,14 @@
 	var ssSec = null;
 	var org = null;
 	
-	function startSession(data, ft){
+	function loggedInInformation(confirmedUN){
+		$('.logOut').html('Log Out').unbind('click').click(function(){clearUser();});
+		$('.loggedInAs').html('Logged in as&nbsp;'+confirmedUN+'');
+		$('.gotoUserPage').html('Go to your User Page').unbind('click').click(function(){window.open(''+baseHref+'user/'+confirmedUN+'.html','_self');});
+		$('.notUser').html('Not&nbsp;'+confirmedUN+'?').unbind('click').click(function(){clearUser();});
+	}
+	
+	function startSession(uN, data, ft){
 		
 		var divid = data.indexOf('_');
 		
@@ -14,6 +21,8 @@
 		
 		datap = $.trim(data.slice((divid+7)));
 		passWord = datap;
+		userName = uN;
+		loggedInInformation(userName);
 		if(chosenPage=='post' || chosenPage=='edit' || chosenPage=='login' || chosenPage=='user' || chosenPage=='thePost'){
 		if(Modernizr.localstorage){
 			try {
@@ -26,9 +35,7 @@
 									 	}
 								}
 		}
-		if(ft==1){//if you want the login form to appear
-		loginConfirmed(datas, dataid, userName);
-		}
+		return datas;
 		}
 	}
 	
@@ -99,18 +106,7 @@
 								 
 								}//credCheck
 								
-								function loggedInInformation(confirmedUN){
-									$('.logOut').html('Log Out').unbind('click').click(function(){clearUser();});
-									$('.loggedInAs').html('Logged in as&nbsp;'+confirmedUN+'');
-									$('.gotoUserPage').html('Go to your User Page').unbind('click').click(function(){window.open(''+baseHref+'user/'+confirmedUN+'.html','_self');});
-									$('.notUser').html('Not&nbsp;'+confirmedUN+'?').unbind('click').click(function(){clearUser();});
-								}
-								
-							
-								
 							function secCodeRetrieve(userN, passW){
-								userName = userN;
-								passWord = passW;
 								
 								$.post(whereTo, function(data) {
 									
@@ -131,13 +127,12 @@
 														
 												if(returned=='houstonMatch'){
 															
-															startSession(data,1);
-															
-															loggedInInformation(userName);
+															ssSec = startSession(userN,data,1);
+															loginConfirmed(datas, dataid, userName);
 															
 												}else if(returned=='sameuseMatch'){
 															
-															startSession(data,0);
+															ssSec = startSession(userN,data,0);
 													
 															$('.replyPostingBtn').hide();
 															$('.postReplySecCode').hide();
@@ -146,12 +141,9 @@
 															$('#postShare-layout .sectionHeaderFormat').css({'margin-left':'0px', 'float':'none'});
 															$('#postShare-layout .sectionHeaderFormat #header-title').html('Sorry, but you cannot reply to one of your own posts.').css({'color':'#990000'});
 															
-															loggedInInformation(userName);			
-															
-															
 												}else if(returned=='mltcnctMatch'){
 															
-															startSession(data,0);
+															ssSec = startSession(userN,data,0);
 													
 															$('.replyPostingBtn').hide();
 															$('.postReplySecCode').hide();
@@ -160,11 +152,9 @@
 															$('#postShare-layout .sectionHeaderFormat').css({'margin-left':'0px', 'float':'none'});
 															$('#postShare-layout .sectionHeaderFormat #header-title').html('Our records show that you\'ve already contacted this user twice regarding this post.').css({'color':'#990000'});
 															
-															loggedInInformation(userName);
-														
 												}else if(returned=='alrdyrnMatch'){//user has already left a review AND rating for this user
 															
-															startSession(data,0);
+															ssSec = startSession(userN,data,0);
 															
 															$('.reviewFormBase1 #post-form #loginFormBody').empty();
 															$('.reviewFormBase1 #post-form #loginFormBody').html('Our records show that you\'ve already left a rating and review for this user.<br/>If you feel you are getting this message in error please feel free to contact us.').css({'color':'#990000', 'text-align':'center'});
@@ -181,10 +171,8 @@
 															$('.reviewFormBase2 #reviews-recommend').html('Our records show that you\'ve left a rating for this user but not a review.  Why not leave a review too?').css({'color':'#669900', 'font-size':'1em', 'text-align':'center'});
 															recUser = 'alrdyraMatch';
 															
-															startSession(data,1);
-															
-															
-															loggedInInformation(userName);
+															ssSec = startSession(userN,data,1);
+															loginConfirmed(datas, dataid, userName);
 															
 												}else if(returned=='mltismnMatch'){//cannot leave a review for yourself
 															$('.reviewFormBase1').css({'height':'60px'}); 
@@ -192,10 +180,9 @@
 															$('.reviewFormBase1 #post-form #loginFormBody').empty().html('We\'re sorry, but you cannot leave a review for yourself.');
 															$('#review-account-greeting-btns #leaveReview').hide();//hide the 'leave a review' button
 															
-															startSession(data,0);
-												
-															loggedInInformation(userName);
-																 
+															ssSec = startSession(userN,data,0);
+															retrieveEditList(ssSec);
+															
 												}else if(returned=='sorryNoMatch'){
 													userName = null;
 													passWord = null;
@@ -212,9 +199,9 @@
 									});
 	}//secCodeRetrieve
 function clearUser(){
-				/*localStorage.removeItem('zoofaroo_username');
+				localStorage.removeItem('zoofaroo_username');
 				localStorage.removeItem('zoofaroo_password');
-				localStorage.removeItem('zoofaroo_loginTime');*/
-				localStorage.clear();
+				localStorage.removeItem('zoofaroo_loginTime');
+				//localStorage.clear();
 				window.location.reload();	
 }

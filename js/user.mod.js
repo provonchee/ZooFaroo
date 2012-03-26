@@ -1,65 +1,17 @@
+var categoriesArray = new Array();
 var revTitle = null;
 var revPost = null;
 var recUser = null;
 var recommend=null;
 var reviews = null;
 var reviewCount = null;
-var stateArrayCall=null;
-var greetingUserName=null;
-var editID = null;
-var editUname = null;
-var editEmail = null;
-var editPS = null;
-var editPSO = null;
-var editCity = null;
-var editState = null;
-var editStateTxt = null;
-var editBus = null;
-var editBusTxt = null;
-var editBusName = null;
-var editFB = null;
-var editFBTxt = null;
-var editTW = null;
-var editTWTxt = null;
-var editGP = null;
-var editGPTxt = null;
-var editLI = null;
-var editLITxt = null;
-var editURL = null;
-var editURLSuf = null;
-var editURLTxt = null;
-var editssSec = null;
-var offerPostCount = null;
-var needPostCount = null;
-var totalPostCount = null;
+
 function reseter(){window.open(''+baseHref+'user/'+chosenUser+'.html', '_self')};
-chosenStateArray = fetchStateObject.fetchStateArray('default');
-function checkStateStatus(stateArray){
-		
-					if(stateArray){
-						
-					for(i=0; i<stateArray.length; i++){
-						if(editState==stateArray[i][0]){
-							editStateTxt=stateArray[i][1];
-							$('.firstListBase .list-accountInfo #list-accountDetail:eq(3) #listContent').html(editStateTxt);
-						}
-						clearInterval(stateArrayCall);
-					}
-					
-				}
-				}
-				
-$.getScript("js/reviewsEditInfo.mod.js");
-		  
+function retrieveEditList(ssSec){
+	$.getScript("js/reviewsEditInfo.mod.js", function(){editssSec = ssSec;});
+}	  
 $(document).ready(function(){
-	
 							$('input[name=review-recommend]:eq(0)').removeAttr("checked");
-							$('#backTop').click(function(){
-								$(window).scrollTop(0);
-								if(navigator.appName=='Microsoft Internet Explorer'){
-								$('html').scrollTop(0);
-								}
-								});
 						   });							
 
 $('.secCodeRefresh').unbind('click').click(function(){secCodeRefresh();});	
@@ -141,7 +93,7 @@ function submitReview(revTitle,revPost){
 												function(reviewConfirmation) {
 													
 														var reviewConfirm = $.trim(reviewConfirmation);
-														console.log(reviewConfirm);
+														
 														$('.reviewFormBase2').hide();
 														if(reviewConfirm == '1'){
 															$('#review-form').remove();
@@ -181,3 +133,5 @@ function submitReview(revTitle,revPost){
 					
 						});
 }
+
+$.getScript('js/photoEdit.mod.js');

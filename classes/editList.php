@@ -87,14 +87,14 @@ class editList extends getReviews{
 		$this->editBusName = $results[14];
 		
 		$listRetrieval = new grabPosts("offered.user_id = '$this->editID'", 'offered');
-		if($listRetrieval->fetchedArray[0][20]!=0){
+		if($listRetrieval->fetchedArray[0][19]!=0){//numrows
 			$offeredPosts = $listRetrieval->fetchedArray;
 		}else{
 			$offeredPosts = 'noOffers';
 		}
 		
 		$listRetrieval = new grabPosts("needed.user_id = '$this->editID'", 'needed');
-		if($listRetrieval->fetchedArray[0][20]!=0){
+		if($listRetrieval->fetchedArray[0][19]!=0){//numrows
 			$neededPosts = $listRetrieval->fetchedArray;
 		}else{
 			$neededPosts = 'noNeeds';

@@ -29,15 +29,15 @@ class goSearch {
 					 $this->searchResult[$oORn][$this->sr][12] = $this->evalLisitngs[$oORn][$eval][12];//category
 					 $this->searchResult[$oORn][$this->sr][13] = $this->evalLisitngs[$oORn][$eval][13];//title
 					 $this->searchResult[$oORn][$this->sr][14] = $this->evalLisitngs[$oORn][$eval][14];//money
-					 $this->searchResult[$oORn][$this->sr][15] = $this->evalLisitngs[$oORn][$eval][15];//empty
-					 $this->searchResult[$oORn][$this->sr][16] = $this->evalLisitngs[$oORn][$eval][16];//postingID
-					 $this->searchResult[$oORn][$this->sr][17] = $this->evalLisitngs[$oORn][$eval][17];//posting
-					 $this->searchResult[$oORn][$this->sr][18] = $this->evalLisitngs[$oORn][$eval][18];//specific Locale
-					 $this->searchResult[$oORn][$this->sr][19] = $this->evalLisitngs[$oORn][$eval][19];//user reiews
-					 $this->searchResult[$oORn][$this->sr][20] = $this->evalLisitngs[$oORn][$eval][20];//# of total postings
-					  $this->searchResult[$oORn][$this->sr][21] = $this->evalLisitngs[$oORn][$eval][21];//# of postings for the opposite, i.e. if this is a call for offers, this number is the number of needs the user has
+					 $this->searchResult[$oORn][$this->sr][15] = $this->evalLisitngs[$oORn][$eval][15];//postingID
+					 $this->searchResult[$oORn][$this->sr][16] = $this->evalLisitngs[$oORn][$eval][16];//posting
+					 $this->searchResult[$oORn][$this->sr][17] = $this->evalLisitngs[$oORn][$eval][17];//specific Locale
+					 $this->searchResult[$oORn][$this->sr][18] = $this->evalLisitngs[$oORn][$eval][18];//user reiews
+					 $this->searchResult[$oORn][$this->sr][19] = $this->evalLisitngs[$oORn][$eval][19];//# of total postings
+					 $this->searchResult[$oORn][$this->sr][20] = $this->evalLisitngs[$oORn][$eval][20];//# of offer postings
+					 $this->searchResult[$oORn][$this->sr][21] = $this->evalLisitngs[$oORn][$eval][21];//# of need postings
 					 
-					 array_push($this->postingIDArray, $this->evalLisitngs[$oORn][$eval][16]);//to avoid duplicates, keep record of postingID 
+					 array_push($this->postingIDArray, $this->evalLisitngs[$oORn][$eval][15]);//to avoid duplicates, keep record of postingID 
 					 
 					 $this->sr++;
 		}//populate
@@ -115,13 +115,13 @@ if($this->evalLisitngs[0]!=NULL || $this->evalLisitngs[1]!=NULL){
 					
 						//search the titles and postings for the keyword match
 						$this->TSearch = stripos($this->evalLisitngs[$e][$j][13], $pieces[$k]);
-						$this->PSearch = stripos($this->evalLisitngs[$e][$j][17], $pieces[$k]);
+						$this->PSearch = stripos($this->evalLisitngs[$e][$j][16], $pieces[$k]);
 
 					//these conditionals just make sure there are no duplicates in the final list of results
-					if($this->TSearch!==false && in_array($this->evalLisitngs[$e][$j][16], $this->postingIDArray)==false){//1
+					if($this->TSearch!==false && in_array($this->evalLisitngs[$e][$j][15], $this->postingIDArray)==false){//1
 							self::populate($e, $j);
 					}//1
-					if($this->PSearch!==false && in_array($this->evalLisitngs[$e][$j][16], $this->postingIDArray)==false){//2
+					if($this->PSearch!==false && in_array($this->evalLisitngs[$e][$j][15], $this->postingIDArray)==false){//2
 							self::populate($e, $j);
 					}//2
 				}
@@ -134,13 +134,13 @@ if($this->evalLisitngs[0]!=NULL || $this->evalLisitngs[1]!=NULL){
 					$this->results = $this->noMatches;
 				}else{
 					if(count($this->searchResult[0])>0){
-						$this->searchResult[0][0][20] = count($this->searchResult[0]);//number of search results when the user enters a keyword
+						$this->searchResult[0][0][19] = count($this->searchResult[0]);//number of search results when the user enters a keyword
 					}else if(count($this->searchResult[0])==0){
 						$this->searchResult[0][0][0] = $this->noMatches;
 					}
 					
 					if(count($this->searchResult[1])>0){
-						$this->searchResult[1][0][20] = count($this->searchResult[1]);//number of search results when the user enters a keyword
+						$this->searchResult[1][0][19] = count($this->searchResult[1]);//number of search results when the user enters a keyword
 					}else if(count($this->searchResult[1])==0){
 						$this->searchResult[1][0][0] = $this->noMatches;
 					}

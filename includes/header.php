@@ -13,13 +13,30 @@
 <meta property="fb:admins" content="787939672" />
 <meta property="og:description"content="<?php echo $page_title; ?> the online social marketplace for the free exchange of goods or services through trade, barter, or money."/>
 <title id="title"><?php echo $page_title; ?></title>
-<!--[if lt IE 8]>
-<script>window.open('http://www.zoofaroo.com/comingSoon.html', '_self');</script>
-<![endif]-->
+
 <script src="js/SD.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/modernizr.js"></script>
-<script src="js/zoofaroo.js"></script>
+<!--<script src="js/zoofaroo.js"></script>-->
+<script src="js/variables.js"></script>
+<script src="js/confirmUser.js"></script>
+<script src="js/fetchCategoryArray.js"></script>
+<script src="js/fetchCityArray.js"></script>
+<script src="js/fetchStateArray.js"></script>
+<script src="js/displayCities.js"></script>
+<script src="js/displayStates.js"></script>
+<script src="js/quickSearch.js"></script>
+<script src="js/listDisplay.js"></script>
+<script src="js/alertBox.js"></script>
+<script src="js/editBox.js"></script>
+<script src="js/shareBox.js"></script>
+<script src="js/mOffer.js"></script>
+<script src="js/localeAction.js"></script>
+<script src="js/loginAction.js"></script>
+<script src="js/ajaxUpload.js"></script>
+<script src="js/genTimer.js"></script>
+<script src="js/abuseReport.js"></script>
+<script src="js/bcInjector.js"></script>
 <link rel="stylesheet" type="text/css" href="css/barter.css" />
 <script type="text/javascript">
 var baseHref = 'http://localhost:8888/ZooFaroo/';

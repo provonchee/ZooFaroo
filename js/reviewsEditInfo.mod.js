@@ -1,3 +1,64 @@
+var categoriesArray = new Array();
+var categoriesArrayAlt = new Array();
+var goodsCategoryID = new Array();
+var servicesCategoryID = new Array();
+var stateArrayCall=null;
+var editID = null;
+var editUname = null;
+var editEmail = null;
+var editPS = null;
+var editPSO = null;
+var editCity = null;
+var editState = null;
+var editStateTxt = null;
+var editBus = null;
+var editBusTxt = null;
+var editBusName = null;
+var editFB = null;
+var editFBTxt = null;
+var editTW = null;
+var editTWTxt = null;
+var editGP = null;
+var editGPTxt = null;
+var editLI = null;
+var editLITxt = null;
+var editURL = null;
+var editURLSuf = null;
+var editURLTxt = null;
+var editssSec = null;
+var offerNeed = null;
+var postCount=0;
+var editssSec = null;
+var whichSubList=null;
+var greetingUserName=null;
+var offerPostCount = null;
+var needPostCount = null;
+var totalPostCount = null;
+
+chosenStateArray = fetchStateObject.fetchStateArray('default');
+function checkStateStatus(stateArray){
+					if(stateArray){
+						
+					for(i=0; i<stateArray.length; i++){
+						if(editState==stateArray[i][0]){
+							editStateTxt=stateArray[i][1];
+							$('.firstListBase .list-accountInfo #list-accountDetail:eq(4) #listContent').html(editStateTxt);
+						}
+						clearInterval(stateArrayCall);
+					}
+					
+				}
+}
+
+
+
+//fetch categories
+fetchCategoryObject.fetchCategoryArray();
+	
+//put cats into a usable array---called from fetchCategoryArray
+function displayCategories(parsedCategories){
+	categoriesArray = parsedCategories;
+}//display categories
 $.ajax({
 			type:'POST',
 			url:'control/pageQuery.php',
@@ -52,17 +113,17 @@ $.ajax({
                 }
                 
                 if(reviewsArrayParsed[0]!='noOffers'){//start with offers
-						offerPostCount = reviewsArrayParsed[0][0][20];
+						offerPostCount = reviewsArrayParsed[0][0][19];
                     	postCount = offerPostCount;//start with offers
                     if(reviewsArrayParsed[1]!='noNeeds'){
-                    	needPostCount = reviewsArrayParsed[1][0][20];
+                    	needPostCount = reviewsArrayParsed[1][0][19];
                     }else{
                     	needPostCount = 0;
                     }
                 }else if(reviewsArrayParsed[1]!='noNeeds'){//if there are no offers then default to needs
                 	offerPostCount = 0;
                     if(reviewsArrayParsed[1]!='noNeeds'){
-						needPostCount = reviewsArrayParsed[1][0][20];
+						needPostCount = reviewsArrayParsed[1][0][19];
                     	postCount = needPostCount;//start with needs
                     }else{
                         needPostCount = 0;
@@ -89,6 +150,11 @@ $.ajax({
 					editBusTxt='Yes';
 				}
 				
+				if(chosenPage!='edit'){//hide ps and email
+					editPSO = '**********';
+					editEmail = '**********';
+				}
+				
 	
 				reviewsArrayParsed[2]=null;
 			
@@ -107,8 +173,6 @@ $.ajax({
                             $('.list-deletePost:eq(0)').unbind('click').click(function(){editObject.editBox('account', editssSec, null, 'delete', 'editAccount');});
                             if(chosenPage!='edit'){
                                 //hide edit delete btns
-                                $('.firstListBase #list-accountDetail:eq(1)').remove();//remove ps from user page
-                                 $('.firstListBase #list-accountDetail:eq(1) #listContent').html('**********');//remove email address from user page
                                   $('.list-editPost:eq(0)').remove();
                                     $('.list-deletePost:eq(0)').remove();
                             }
