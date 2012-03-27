@@ -19,7 +19,7 @@ $tally= $_REQUEST['tally'];
 
 <div class="activateBase1">
 <div class="boxGradientDrop registerBase2" style="margin-top:-100px;">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 id="register-title">ZooFaroo Posting Activation</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 id="register-title">ZooFaroo Posting Activation</h2></div>
 
 <div id="register-form" style="width:600px;">
 <br/>

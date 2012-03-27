@@ -15,7 +15,7 @@ if (!defined('BASE_URL')) {
 <div class="boxBasic forgetBase1">
 <div id="breadCrumbs"><? echo $breadCrumbs; ?></div><!--breadCrumbs-->
 <div class="boxGradientDrop forgetBase2">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 id="register-title">Did you forget your ZooFaroo password?</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 id="register-title">Did you forget your ZooFaroo password?</h2></div>
 <div id="forget-form">
     Enter your username and email address.&nbsp;&nbsp;Your password will be sent to you via email.
     <br/><br/>

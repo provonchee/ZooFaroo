@@ -18,12 +18,12 @@ if (!defined('BASE_URL')) {
 <div class="boxBare loginBase1">
 <div id="breadCrumbs"><? echo $breadCrumbs; ?></div><!--breadCrumbs-->
 <div class="boxGradient loginBase2">
-<hgroup class="sectionHeaderFormat grayHeader"><h2 id="header-title">Login to ZooFaroo</h2></hgroup>
+<div class="sectionHeaderFormat grayHeader"><h2 id="header-title">Login to ZooFaroo</h2></div>
 <div id="post-form"></div><!--post-form-->
 </div><!--loginBase2-->
 </div><!--loginBase1-->
 <div class="boxBasic homeBase" style="margin-top:10px;">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 id="index-title">Welcome to ZooFaroo - the online barter community.</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 id="index-title">Welcome to ZooFaroo - the online barter community.</h2></div>
 <div id="index-Map"><img height="289" width="460" alt="" border="0" src="images/usa.gif" usemap="#map_usa" id="usa"/></div>
 <div id="preloader"></div>
 <div id="index-menu"></div><!--index-menu-->

@@ -18,7 +18,7 @@ $ssSec = $_REQUEST['ssSec'];
 ?>
 <div class="activateBase1">
 <div class="boxGradientDrop registerBase2" style="margin-top:-100px;">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 id="register-title">ZooFaroo User Activation</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 id="register-title">ZooFaroo User Activation</h2></div>
 
 <div id="register-form" style="width:600px;">
 <br/>

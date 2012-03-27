@@ -13,7 +13,7 @@ if (!defined('BASE_URL')) {
 } // End of defined() IF.
 ?>
 <div class="boxBasic homeBase">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 id="index-title">Welcome to ZooFaroo - the online barter community.</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 id="index-title">Welcome to ZooFaroo - the online barter community.</h2></div>
 
 <div id="index-Map"><img height="289" width="460" alt="" src="images/usa.gif" usemap="#map_usa" id="usa"/></div>
 <div id="preloader"></div>
@@ -23,7 +23,7 @@ if (!defined('BASE_URL')) {
 </div><!--boxDrop homeBase-->
 
 <div class="boxBasic recentBlogPost">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 id="index-title">Most Recent ZooFaroo Blog Post</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 id="index-title">Most Recent ZooFaroo Blog Post</h2></div>
 <div class="recentBlogWrap">
 <div id="bTitle"></div><!--bTitle-->
 Posted by:&nbsp;<div id="bAuthor"></div><!--bAuthor-->

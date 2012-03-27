@@ -824,6 +824,7 @@ font-size:0.9em;
 	-webkit-border-radius: 5px;
 	border: 1px solid #DDD;
 	margin-top: 0.2em;
+	display: inline-block;
 }
 
 #preloader
@@ -2145,6 +2146,7 @@ font-size: 1.1em;
 	text-decoration:underline;
 	color:#0066cc;
 	cursor:pointer;
+	width: 100px;
  }
  
  #qSearchTxt {

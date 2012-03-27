@@ -14,7 +14,7 @@ if (!defined('BASE_URL')) {
 ?>
 <div class="boxBasic registerBase1"> <script>$('.registerBase1').hide();</script> 
 <div id="breadCrumbs"><? echo $breadCrumbs; ?></div><!--breadCrumbs--> 
-<div class="boxGradientDrop registerBase2"> <hgroup class="sectionHeaderFormat blueHeader"><h2 id="register-title">Register with ZooFaroo</h2></hgroup> 
+<div class="boxGradientDrop registerBase2"> <div class="sectionHeaderFormat blueHeader"><h2 id="register-title">Register with ZooFaroo</h2></div> 
 <? include('regEditForm.inc.php'); ?> 
 <script>$('#post-postForm').hide();var RecaptchaOptions = {theme : 'clean'};function secCodeRefresh(){Recaptcha.reload();}</script> 
 <div id="post-captcha" style="float:none; margin-left:0px;"> <div class='secCodeRefresh' style="margin-left: 400px;">Refresh Code</div> 

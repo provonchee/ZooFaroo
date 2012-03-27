@@ -18,9 +18,8 @@ var userLink = null;
 
 //calls to fill the list
 function populateList(tAdjusted, kind){
-			chosenOfferNeed = kind;
-			listTicker++;
-			
+			chosenOfferNeed = $.trim(kind);
+			//listTicker++;
 				 for(j=listStart; j<listFinish; j++){
 					var year = uniqueArrayParsed[j][3].substring(0,4);
 					var month = uniqueArrayParsed[j][3].substring(5,7);
@@ -60,21 +59,21 @@ function populateList(tAdjusted, kind){
 					
 				   if(chosenOfferNeed == 'Offered'){
 						var primarySection = "<div id='list-offerTitle'><div id='list-offerIcon'><div id='list-offerTag'>offered</div></div><div id='list-offerLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+uniqueArrayParsed[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+uniqueArrayParsed[j][7]+"/"+uniqueArrayParsed[j][5]+"/"+chosenOfferNeed+"/"+uniqueArrayParsed[j][12].replace(/ /g, '_')+"/"+uniqueArrayParsed[j][15]+".html'> <div id='offerTitle'>"+uniqueArrayParsed[j][13]+"</div></a><div id='hasPic'>"+hasPhoto+"</div></div></div>";
-						if(uniqueArrayParsed[j][1]!=userName||chosenPage=='postList'){//not logged in
+						if(uniqueArrayParsed[j][1]!=userName||chosenPage=='postList'||chosenPage=='search'||chosenPage=='searchAdvanced'){//not logged in
 							if(chosenPage!='user'){
-								var secondarySection = "<div id='list-needTitle'  style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;also&nbsp;has&nbsp;<div id='list-needIcon'><div id='list-needTag'>"+uniqueArrayParsed[j][21]+"&nbsp;needs</div></div>&nbsp;and&nbsp;<div id='list-offerIcon'><div id='list-offerTag'>"+uniqueArrayParsed[j][20]+"&nbsp;more&nbsp;offers</div></div></div></div>";
+								var secondarySection = "<div id='list-needTitle'  style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;also&nbsp;has&nbsp;<div id='list-needIcon'><div id='list-needTag'>"+uniqueArrayParsed[j][21]+"&nbsp;needs</div></div>&nbsp;and&nbsp;<div id='list-offerIcon'><div id='list-offerTag'>"+uniqueArrayParsed[j][20]+"&nbsp;more&nbsp;offers</div></div></div>";
 								$('.secondListBase').append('<div class="boxGradient listPostListPg listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}else if(chosenPage=='user'){
 								var secondarySection = "";	
 								$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}
-						}else if(uniqueArrayParsed[j][1]==userName&&passWord!=null){//logged in
+						}else if(uniqueArrayParsed[j][1]==userName&&passWord!=null&&chosenPage!='postList'&&chosenPage!='search'&&chosenPage!='searchAdvanced'){//logged in
 							var secondarySection = "";
 							$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
 						}
 				   }else if(chosenOfferNeed == 'Needed'){
 						var primarySection = "<div id='list-needTitle'><div id='list-needIcon'><div id='list-needTag'>needed</div></div><div id='list-needLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+uniqueArrayParsed[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+uniqueArrayParsed[j][7]+"/"+uniqueArrayParsed[j][5]+"/"+chosenOfferNeed+"/"+uniqueArrayParsed[j][12].replace(/ /g, '_')+"/"+uniqueArrayParsed[j][15]+".html'> <div id='needTitle'>"+uniqueArrayParsed[j][13]+"</div></a></div><div id='hasPic'>"+hasPhoto+"</div></div>";
-						if(uniqueArrayParsed[j][1]!=userName||chosenPage=='postList'){//not logged in
+						if(uniqueArrayParsed[j][1]!=userName||chosenPage=='postList'||chosenPage=='search'||chosenPage=='searchAdvanced'){//not logged in
 							if(chosenPage!='user'){
 								var secondarySection = "<div id='list-offerTitle' style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;has&nbsp;<div id='list-offerIcon'><div id='list-offerTag'>"+uniqueArrayParsed[j][20]+"&nbsp;offers</div></div>&nbsp;and&nbsp;<div id='list-needIcon'><div id='list-needTag'>"+uniqueArrayParsed[j][21]+"&nbsp;more&nbsp;needs</div></div></div>";
 								$('.secondListBase').append('<div class="boxGradient listPostListPg listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
@@ -82,7 +81,7 @@ function populateList(tAdjusted, kind){
 								var secondarySection = "";
 								$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}
-				   		}else if(uniqueArrayParsed[j][1]==userName&&passWord!=null){//logged in
+				   		}else if(uniqueArrayParsed[j][1]==userName&&passWord!=null&&chosenPage!='postList'&&chosenPage!='search'&&chosenPage!='searchAdvanced'){//logged in
 						var secondarySection = "";
 						$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
 						 
@@ -142,7 +141,7 @@ function populateList(tAdjusted, kind){
 					 }
 					 
 					 //if SEARCH PAGE
-					  if(j==listFinish-1 && (chosenPage=='search')){
+					  if(j==listFinish-1 && (chosenPage=='search'||chosenPage=='searchAdvanced')){
 						  
 						 if(chosenOfferNeed!='Needed' && needPostCount!='0'){
 							 listTicker = 0;
@@ -156,24 +155,25 @@ function populateList(tAdjusted, kind){
 					
 					//pagination only for list page
 					//do not display page numbers if there is only one page
-						if(pageCount!=1){
-							$('.secondListBase').css({'padding-bottom':'20px'});
+						if(pageCount!=1&&j==listFinish-1){
+							
+							$('.secondListBase').css({'padding-bottom':'20px'}).append('<div id="list-pageCount"></div>');
 							//position page number buttons
 							pgBtnPosition = 495-((pageCount/2)*30)+'px';
-							$('#list-pageCount').empty();
+							//$('#list-pageCount').empty();
 							//display page numbers
 							for(r=pageCount; r>0; r--){
 								//highlight the selected page number
 								if(selectPage==r){
-									$('#list-pageCount').css({'margin-left':pgBtnPosition, 'margin-top':'-33px'}).append('<div class="buttonWrap" name="'+r+'" style="margin-right:10px; background:#336699; color:#FFF;">'+r+'</div>');
+									$('.secondListBase #list-pageCount').css({'margin-left':pgBtnPosition, 'margin-top':'-15px'}).append('<div class="buttonWrap" name="'+r+'" style="margin-right:10px; background:#336699; color:#FFF;">'+r+'</div>');
 								}else{
-									$('#list-pageCount').css({'margin-left':pgBtnPosition, 'margin-top':'-33px'}).append('<div class="buttonWrap" name="'+r+'" style="margin-right:10px;">'+r+'</div>');
+									$('.secondListBase #list-pageCount').css({'margin-left':pgBtnPosition, 'margin-top':'-15px'}).append('<div class="buttonWrap" name="'+r+'" style="margin-right:10px;">'+r+'</div>');
 								}
 							}
 							
 							
 							//give page numbers actions
-							$('#list-pageCount .buttonWrap').unbind('click').click(function(){
+							$('.secondListBase #list-pageCount .buttonWrap').unbind('click').click(function(){
 								selectPage = $(this).attr('name');
 								
 								listStart = (selectPage-1)*postsPerPage;
@@ -197,7 +197,7 @@ function populateList(tAdjusted, kind){
 							$('#list-pageCount').empty();
 						}//pageCount!=1
 					 
-					$('.secondListBase').fadeIn('slow');
+					$('.secondListBase').fadeIn('fast');
 				 }
 }
 

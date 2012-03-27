@@ -15,7 +15,7 @@ if (!defined('BASE_URL')) {
 <div class="boxBasic donateBase1">
 <div id="breadCrumbs"><? echo $breadCrumbs; ?></div><!--breadCrumbs-->
 <div class="boxGradientDrop donateBase2">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 id="donate-title">Donate to ZooFaroo</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 id="donate-title">Donate to ZooFaroo</h2></div>
 <div id="donate-content">
 Currently ZooFaroo is a service that is completely free to use.  If you use and enjoy ZooFaroo please consider making a small donation.  Every little bit helps.  Thank you!
 <br/><br/>

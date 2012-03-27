@@ -128,7 +128,9 @@
 												if(returned=='houstonMatch'){
 															
 															ssSec = startSession(userN,data,1);
+															if(chosenPage=='post' || chosenPage=='edit' || chosenPage=='login' || chosenPage=='user' || chosenPage=='thePost'){
 															loginConfirmed(datas, dataid, userName);
+															}
 															
 												}else if(returned=='sameuseMatch'){
 															

@@ -14,7 +14,7 @@ if (!defined('BASE_URL')) {
 ?>
 
 <div class="boxBasic searchBase1"><script>chosenPage = '<? echo $p; ?>';$('.searchBase1').hide();</script>
-<hgroup class="sectionHeaderFormat ltGrayHeader"><h2 id="index-title">ZooFaroo User Directory</h2></hgroup>
+<div class="sectionHeaderFormat ltGrayHeader"><h2 id="index-title">ZooFaroo User Directory</h2></div>
 <div class="boxBasic searchBase2 sideBySide">
         <div class="sectionHeaderFormat ltGrayHeader sectionHeader3">Search Users by Location</div>
        <div id="stateDropDwn" style="margin-left:75px;"></div><!--stateDropDwn-->

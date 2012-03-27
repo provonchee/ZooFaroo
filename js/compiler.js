@@ -198,11 +198,11 @@ if(localeObject.localeAction('state')||localeObject.localeAction('city')){
 	var bcCity = localeObject.localeAction('city');
 	var bcState = localeObject.localeAction('state');
 	if(bcCity&&bcState&& bcCity!=bcState){
-		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<div id="bcRegion"><a href="login.html">United States</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'.html">'+bcState.replace(/_/g, " ")+'</a></div>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'/'+localeObject.localeAction('city')+'.html">'+bcCity.replace(/_/g, " ")+'</a>');
+		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<u><div id="bcRegion"><a href="login.html">United States</a></div><div id="bcState">&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'.html">'+bcState.replace(/_/g, " ")+'</a></div>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'/'+localeObject.localeAction('city')+'.html">'+bcCity.replace(/_/g, " ")+'</a></u>');
 	}else if(bcCity&&bcState && bcCity==bcState){
-		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<div id="bcRegion"><a href="login.html">United States</a></div>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'/'+localeObject.localeAction('city')+'.html">'+bcCity.replace(/_/g, " ")+'</a>');
+		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<u><div id="bcRegion"><a href="login.html">United States</a></div>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'/'+localeObject.localeAction('city')+'.html">'+bcCity.replace(/_/g, " ")+'</a></u>');
 	}else if(bcState){
-		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<a href="login.html">United States</a>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'.html">'+bcState.replace(/_/g, " ")+'</a>');
+		$('#breadCrumbs').append('&nbsp;&nbsp;&nbsp;&nbsp;<u><a href="login.html">United States</a>&nbsp;&hArr;&nbsp;<a href="'+localeObject.localeAction('state')+'.html">'+bcState.replace(/_/g, " ")+'</a></u>');
 	}
 }
 }
@@ -231,7 +231,7 @@ confirmUser:function(){
 						//declare password
 						var retrievedPassword = localStorage.getItem('zoofaroo_password');
 						//open logform
-						lValidate(retrievedUsername, retrievedPassword, 'storage');
+						lValidate(retrievedUsername, retrievedPassword,'storage');
 						//break;
 					}else{//if they have been logged in for more than two hours and stagnant, then log them out
 						clearUser();	
@@ -559,16 +559,13 @@ var editObject = {
 																												  
 							});
 		
-		}else if(chosenPage=='edit'){///IF EDIT PAGE
+		}else{///IF EDIT PAGE
+		
 		//RESET EDIT BOX BUTTONS
 			function btnReset(action){
-				Recaptcha.reload();
-				
 				$(".editCancelBtn").unbind('click').click(function(){tempPhotoEdit[5] = 'cancel';editFormPhotoAction(tempPhotoEdit, tempPhotoEdit[0], tempPhotoEdit[2]);$('.mainBase .postBaseEdit .postBaseEdit2').empty(); $('#alertScreen').css({'display':'none'});$('.postBaseEdit').css({'display':'none'});});
 				$(".regEditSubmitBtn").html('Save and Continue');	
-			
 				$('.regEditSubmitBtn').unbind('click').click(function(){action();});
-				$(".secCodeRefresh").unbind('click').click(function(){Recaptcha.reload();});
 			}
 			
 			function editRefresh(){
@@ -579,6 +576,7 @@ var editObject = {
 				//EDITING A POSTING
 			case 'editPost':
 				if(aux!='delete'){
+					
 					screenAndAlert();
 					$(window).scrollTop(0);
 					if(navigator.appName=='Microsoft Internet Explorer'){
@@ -593,6 +591,12 @@ var editObject = {
 							oORn = 0;
 						}else if(whichKind=='need'){
 							oORn = 1;
+						}
+						var theChosenArray = null;
+						if(chosenPage=='thePost'){
+							theChosenArray = theSelectedPostInfo;
+						}else{
+							theChosenArray = reviewsArrayParsed[oORn][whichSubList];
 						}
 					
 					$('.mainBase .postBaseEdit').css({'margin-left':'-8px'});
@@ -609,7 +613,7 @@ var editObject = {
 						
 						$('.mainBase .postBaseEdit .index-ZooFaroo').html(''+alertHdrImg+'');
 						
-								$(".mainBase .postBaseEdit input[value='"+reviewsArrayParsed[oORn][whichSubList][9]+"']").attr('checked', true);
+								$(".mainBase .postBaseEdit input[value='"+window[''+theChosenArray+'[9]']+"']").attr('checked', true);
 								
 				
 								$('.mainBase .postBaseEdit #w').hide();
@@ -648,20 +652,20 @@ var editObject = {
 													}
 																																				 });
 									
-								if(reviewsArrayParsed[oORn][whichSubList][9]=='g'){
+								if(theChosenArray[9]=='g'){
 									$(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory").hide();
-									$(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory").val(''+reviewsArrayParsed[oORn][whichSubList][11]+'');
+									$(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory").val(''+theChosenArray[11]+'');
 								}
-								if(reviewsArrayParsed[oORn][whichSubList][9]=='s'){
+								if(theChosenArray[9]=='s'){
 									$(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory").hide();
-									$(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory").val(''+reviewsArrayParsed[oORn][whichSubList][11]+'');
+									$(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory").val(''+theChosenArray[11]+'');
 								}	
 																																
-								$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(''+reviewsArrayParsed[oORn][whichSubList][13]+'');
-								$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(''+reviewsArrayParsed[oORn][whichSubList][17]+'');
+								$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(''+theChosenArray[13]+'');
+								$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(''+theChosenArray[16]+'');
 								
-								$(".mainBase .postBaseEdit input[value='"+reviewsArrayParsed[oORn][whichSubList][10]+"']").attr('checked', true);
-									if(reviewsArrayParsed[oORn][whichSubList][14]=='2'){
+								$(".mainBase .postBaseEdit input[value='"+theChosenArray[10]+"']").attr('checked', true);
+									if(theChosenArray[14]=='2'){
 										$(".mainBase .postBaseEdit #post-"+whichKind+"FormBottom #"+whichKind+"Money input[value='2']").attr('checked', true);
 									}else{
 										$(".mainBase .postBaseEdit #post-"+whichKind+"FormBottom #"+whichKind+"Money input[value='2']").attr('checked', false);
@@ -678,7 +682,7 @@ var editObject = {
 									divLocale = '.mainBase .postBaseEdit';
 									pOrE = 'edit';
 																							
-									if(reviewsArrayParsed[oORn][whichSubList][8]=='1'){
+									if(theChosenArray[8]=='1'){
 										tempPhotoEdit[0] = '0';//offer
 										tempPhotoEdit[1] = '0';//arrived empty or full, '0' or '1'
 										tempPhotoEdit[2] = ''+whichSubList+'';//which number in the list of offers/needs
@@ -694,12 +698,12 @@ var editObject = {
 										tempPhotoEdit[1] =  '1';//arrived empty or full, '0' or '1'
 										tempPhotoEdit[2] = ''+whichSubList+'';//which number in the list of offers/needs
 										tempPhotoEdit[3] = 'empty';//photoname new
-										tempPhotoEdit[4] = reviewsArrayParsed[oORn][whichSubList][8];//photoname old
+										tempPhotoEdit[4] = theChosenArray[8];//photoname old
 										tempPhotoEdit[5] = '1';//what kind of action, save, change, cancel
 										$('.mainBase .postBaseEdit #post-offerFormPhoto #post-offerPhoto').hide();
 										$('.mainBase .postBaseEdit .post-offerChangePhoto').unbind('click').show();
 										
-										$('.mainBase .postBaseEdit #post-offerActPhoto').html('<img id="'+tempPhotoEdit[4]+'" src="photos/'+reviewsArrayParsed[oORn][whichSubList][6]+'/'+tempPhotoEdit[4]+'" name="100"/>');
+										$('.mainBase .postBaseEdit #post-offerActPhoto').html('<img id="'+tempPhotoEdit[4]+'" src="photos/'+theChosenArray[6]+'/'+tempPhotoEdit[4]+'" name="100"/>');
 										photoListen(whichOne, 'edit');
 									}
 									
@@ -710,8 +714,7 @@ var editObject = {
 									tempPhotoEdit[2] = ''+whichSubList+'';//which number in the list of offers/needs
 								}
 												
-								$(".secCodeRefresh").unbind('click').click(function(){Recaptcha.reload();});																						
-								$(".mainBase .postBaseEdit #post-captcha .editCancelBtn").unbind('click').click(function(){
+								$(".mainBase .postBaseEdit #post-captchaEdit .editCancelBtn").unbind('click').click(function(){
 																										tempPhotoEdit[5] = 'cancel';
 																										editFormPhotoAction(tempPhotoEdit, tempPhotoEdit[0], tempPhotoEdit[2]);
 																										$(".mainBase .postBaseEdit .postBaseEdit2").empty();
@@ -719,11 +722,67 @@ var editObject = {
 																										$('.postBaseEdit').css({'display':'none'});
 																										
 									});
-								$(".mainBase .postBaseEdit #post-captcha .regEditSubmitBtn").unbind('click').click(function(){editSave();});
+								$(".mainBase .postBaseEdit #post-captchaEdit .regEditSubmitBtn").unbind('click').click(function(){editSave();});
 								//SAVING A POSTING
 								function editSave(){
 									
-									 $(".mainBase .postBaseEdit #post-captcha .regEditSubmitBtn").unbind('click'); $(".mainBase .postBaseEdit #post-captcha .regEditSubmitBtn").html('Please wait...<img src="images/loaderSm.gif"/>'); var checkFormArray = new Array(); checkFormArray = { 'Title':$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(), 'Posting':$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(), 'arrayEnd':'arrayEnd' }; if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='g'){ checkFormArray['Category'] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); }else{ checkFormArray['Category'] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); } for (var child in checkFormArray){ if(checkFormArray[child]==null || checkFormArray[child]=='' || checkFormArray[child]=='undefined' || checkFormArray[child]=='please choose...'){ alertObject.alertBox('EMPTY FORM!', 'Please make sure that '+child+' is filled out/chosen!', 'gerrorPlus', btnReset, '.postBaseEdit', editSave); break; }else if(checkFormArray[child]=='arrayEnd'){ subMitEditPostAccountForm(); } } function subMitEditPostAccountForm() {genTimerObject.genTimer(); var response = $('#recaptcha_response_field').val(); var challenge = $('#recaptcha_challenge_field').val(); $.ajax({ type: "POST", url:'control/verifyUser.php', data: "type=advanced&user="+userName+"&pass="+passWord+"&ssSec="+editssSec+"&response="+response+"&challenge="+challenge+"", success: function(confirmi){clearTimeout(genericTimer); confirmi = $.trim(confirmi); if(confirmi!='X11' && confirmi!='X10'){ editssSec = confirmi; if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='g'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 'g'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); if(reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } }else if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='s'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 's'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); if(reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } } if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val().length==0){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = null; }else{ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(); } if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val().length==0){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][17] = null; }else{ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][17] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(); } if($(".mainBase .postBaseEdit input[name='"+whichKind+"EmailNotes"+whichOne+"']").is(':checked')){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '2'; }else{ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '1'; } if(whichKind=='need'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = '2'; } if($(".mainBase .postBaseEdit input[name="+whichKind+"Money"+whichOne+"]").is(':checked')){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '2'; }else{ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '1'; } var specificPostingStateID = reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][6]; if(whichKind=='offer'){ tempPhotoEdit[5] = 'save'; editFormPhotoAction(tempPhotoEdit, whichSubList, whichSubList);} var theArray = new Array(); theArray = {'s1':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9], 's2':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11], 's3':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13], 's4':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][17], 's5':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10], 's6':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8], 's7':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14], 's8':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][15], 's9':whichKind}; genTimerObject.genTimer(); var form = new Array(); form = {'di':'edit', 'd2':'editPost', 'i1':postID, 's2':userName, 's3':passWord, 's4':editssSec, 'i2':specificPostingStateID, 'a1': theArray}; $.post("control/formValidate.php", {form:form}, function(confirmation){ clearTimeout(genericTimer); var confirmate = $.trim(confirmation); if(confirmate=='X10'){ alertObject.alertBox('ALERT!', errorAlrt, 'ferror', editRefresh, null, null); }else{ Recaptcha.reload(); $('.mainBase .postBaseEdit .postBaseEdit2').empty(); $('#alertScreen').css({'display':'none'}); $('.postBaseEdit').css({'display':'none'}); alertObject.alertBox('SUCCESS!', updatePostSuccess, 'ferror', editRefresh, null, null); } }); }else if(confirmi=='X10'){ alertObject.alertBox('ALERT!', invalidUP, 'ferror', editRefresh, null, null); }else if(confirmi=='X11'){ alertObject.alertBox('ALERT!', codeAlrt, 'gerrorPlus', btnReset, '.postBaseEdit', editSave); } } }); }
+									 $(".mainBase .postBaseEdit #post-captchaEdit .regEditSubmitBtn").unbind('click'); $(".mainBase .postBaseEdit #post-captchaEdit .regEditSubmitBtn").html('Please wait...<img src="images/loaderSm.gif"/>'); var checkFormArray = new Array(); checkFormArray = { 'Title':$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(), 'Posting':$(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(), 'arrayEnd':'arrayEnd' }; if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='g'){ checkFormArray['Category'] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); }else{ checkFormArray['Category'] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); } for (var child in checkFormArray){ if(checkFormArray[child]==null || checkFormArray[child]=='' || checkFormArray[child]=='undefined' || checkFormArray[child]=='please choose...'){ alertObject.alertBox('EMPTY FORM!', 'Please make sure that '+child+' is filled out/chosen!', 'gerrorPlus', btnReset, '.postBaseEdit', editSave); break; }else if(checkFormArray[child]=='arrayEnd'){ subMitEditPostAccountForm(); } } 
+									 
+									 function subMitEditPostAccountForm() {
+										 genTimerObject.genTimer();
+										 $.ajax({ type: "POST", url:'control/verifyUser.php', data: "type=basic&user="+userName+"&pass="+passWord+"&ssSec="+editssSec+"", success: function(confirmi){
+											 clearTimeout(genericTimer); confirmi = $.trim(confirmi); 
+											 if(confirmi!='X11' && confirmi!='X10'){ 
+											 editssSec = confirmi; 
+											 if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='g'){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 'g'; 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); 
+											 if(reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } 
+											 }else if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='s'){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 's'; 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); 
+											 if(reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } } 
+											 if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val().length==0){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = null; 
+											 }else{ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(); } 
+											 if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val().length==0){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][16] = null; 
+											 }else{ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][16] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(); } 
+											 if($(".mainBase .postBaseEdit input[name='"+whichKind+"EmailNotes"+whichOne+"']").is(':checked')){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '2'; 
+											 }else{ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '1'; 
+											 } 
+											 if(whichKind=='need'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = '2'; } 
+											 if($(".mainBase .postBaseEdit input[name="+whichKind+"Money"+whichOne+"]").is(':checked')){ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '2'; 
+											 }else{ 
+											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '1'; 
+											 } 
+											 var specificPostingStateID = reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][6]; 
+											 if(whichKind=='offer'){ tempPhotoEdit[5] = 'save'; 
+											 editFormPhotoAction(tempPhotoEdit, whichSubList, whichSubList);
+											 } 
+											 var theArray = new Array(); 
+											 theArray = {'s1':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9], 's2':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11], 's3':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13], 's4':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][16], 's5':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10], 's6':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8], 's7':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14], 's8':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][15], 's9':whichKind}; 
+											 genTimerObject.genTimer(); 
+											 var form = new Array(); form = {'di':'edit', 'd2':'editPost', 'i1':postID, 's2':userName, 's3':passWord, 's4':editssSec, 'i2':specificPostingStateID, 'a1': theArray}; 
+											 $.post("control/formValidate.php", {form:form}, function(confirmation){ 
+											 clearTimeout(genericTimer); 
+											 var confirmate = $.trim(confirmation); 
+											 if(confirmate=='X10'){ alertObject.alertBox('ALERT!', errorAlrt, 'ferror', editRefresh, null, null); 
+											 }else{
+												 $('.mainBase .postBaseEdit .postBaseEdit2').empty(); 
+												 $('#alertScreen').css({'display':'none'}); 
+												 $('.postBaseEdit').css({'display':'none'}); 
+												 alertObject.alertBox('SUCCESS!', updatePostSuccess, 'ferror', editRefresh, null, null); } }); 
+											}else if(confirmi=='X10'){ 
+												 alertObject.alertBox('ALERT!', invalidUP, 'ferror', editRefresh, null, null); 
+											}else if(confirmi=='X11'){ 
+												 alertObject.alertBox('ALERT!', codeAlrt, 'gerrorPlus', btnReset, '.postBaseEdit', editSave); } } }); }
 											
 							}//editSave;
 																						  
@@ -735,6 +794,7 @@ var editObject = {
 					   alertObject.alertBox('ALERT!', deleteConfirm, 'decision', editDelete, whichOne, postID);
 				   }
 						   function editDelete(whichOne, postID){
+							  
 							    genTimerObject.genTimer();//start the timeout timer
 								 $('.list-deletePost:eq('+whichOne+')').html('Please wait...<img src="images/loaderSm.gif"/>');
 												 var form = new Array();
@@ -791,11 +851,8 @@ var editObject = {
 					$('.mainBase .postBaseEdit #busName').show().val(editBusName);
 					}
 					$(".mainBase .postBaseEdit #recaptcha_widget_div").css({'margin-left':'55px'});
-					//////////////////////////if you want to reinstate the capchta
-					$(".mainBase .postBaseEdit #recaptcha_widget_div").hide();
-					$(".mainBase .postBaseEdit #refreshCodeMsg").hide();
-					////////////////////////////
-					$(".mainBase .postBaseEdit .editCancelBtn").unbind('click').click(function(){Recaptcha.reload();$('.mainBase .postBaseEdit .postBaseEdit2').empty(); $('#alertScreen').css({'display':'none'});$('.postBaseEdit').css({'display':'none'});});
+	
+					$(".mainBase .postBaseEdit .editCancelBtn").unbind('click').click(function(){$('.mainBase .postBaseEdit .postBaseEdit2').empty(); $('#alertScreen').css({'display':'none'});$('.postBaseEdit').css({'display':'none'});});
 					
 				
 					$(".mainBase .postBaseEdit .regEditSubmitBtn").unbind('click').click(function(){accountSave()});//regEditSubmitBtn
@@ -853,15 +910,12 @@ var editObject = {
 							}
 									
 						function subMitEditAccountForm(){
-						//////REDUNDANT SEE EDIT POST ABOVE
 						genTimerObject.genTimer();//start the timeout timer
-						var response = $('#recaptcha_response_field').val();
-						var challenge = $('#recaptcha_challenge_field').val();
 																											
 							$.ajax({
 							type: "POST",
 							url:'control/verifyUser.php',
-							data: "type=basic&user="+userName+"&pass="+passWord+"&ssSec="+editssSec+"&response="+response+"&challenge="+challenge+"",
+							data: "type=basic&user="+userName+"&pass="+passWord+"&ssSec="+editssSec+"",
 							success: function(confirmi){
 								clearTimeout(genericTimer);
 								confirmi = $.trim(confirmi);
@@ -884,7 +938,8 @@ var editObject = {
 																	alertObject.alertBox('ALERT!', userNameInUse, 'gerrorPlus', btnReset, '.postBaseEdit', accountSave);
 															   }else{//form is filled out properly, moving on
 																		
-																Recaptcha.reload();$('.mainBase .postBaseEdit .postBaseEdit2').empty(); 
+																
+																$('.mainBase .postBaseEdit .postBaseEdit2').empty(); 
 																$('#alertScreen').css({'display':'none'});$('.postBaseEdit').css({'display':'none'});
 																alertObject.alertBox('SUCCESS!', updateSuccess, 'ferror', clearUser, null, null);
 					
@@ -1269,9 +1324,8 @@ var userLink = null;
 
 //calls to fill the list
 function populateList(tAdjusted, kind){
-			chosenOfferNeed = kind;
-			listTicker++;
-			
+			chosenOfferNeed = $.trim(kind);
+			//listTicker++;
 				 for(j=listStart; j<listFinish; j++){
 					var year = uniqueArrayParsed[j][3].substring(0,4);
 					var month = uniqueArrayParsed[j][3].substring(5,7);
@@ -1279,13 +1333,13 @@ function populateList(tAdjusted, kind){
 					
 					var dateAdjusted = ''+month+'-'+day+'-'+year+'';
 					
-					var postLocaleLinkPkg = '<div id="headerFooter-city">Post Location:&nbsp;'+uniqueArrayParsed[j][18]+'&nbsp;&nbsp;(<a href="'+uniqueArrayParsed[j][7]+'/'+uniqueArrayParsed[j][5]+'.html">'+uniqueArrayParsed[j][5].replace(/__/g, '/').replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a href="'+uniqueArrayParsed[j][7]+'.html">'+uniqueArrayParsed[j][7].replace(/__/g, '/').replace(/_/g, ' ')+'</a></div>)';
+					var postLocaleLinkPkg = '<div id="headerFooter-city">Post Location:&nbsp;'+uniqueArrayParsed[j][17]+'&nbsp;&nbsp;(<a href="'+uniqueArrayParsed[j][7]+'/'+uniqueArrayParsed[j][5]+'.html">'+uniqueArrayParsed[j][5].replace(/__/g, '/').replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a href="'+uniqueArrayParsed[j][7]+'.html">'+uniqueArrayParsed[j][7].replace(/__/g, '/').replace(/_/g, ' ')+'</a></div>)';
 					
 				
-					 if(uniqueArrayParsed[j][19][0]!='0'){
-						 userRatingCount = uniqueArrayParsed[j][19][0];
-			 	 		 userRatingPercent = "<span style='color:#669900;'>"+uniqueArrayParsed[j][19][1]+"%</span>";
-						 userBusiness = uniqueArrayParsed[j][19][2];
+					 if(uniqueArrayParsed[j][18][0]!='0'){
+						 userRatingCount = uniqueArrayParsed[j][18][0];
+			 	 		 userRatingPercent = "<span style='color:#669900;'>"+uniqueArrayParsed[j][18][1]+"%</span>";
+						 userBusiness = uniqueArrayParsed[j][18][2];
 					 }else{
 						userRatingCount = '0'; 
 						userRatingPercent = "";
@@ -1310,32 +1364,32 @@ function populateList(tAdjusted, kind){
 					
 					
 				   if(chosenOfferNeed == 'Offered'){
-						var primarySection = "<div id='list-offerTitle'><div id='list-offerIcon'><div id='list-offerTag'>offered</div></div><div id='list-offerLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+uniqueArrayParsed[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+uniqueArrayParsed[j][7]+"/"+uniqueArrayParsed[j][5]+"/"+chosenOfferNeed+"/"+uniqueArrayParsed[j][12].replace(/ /g, '_')+"/"+uniqueArrayParsed[j][16]+".html'> <div id='offerTitle'>"+uniqueArrayParsed[j][13]+"</div></a><div id='hasPic'>"+hasPhoto+"</div></div></div>";
-						if(chosenPage!='edit'){
+						var primarySection = "<div id='list-offerTitle'><div id='list-offerIcon'><div id='list-offerTag'>offered</div></div><div id='list-offerLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+uniqueArrayParsed[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+uniqueArrayParsed[j][7]+"/"+uniqueArrayParsed[j][5]+"/"+chosenOfferNeed+"/"+uniqueArrayParsed[j][12].replace(/ /g, '_')+"/"+uniqueArrayParsed[j][15]+".html'> <div id='offerTitle'>"+uniqueArrayParsed[j][13]+"</div></a><div id='hasPic'>"+hasPhoto+"</div></div></div>";
+						if(uniqueArrayParsed[j][1]!=userName||chosenPage=='postList'||chosenPage=='search'||chosenPage=='searchAdvanced'){//not logged in
 							if(chosenPage!='user'){
-								var secondarySection = "<div id='list-needTitle'  style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;has&nbsp;<div id='list-needIcon'><div id='list-needTag'>"+uniqueArrayParsed[j][21]+"&nbsp;needs</div></div></div>";
-								$('.secondListBase').append('<div class="boxGradient listPostListPg listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][16]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
+								var secondarySection = "<div id='list-needTitle'  style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;also&nbsp;has&nbsp;<div id='list-needIcon'><div id='list-needTag'>"+uniqueArrayParsed[j][21]+"&nbsp;needs</div></div>&nbsp;and&nbsp;<div id='list-offerIcon'><div id='list-offerTag'>"+uniqueArrayParsed[j][20]+"&nbsp;more&nbsp;offers</div></div></div>";
+								$('.secondListBase').append('<div class="boxGradient listPostListPg listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}else if(chosenPage=='user'){
 								var secondarySection = "";	
-								$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][16]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
+								$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}
-						}else if(chosenPage=='edit'){
+						}else if(uniqueArrayParsed[j][1]==userName&&passWord!=null&&chosenPage!='postList'&&chosenPage!='search'&&chosenPage!='searchAdvanced'){//logged in
 							var secondarySection = "";
-							$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+uniqueArrayParsed[j][16]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+uniqueArrayParsed[j][16]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
+							$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
 						}
 				   }else if(chosenOfferNeed == 'Needed'){
-						var primarySection = "<div id='list-needTitle'><div id='list-needIcon'><div id='list-needTag'>needed</div></div><div id='list-needLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+uniqueArrayParsed[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+uniqueArrayParsed[j][7]+"/"+uniqueArrayParsed[j][5]+"/"+chosenOfferNeed+"/"+uniqueArrayParsed[j][12].replace(/ /g, '_')+"/"+uniqueArrayParsed[j][16]+".html'> <div id='needTitle'>"+uniqueArrayParsed[j][13]+"</div></a></div><div id='hasPic'>"+hasPhoto+"</div></div>";
-						if(chosenPage!='edit'){
+						var primarySection = "<div id='list-needTitle'><div id='list-needIcon'><div id='list-needTag'>needed</div></div><div id='list-needLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+uniqueArrayParsed[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+uniqueArrayParsed[j][7]+"/"+uniqueArrayParsed[j][5]+"/"+chosenOfferNeed+"/"+uniqueArrayParsed[j][12].replace(/ /g, '_')+"/"+uniqueArrayParsed[j][15]+".html'> <div id='needTitle'>"+uniqueArrayParsed[j][13]+"</div></a></div><div id='hasPic'>"+hasPhoto+"</div></div>";
+						if(uniqueArrayParsed[j][1]!=userName||chosenPage=='postList'||chosenPage=='search'||chosenPage=='searchAdvanced'){//not logged in
 							if(chosenPage!='user'){
-								var secondarySection = "<div id='list-offerTitle' style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;has&nbsp;<div id='list-offerIcon'><div id='list-offerTag'>"+uniqueArrayParsed[j][21]+"&nbsp;offers</div></div></div>";
-								$('.secondListBase').append('<div class="boxGradient listPostListPg listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][16]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
+								var secondarySection = "<div id='list-offerTitle' style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;has&nbsp;<div id='list-offerIcon'><div id='list-offerTag'>"+uniqueArrayParsed[j][20]+"&nbsp;offers</div></div>&nbsp;and&nbsp;<div id='list-needIcon'><div id='list-needTag'>"+uniqueArrayParsed[j][21]+"&nbsp;more&nbsp;needs</div></div></div>";
+								$('.secondListBase').append('<div class="boxGradient listPostListPg listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}else if(chosenPage=='user'){
 								var secondarySection = "";
-								$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][16]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
+								$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}
-				   		}else if(chosenPage=='edit'){
+				   		}else if(uniqueArrayParsed[j][1]==userName&&passWord!=null&&chosenPage!='postList'&&chosenPage!='search'&&chosenPage!='searchAdvanced'){//logged in
 						var secondarySection = "";
-						$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+uniqueArrayParsed[j][16]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+uniqueArrayParsed[j][16]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
+						$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
 						 
 						}
 				   }
@@ -1358,7 +1412,15 @@ function populateList(tAdjusted, kind){
 					//user name link alt info
 					$('.secondListBase .listPost:eq('+j+') .reviewLink').attr({ title: "Check out "+uniqueArrayParsed[j][1]+"'s User Page", alt:"Check out "+uniqueArrayParsed[j][1]+"'s User Page"});
 					
-					if(chosenPage!='edit'){
+					
+					if(uniqueArrayParsed[j][1]==userName&&passWord!=null){//this doesn't need to check the page but rather if the user is logged in and these are his/her posts
+						//EDIT BUTTONS
+						var editBtnsPosi = $('.secondListBase .listPost').length-1;
+								$('.secondListBase .listPost:eq('+editBtnsPosi+') .list-editPost').unbind('click').click(function(){editObject.editBox($(this).attr('type'), editBtnsPosi, $(this).attr('postID'), $(this).attr('aux'), 'editPost');});
+								   $('.secondListBase .listPost:eq('+editBtnsPosi+') .list-deletePost').unbind('click').click(function(){								
+											editObject.editBox($(this).attr('type'), editBtnsPosi, $(this).attr('postID'), 'delete', 'editPost');
+									});
+					}else{
 					//abuse buttons
 					 $('.secondListBase .listPost:eq('+j+') .abuseReport').unbind('click').click(function(){
 							var thisOne = $(this).attr('aux');
@@ -1370,16 +1432,7 @@ function populateList(tAdjusted, kind){
 						alt: reportA
 					});
 			
-					}else if(chosenPage=='edit'){
-						//EDIT BUTTONS
-						var editBtnsPosi = $('.secondListBase .listPost').length-1;
-								$('.secondListBase .listPost:eq('+editBtnsPosi+') .list-editPost').unbind('click').click(function(){editObject.editBox($(this).attr('type'), editBtnsPosi, $(this).attr('postID'), $(this).attr('aux'), 'editPost');});
-								   $('.secondListBase .listPost:eq('+editBtnsPosi+') .list-deletePost').unbind('click').click(function(){								
-											editObject.editBox($(this).attr('type'), editBtnsPosi, $(this).attr('postID'), 'delete', 'editPost');
-									});
-							
-						
-					}
+					} 
 					 
 					 ///if REVIEWS/EDIT PAGE
 					 if(j==listFinish-1 && (chosenPage=='user' || chosenPage=='edit')){
@@ -1394,7 +1447,7 @@ function populateList(tAdjusted, kind){
 					 }
 					 
 					 //if SEARCH PAGE
-					  if(j==listFinish-1 && (chosenPage=='search')){
+					  if(j==listFinish-1 && (chosenPage=='search'||chosenPage=='searchAdvanced')){
 						  
 						 if(chosenOfferNeed!='Needed' && needPostCount!='0'){
 							 listTicker = 0;
@@ -1408,24 +1461,25 @@ function populateList(tAdjusted, kind){
 					
 					//pagination only for list page
 					//do not display page numbers if there is only one page
-						if(pageCount!=1){
-							$('.secondListBase').css({'padding-bottom':'20px'});
+						if(pageCount!=1&&j==listFinish-1){
+							
+							$('.secondListBase').css({'padding-bottom':'20px'}).append('<div id="list-pageCount"></div>');
 							//position page number buttons
 							pgBtnPosition = 495-((pageCount/2)*30)+'px';
-							$('#list-pageCount').empty();
+							//$('#list-pageCount').empty();
 							//display page numbers
 							for(r=pageCount; r>0; r--){
 								//highlight the selected page number
 								if(selectPage==r){
-									$('#list-pageCount').css({'margin-left':pgBtnPosition, 'margin-top':'-33px'}).append('<div class="buttonWrap" name="'+r+'" style="margin-right:10px; background:#336699; color:#FFF;">'+r+'</div>');
+									$('.secondListBase #list-pageCount').css({'margin-left':pgBtnPosition, 'margin-top':'-15px'}).append('<div class="buttonWrap" name="'+r+'" style="margin-right:10px; background:#336699; color:#FFF;">'+r+'</div>');
 								}else{
-									$('#list-pageCount').css({'margin-left':pgBtnPosition, 'margin-top':'-33px'}).append('<div class="buttonWrap" name="'+r+'" style="margin-right:10px;">'+r+'</div>');
+									$('.secondListBase #list-pageCount').css({'margin-left':pgBtnPosition, 'margin-top':'-15px'}).append('<div class="buttonWrap" name="'+r+'" style="margin-right:10px;">'+r+'</div>');
 								}
 							}
 							
 							
 							//give page numbers actions
-							$('#list-pageCount .buttonWrap').unbind('click').click(function(){
+							$('.secondListBase #list-pageCount .buttonWrap').unbind('click').click(function(){
 								selectPage = $(this).attr('name');
 								
 								listStart = (selectPage-1)*postsPerPage;
@@ -1470,7 +1524,6 @@ var myImagePR = new Image;
 	
 $('.secondListBase').hide();
 
-
 //localeAction
 var localeObject = {
 	localeAction:function(local){
@@ -1499,14 +1552,22 @@ var localeObject = {
 
 
 
+
 //loginAction
-		var whereTo = null;
+	var whereTo = null;
 	var userName = null;
 	var passWord = null;
 	var ssSec = null;
 	var org = null;
 	
-	function startSession(data, ft){
+	function loggedInInformation(confirmedUN){
+		$('.logOut').html('Log Out').unbind('click').click(function(){clearUser();});
+		$('.loggedInAs').html('Logged in as&nbsp;'+confirmedUN+'');
+		$('.gotoUserPage').html('Go to your User Page').unbind('click').click(function(){window.open(''+baseHref+'user/'+confirmedUN+'.html','_self');});
+		$('.notUser').html('Not&nbsp;'+confirmedUN+'?').unbind('click').click(function(){clearUser();});
+	}
+	
+	function startSession(uN, data, ft){
 		
 		var divid = data.indexOf('_');
 		
@@ -1516,6 +1577,8 @@ var localeObject = {
 		
 		datap = $.trim(data.slice((divid+7)));
 		passWord = datap;
+		userName = uN;
+		loggedInInformation(userName);
 		if(chosenPage=='post' || chosenPage=='edit' || chosenPage=='login' || chosenPage=='user' || chosenPage=='thePost'){
 		if(Modernizr.localstorage){
 			try {
@@ -1528,9 +1591,7 @@ var localeObject = {
 									 	}
 								}
 		}
-		if(ft==1){//if you want the login form to appear
-		loginConfirmed(datas, dataid, userName);
-		}
+		return datas;
 		}
 	}
 	
@@ -1601,18 +1662,7 @@ var localeObject = {
 								 
 								}//credCheck
 								
-								function loggedInInformation(confirmedUN){
-									$('.logOut').html('Log Out').unbind('click').click(function(){clearUser();});
-									$('.loggedInAs').html('Logged in as&nbsp;'+confirmedUN+'');
-									$('.gotoUserPage').html('Go to your User Page').unbind('click').click(function(){window.open(''+baseHref+'user/'+confirmedUN+'.html','_self');});
-									$('.notUser').html('Not&nbsp;'+confirmedUN+'?').unbind('click').click(function(){clearUser();});
-								}
-								
-							
-								
 							function secCodeRetrieve(userN, passW){
-								userName = userN;
-								passWord = passW;
 								
 								$.post(whereTo, function(data) {
 									
@@ -1633,13 +1683,14 @@ var localeObject = {
 														
 												if(returned=='houstonMatch'){
 															
-															startSession(data,1);
-															
-															loggedInInformation(userName);
+															ssSec = startSession(userN,data,1);
+															if(chosenPage=='post' || chosenPage=='edit' || chosenPage=='login' || chosenPage=='user' || chosenPage=='thePost'){
+															loginConfirmed(datas, dataid, userName);
+															}
 															
 												}else if(returned=='sameuseMatch'){
 															
-															startSession(data,0);
+															ssSec = startSession(userN,data,0);
 													
 															$('.replyPostingBtn').hide();
 															$('.postReplySecCode').hide();
@@ -1648,12 +1699,9 @@ var localeObject = {
 															$('#postShare-layout .sectionHeaderFormat').css({'margin-left':'0px', 'float':'none'});
 															$('#postShare-layout .sectionHeaderFormat #header-title').html('Sorry, but you cannot reply to one of your own posts.').css({'color':'#990000'});
 															
-															loggedInInformation(userName);			
-															
-															
 												}else if(returned=='mltcnctMatch'){
 															
-															startSession(data,0);
+															ssSec = startSession(userN,data,0);
 													
 															$('.replyPostingBtn').hide();
 															$('.postReplySecCode').hide();
@@ -1662,11 +1710,9 @@ var localeObject = {
 															$('#postShare-layout .sectionHeaderFormat').css({'margin-left':'0px', 'float':'none'});
 															$('#postShare-layout .sectionHeaderFormat #header-title').html('Our records show that you\'ve already contacted this user twice regarding this post.').css({'color':'#990000'});
 															
-															loggedInInformation(userName);
-														
 												}else if(returned=='alrdyrnMatch'){//user has already left a review AND rating for this user
 															
-															startSession(data,0);
+															ssSec = startSession(userN,data,0);
 															
 															$('.reviewFormBase1 #post-form #loginFormBody').empty();
 															$('.reviewFormBase1 #post-form #loginFormBody').html('Our records show that you\'ve already left a rating and review for this user.<br/>If you feel you are getting this message in error please feel free to contact us.').css({'color':'#990000', 'text-align':'center'});
@@ -1683,10 +1729,8 @@ var localeObject = {
 															$('.reviewFormBase2 #reviews-recommend').html('Our records show that you\'ve left a rating for this user but not a review.  Why not leave a review too?').css({'color':'#669900', 'font-size':'1em', 'text-align':'center'});
 															recUser = 'alrdyraMatch';
 															
-															startSession(data,1);
-															
-															
-															loggedInInformation(userName);
+															ssSec = startSession(userN,data,1);
+															loginConfirmed(datas, dataid, userName);
 															
 												}else if(returned=='mltismnMatch'){//cannot leave a review for yourself
 															$('.reviewFormBase1').css({'height':'60px'}); 
@@ -1694,10 +1738,9 @@ var localeObject = {
 															$('.reviewFormBase1 #post-form #loginFormBody').empty().html('We\'re sorry, but you cannot leave a review for yourself.');
 															$('#review-account-greeting-btns #leaveReview').hide();//hide the 'leave a review' button
 															
-															startSession(data,0);
-												
-															loggedInInformation(userName);
-																 
+															ssSec = startSession(userN,data,0);
+															retrieveEditList(ssSec);
+															
 												}else if(returned=='sorryNoMatch'){
 													userName = null;
 													passWord = null;
@@ -1714,10 +1757,10 @@ var localeObject = {
 									});
 	}//secCodeRetrieve
 function clearUser(){
-				/*localStorage.removeItem('zoofaroo_username');
+				localStorage.removeItem('zoofaroo_username');
 				localStorage.removeItem('zoofaroo_password');
-				localStorage.removeItem('zoofaroo_loginTime');*/
-				localStorage.clear();
+				localStorage.removeItem('zoofaroo_loginTime');
+				//localStorage.clear();
 				window.location.reload();	
 }
 
@@ -1936,6 +1979,7 @@ var shareObject = {
 }
 
 //variables
+//static variables
 //static variables
 var chosenPage = null;
 var chosenRegionName = null;

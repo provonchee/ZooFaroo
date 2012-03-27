@@ -16,7 +16,7 @@ include_once('modules/editBox.inc.php');
 <div class="boxBare editBase1">
 	<div id="breadCrumbs"><? echo $breadCrumbs; ?></div>
 	<div class="boxGradient loginBase2">
-	<hgroup class="sectionHeaderFormat grayHeader"><h2 id="header-title">You must sign in to access your ZooFaroo User Account Page</h2></hgroup>
+	<div class="sectionHeaderFormat grayHeader"><h2 id="header-title">You must sign in to access your ZooFaroo User Account Page</h2></div>
 	<div id="post-form"></div>
 </div><!--editBase1-->
 <div id="preloader"></div>

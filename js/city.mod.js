@@ -33,7 +33,7 @@ if(requestCity!=requestState){
 $('#welcomeMsg').html('Welcome to ZooFaroo&nbsp;'+cityDisplay+', '+stateDisplay+'');
 $('#dynamicMsg').html('We\'re brand new and you\'re one of our very first visitors.  You\'re a ZooFaroo pioneer!  Join in (it\'s totally free!) the exciting new social marketplace.  Spread the word, tell your friends, family, co-workers and make the ZooFaroo <? echo str_replace("_"," ",$city); ?> community all your own!<div id="forgetCategory"><a href="contact.html">Did we forget a category?&nbsp;&nbsp;Let us know!</a>');
 }else{
-$('#welcomeMsg').html('Welcome to ZooFaroo&nbsp;<? echo str_replace("_"," ",$state); ?>');
+$('#welcomeMsg').html('Welcome to ZooFaroo&nbsp;'+stateDisplay+'');
 $('#dynamicMsg').html('We\'re brand new and you\'re one of our very first visitors.  You\'re a ZooFaroo pioneer!  Join in (it\'s totally free!) the exciting new social marketplace.  Spread the word, tell your friends, family, co-workers and make the ZooFaroo <? echo str_replace("_"," ",$state); ?> community all your own!<div id="forgetCategory"><a href="contact.html">Did we forget a category?&nbsp;&nbsp;Let us know!</a>');
 }
 fetchCityObject.fetchCityArray(requestState, false);

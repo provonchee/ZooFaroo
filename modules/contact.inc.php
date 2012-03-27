@@ -15,7 +15,7 @@ if (!defined('BASE_URL')) {
 <div class="boxBasic contactBase1">
 <div id="breadCrumbs"><? echo $breadCrumbs; ?></div><!--breadCrumbs-->
 <div class="boxGradientDrop contactBase2">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 id="contact-title">Contact ZooFaroo</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 id="contact-title">Contact ZooFaroo</h2></div>
 <div id="contact-form">
 Questions?&nbsp;&nbsp;Comments?&nbsp;&nbsp;Find a bug?&nbsp;&nbsp;Have a suggestion?&nbsp;&nbsp;Let us know, we'd love to hear from you.
  	<div id="contact-email">Your Email:

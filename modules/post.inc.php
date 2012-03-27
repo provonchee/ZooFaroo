@@ -29,7 +29,7 @@ $('#post-postForm').hide();
 </script>
 
 <div class="boxGradient loginBase2">
-<hgroup class="sectionHeaderFormat grayHeader"><h2 id="header-title">Post Your Own Offers and Needs!</h2></hgroup>
+<div class="sectionHeaderFormat grayHeader"><h2 id="header-title">Post Your Own Offers and Needs!</h2></div>
 
 <div id="preloader"></div><!--preloader-->
 <div id="post-form"></div><!--post-form-->

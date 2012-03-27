@@ -47,7 +47,7 @@ function loginConfirmed(sdata, iddata, un){
 	case 'post':
 	chosenUserID = iddata;
 	ssSec = sdata;
-	$('.loginBase2').html('<hgroup class="sectionHeaderFormat grayHeader"><h2 id="header-title">Post Your Own Offers and Needs!</h2></hgroup>');
+	$('.loginBase2').html('<div class="sectionHeaderFormat grayHeader"><h2 id="header-title">Post Your Own Offers and Needs!</h2></div>');
 	$('#postingForms').fadeIn('fast');//postingForms fade in
 	$('#post-message').show();
 	$('#post-Explained').show();
@@ -78,7 +78,7 @@ function loginConfirmed(sdata, iddata, un){
 	ssSec = sdata;
 	chosenUserID = iddata;
 	chosenUser = un;
-	$('.loginBase2').html('<hgroup class="sectionHeaderFormat grayHeader"><h2 id="header-title">Your ZooFaroo User Account</h2></hgroup>');
+	$('.loginBase2').html('<div class="sectionHeaderFormat grayHeader"><h2 id="header-title">Your ZooFaroo User Account</h2></div>');
 	retrieveEditList(ssSec);
 	break;
 	

@@ -66,7 +66,7 @@ var baseHref = 'http://www.zoofaroo.com/';
 <div class="header">
 <div id="logStatus"><div class="loggedInAs"></div><div class="gotoUserPage"></div><div class="logOut"></div><div class="notUser"></div></div>
 <div class="index-ZooFaroo"><img src='images/zoofaroo.png' alt='ZooFaroo - Be social.  Trade local.' width="346" height="65"  style='border:none;'/></div>
-<hgroup id="h1Header"><h1>www.zoofaroo.com</h1><h2>be social.  trade local.</h2></hgroup>
+<div id="h1Header"><h1>www.zoofaroo.com</h1><h2>be social.  trade local.</h2></div>
 <div id="index-barterDef">ZooFaroo<img src="images/definition.jpg" alt='ZooFaroo definition' width=99 height=18 style="float:right; margin-top:2px; margin-right:70px;"/><div id="definition"><div>noun</div>online social marketplace for the free exchange of goods or services through trade, goodwill, or money.</div></div>
 <div id="header-menu">
 <div class="buttonWrap header-menuBtn" aux="home.html">USA map</div>
@@ -85,7 +85,7 @@ var baseHref = 'http://www.zoofaroo.com/';
 
 <div class="boxBasic aboutBase1" style="height:auto;">
 <div class="boxBasic aboutBase2">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 class="about-title">Welcome to ZooFaroo</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 class="about-title">Welcome to ZooFaroo</h2></div>
 <div id="about-content">
 ZooFaroo currently only serves the United States, we are however, planning on expanding our reach.  Since this is only a two person operation you can imagine the work load we're under.  But we'll get there we promise!
 <br/><br/>
@@ -98,7 +98,7 @@ Please feel free to visit our Facebook page (Please 'Like us!'), or follow us on
 </div><!--aboutBase2-->
 
 <div class="boxBasic aboutBase2">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 class="about-title">What is ZooFaroo?</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 class="about-title">What is ZooFaroo?</h2></div>
 <div id="about-content">
 ZooFaroo is an online social marketplace and resource where neighbors and small businesses can trade, buy, sell, barter, and promote themselves within in their community.
 <br/><br/>
@@ -118,7 +118,7 @@ ZooFaroo is a community that encourages everyone to help out their neighbors, sh
 </div><!--aboutBase2-->
 
 <div class="boxBasic aboutBase2">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 class="about-title">How does ZooFaroo work?</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 class="about-title">How does ZooFaroo work?</h2></div>
 <div id="about-content">
 <br/>
 First, you register (don't worry, it's easy and free).&nbsp;&nbsp;During the process you will have the option of including links to your facebook page, twitter page, google plus page, linkedin page, and your own website.&nbsp;&nbsp;
@@ -172,7 +172,7 @@ If you're a business and you'd like to promote it, first make sure you fill out 
 </div>
 </div><!--aboutBase2-->
 <div class="boxBasic aboutBase2">
-<hgroup class="sectionHeaderFormat blueHeader"><h2 class="about-title">About ZooFaroo</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 class="about-title">About ZooFaroo</h2></div>
 <div id="about-content"><div id="about-photo"><img src="images/josh&joel.jpg" alt="Joel and Josh/"><br/>Joel and Josh<br/><a href="http://www.linkedin.com/pub/joel-hokkanen/46/25b/274">Joel's LinkedIn Page</a><br/><a href="http://www.linkedin.com/pub/joshua-provonchee/23/b16/818">Joshua's LinkedIn Page</a></div>
 Joel and Josh grew up together in mid-coast Maine, where their friendship began at age fourteen.&nbsp;&nbsp;With the perfect formula of creativity, brainpower, compatibility, and drive and determination they knew a joint project was on the horizon.&nbsp;&nbsp;Ever since then, they’ve been waiting for that one main ingredient: a great idea. 
 <br/><br/>

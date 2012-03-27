@@ -15,7 +15,7 @@ if (!defined('BASE_URL')) {
 <div id="breadCrumbs"><? echo $breadCrumbs; ?></div><!--breadCrumbs-->
 
 <div class="boxBasic searchBase1"><script>$('.searchBase1').hide();</script>
-<hgroup class="sectionHeaderFormat blueHeader"><h2 id="index-title">Search ZooFaroo - Be social.  Trade local.</h2></hgroup>
+<div class="sectionHeaderFormat blueHeader"><h2 id="index-title">Search ZooFaroo - Be social.  Trade local.</h2></div>
 <div id="advancedBtn"><div class='buttonWrap'>Advanced Search</div></div>
 
 <div class="boxBasic searchBase2">
