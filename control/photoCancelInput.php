@@ -2,8 +2,6 @@
 include_once('../includes/connect.php');
 
 function photoCancel($photoCancelForm){
-	//{"di":"photoCancel","s1":"'013112kc2b4dp557.jpg'","i1":1,"s2":"'wzb3nq'","s3":"'rTemp'","i2":38,"i3":2}
-	//'s1':tphotonm, 'i1':chosenUserID, 's2':editssSec, 's3':removeType, 'i2':stateID, 'i3':postID
 	$photoName = $photoCancelForm['s1']; 
 	$chosenUserID = $photoCancelForm['i1'];
 	$ssSec = $photoCancelForm['s2'];

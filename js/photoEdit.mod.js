@@ -1,6 +1,64 @@
 var tempPhotoEdit = new Array();
 
-function editFormPhotoAction(tPEArray, whichOne, whichSubList){ tempPhotoEdit = tPEArray; if(tempPhotoEdit[1]=='0'){ if(tempPhotoEdit[5]=='change'){ removePhoto(tempPhotoEdit[4], 'rTemp', reviewsArrayParsed[whichOne][whichSubList][6], reviewsArrayParsed[whichOne][whichSubList][15]); reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8]='1'; tempPhotoEdit[3] = 'empty'; tempPhotoEdit[4] = '1'; }; if(tempPhotoEdit[5]=='cancel'){ if(tempPhotoEdit[4]!='1'){ removePhoto(tempPhotoEdit[4], 'rTemp', reviewsArrayParsed[whichOne][whichSubList][6], reviewsArrayParsed[whichOne][whichSubList][15]); tempPhotoEdit[3] = 'empty'; tempPhotoEdit[4] = '1'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8]='1'; }else{ tempPhotoEdit[3] = 'empty'; tempPhotoEdit[4] = '1'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8]='1'; } } if(tempPhotoEdit[5]=='save'){ if(tempPhotoEdit[4]!='1'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = tempPhotoEdit[4];}else{ tempPhotoEdit[3]='empty'; tempPhotoEdit[4]='1'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8]='1'; } } }else if(tempPhotoEdit[1]=='1'){ if(tempPhotoEdit[5]=='change'){ if(tempPhotoEdit[3] == 'empty'){ tempPhotoEdit[3] = tempPhotoEdit[4]; tempPhotoEdit[4] = '1'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8]='1'; } else{ removePhoto(tempPhotoEdit[4], 'rTemp', reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][6], reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][15]); tempPhotoEdit[4] = '1'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8]='1'; } } if(tempPhotoEdit[5]=='cancel'){ if(tempPhotoEdit[4]!='1'){ if(tempPhotoEdit[3] == 'empty'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = tempPhotoEdit[4]; }else{ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = tempPhotoEdit[3]; removePhoto(tempPhotoEdit[4], 'rTemp', reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][6], reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][15]); tempPhotoEdit[4] = tempPhotoEdit[3]; tempPhotoEdit[3] = 'empty'; } }else{ tempPhotoEdit[4] = tempPhotoEdit[3]; tempPhotoEdit[3] = 'empty'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = tempPhotoEdit[4]; } } if(tempPhotoEdit[5]=='save'){ if(tempPhotoEdit[4]!='1'){ if(tempPhotoEdit[3] == 'empty'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = '2'; }else{ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = tempPhotoEdit[4]; removePhoto(tempPhotoEdit[3], 'rState', reviewsArrayParsed[whichOne][whichSubList][6], reviewsArrayParsed[whichOne][whichSubList][15]); } }else{ tempPhotoEdit[4] = '1'; reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = '1'; } } } $('.postBase1 .post-offerAdditional').css({'margin-top':'35px'}); $(''+divLocale+' #post-offerPhoto').show(); $(''+divLocale+' #post-offerActPhoto').empty(); $(''+divLocale+' .post-offerChangePhoto').unbind('click'); $(''+divLocale+' #post-offerFormPhoto .post-offerChangePhoto').hide(); }
+function editFormPhotoAction(tPEArray, chosenArray){
+	tempPhotoEdit = tPEArray; 
+if(tempPhotoEdit[1]=='0'){ 
+if(tempPhotoEdit[5]=='change'){ 
+removePhoto(tempPhotoEdit[4], 'rTemp', chosenArray[6], chosenArray[15]); 
+chosenArray[8]='1'; tempPhotoEdit[3] = 'empty'; tempPhotoEdit[4] = '1'; }; 
+if(tempPhotoEdit[5]=='cancel'){ 
+if(tempPhotoEdit[4]!='1'){ 
+removePhoto(tempPhotoEdit[4], 'rTemp', chosenArray[6], chosenArray[15]); 
+tempPhotoEdit[3] = 'empty'; 
+tempPhotoEdit[4] = '1'; 
+chosenArray[8]='1'; 
+}else{ 
+tempPhotoEdit[3] = 'empty'; 
+tempPhotoEdit[4] = '1'; 
+chosenArray[8]='1'; } } 
+if(tempPhotoEdit[5]=='save'){ 
+if(tempPhotoEdit[4]!='1'){ 
+chosenArray[8] = tempPhotoEdit[4];
+}else{ 
+tempPhotoEdit[3]='empty'; 
+tempPhotoEdit[4]='1'; 
+chosenArray[8]='1'; } } 
+
+}else if(tempPhotoEdit[1]=='1'){ 
+if(tempPhotoEdit[5]=='change'){ 
+if(tempPhotoEdit[3] == 'empty'){ 
+tempPhotoEdit[3] = tempPhotoEdit[4]; 
+tempPhotoEdit[4] = '1'; 
+chosenArray[8]='1'; 
+} else{ 
+removePhoto(tempPhotoEdit[4], 'rTemp', 
+chosenArray[6], chosenArray[15]); 
+tempPhotoEdit[4] = '1'; chosenArray[8]='1'; } } 
+
+if(tempPhotoEdit[5]=='cancel'){ 
+ 
+	if(tempPhotoEdit[4]!='1'){ 
+		if(tempPhotoEdit[3] == 'empty'){
+		chosenArray[8] = tempPhotoEdit[4]; 
+		}else{ 
+		chosenArray[8] = tempPhotoEdit[3]; 
+		removePhoto(tempPhotoEdit[4], 'rTemp', chosenArray[6], chosenArray[15]); 
+		tempPhotoEdit[4] = tempPhotoEdit[3]; 
+		tempPhotoEdit[3] = 'empty'; } 
+	}else{ 
+	tempPhotoEdit[4] = tempPhotoEdit[3]; 
+	tempPhotoEdit[3] = 'empty'; 
+	chosenArray[8] = tempPhotoEdit[4]; 
+	} } 
+if(tempPhotoEdit[5]=='save'){ 
+if(tempPhotoEdit[4]!='1'){ 
+if(tempPhotoEdit[3] == 'empty'){ 
+chosenArray[8] = '2'; 
+}else{ 
+chosenArray[8] = tempPhotoEdit[4]; 
+removePhoto(tempPhotoEdit[3], 'rState', chosenArray[6], chosenArray[15]); } 
+}else{ 
+tempPhotoEdit[4] = '1'; chosenArray[8] = '1'; } } } $('.postBase1 .post-offerAdditional').css({'margin-top':'35px'}); $(''+divLocale+' #post-offerPhoto').show(); $(''+divLocale+' #post-offerActPhoto').empty(); $(''+divLocale+' .post-offerChangePhoto').unbind('click'); $(''+divLocale+' #post-offerFormPhoto .post-offerChangePhoto').hide(); }
 
 function photoLoaded(whichOne){
 							
@@ -152,7 +210,7 @@ function photoCancelLoad(whichOne){
 	$(''+divLocale+' #post-offerFormPhoto #photoLoading').empty();
 	if(pOrE=='post'){
 		alertObject.alertBox('ALERT!', photoErr, 'alert', null, null, null);
-	}else if(pOrE=='edit'){
+	}else{
 		alertObject.alertBox('ALERT!', photoErr, 'gerror', null, '.postBaseEdit', null);
 	}
 }//photoCancelLoad

@@ -1,8 +1,8 @@
 var mOfferObject = {
-	mOffer:function(j, kind){
-switch(chosenPage){
+	mOffer:function(theFirstArray, j, kind){
+switch(theFirstArray){
 	
-	case 'thePost':
+	case 'theMainPost':
 			
 			if(j=='2'){
 				if(kind=='offer'){
@@ -18,7 +18,7 @@ switch(chosenPage){
 	
 	default://search, edit, postList
 		
-			if(uniqueArrayParsed[j][14]=='2'){
+			if(theFirstArray[j][14]=='2'){
 				if(kind=='Offered'){
 					$('.secondListBase #list-offerLink:eq('+j+')').append('&nbsp;&nbsp;<div class=" moneyOption"><img src="images/onlyMoney.png"/></div>');
 					$('.secondListBase #list-offerLink:eq('+j+') .moneyOption').unbind('click').click(function(){

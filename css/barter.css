@@ -1408,6 +1408,7 @@ font-size:0.9em;
 		color:#333;
 		word-wrap: break-word;
 		padding-bottom:50px;
+		margin-bottom: 25px;
 }
 
 #post-offerPhoto {
@@ -1431,7 +1432,7 @@ font-size:0.9em;
 
 #postShare {
 	float: right;
-	margin-top: -20px;
+	margin-top: -50px;
 }
 
 
@@ -1455,7 +1456,7 @@ font-size:0.9em;
 #postShare-shareMsg{
 	color: inherit;
 	float: left;
-	margin-left: 725px;
+	margin-left: 785px;
 	margin-top: 6px;
 	padding-right: 15px;
 	font-size:0.8em;
@@ -1534,6 +1535,7 @@ font-size:0.9em;
 		padding:10px;
 		color:#333;
 		word-wrap: break-word;
+		margin-bottom: 50px;
 }
 
 #post-needPosting {

@@ -16,7 +16,6 @@ if(localeObject.localeAction('state')||localeObject.localeAction('city')){
 if($('#bcState').text()==$('#bcCity').text()){
 	$('#bcState').hide();
 }
-
-$("#breadCrumbs .backBtn").unbind("click").click(function(){history.go(-1)});
-	}
+$("#breadCrumbs .backBtn").unbind("click").click(function(){refreshBackOne();});
+}
 }

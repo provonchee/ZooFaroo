@@ -26,25 +26,7 @@ $('#post-postForm').hide();
 <div id="breadCrumbs"><? echo $breadCrumbs; ?></div><!--breadCrumbs-->
 
 <div id="preloader"></div><!--preloader-->
-
-<div class="boxBasic primaryThePostBase">
-<div class="buttonWrap replyPostingBtn" style="margin-top: -55px; margin-left: 820px; float: left;">Reply To This Posting</div>
-<div id="postShare">
-<div id="postShare-shareMsg">Share this Posting</div>
-
-<!--facebook-->
-<div id='postShare-facebook'>
-
-<script>function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script>
-	<a rel="nofollow" href="#" class="fb_share_button" onclick="return fbs_click()" target="_blank" style="text-decoration:none; border:0;"><img src='images/facebook.png' alt="Share on Facebook"  width="23" height="23"/></a>
-</div>
-<!--twitter-->
-<div id='postShare-twitter'>
-<script>function twitter_click() {u=location.href;t=document.title;window.open('https://twitter.com/share?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script>
-    <a href="https://twitter.com" class="twitter_share_button" onclick="return twitter_click()" target="_blank" style="text-decoration:none; border:0;"><img src='images/twitter.png' alt="Share on Twitter" width="23" height="23"/></a>
-</div>
-</div><!--postShare-->
-</div><!--primaryThePostBase-->
+<div class="boxBasic primaryThePostBase"></div><!--primaryThePostBase-->
 <div id="postShare-layout">
 <div class="sectionHeaderFormat" style="margin-top:15px; font-size: 1.1em; float:left; margin-left:400px; border-bottom: none;"><div id="header-title">Reply to this Posting!</div></div>
 <script>$('.thePostBase .primaryThePostBase').hide();$('#postShare-layout').hide();var myImagePR = new Image;myImagePR.src = "images/preloader.gif";myImagePR.id = "preload";$('#preloader').append(myImagePR);</script>
@@ -68,7 +50,7 @@ $('#post-postForm').hide();
 <div class="boxBare thirdListBase" style="position:relative; margin-top:25px; font-weight:bold; font-size:0.9em;"><div class="reviews-greeting"></div></div>
 
 <div id="secondaryHouse"></div>
-
+<div class="boxBare secondListBase" style="position:relative;"><div id='review-postings-greeting'></div></div><!--secondListBase-->
 <div id="terteiryHouse"><div class="boxGradient thePostBaseMsg"><div class="sectionHeaderFormat regBlueHeader sectionHeader2">ZooFaroo Helpful Hint:</div>  <div id="postHint"></div></div></div>
 <script>$('#terteiryHouse').hide();</script>
 
@@ -89,5 +71,10 @@ chosenOfferNeed = '<? echo $offerNeed; ?>';
 chosenPostingID = '<? echo $postingID; ?>';
 chosenRegionName = '<? echo $regionName; ?>';
 var BreadCrumbTitle = '<? echo $offerNeed; ?>';
-$.getScript('js/thePost.mod.js');
+function retrieveEditList(ssSec){
+	$.getScript("js/thePost.mod.js");
+}
+if(!ssSec){
+	$.getScript("js/thePost.mod.js");
+}
 </script>

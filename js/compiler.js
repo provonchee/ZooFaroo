@@ -596,7 +596,7 @@ var editObject = {
 						if(chosenPage=='thePost'){
 							theChosenArray = theSelectedPostInfo;
 						}else{
-							theChosenArray = reviewsArrayParsed[oORn][whichSubList];
+							theChosenArray = userEditInfoArray[oORn][whichSubList];
 						}
 					
 					$('.mainBase .postBaseEdit').css({'margin-left':'-8px'});
@@ -613,7 +613,7 @@ var editObject = {
 						
 						$('.mainBase .postBaseEdit .index-ZooFaroo').html(''+alertHdrImg+'');
 						
-								$(".mainBase .postBaseEdit input[value='"+window[''+theChosenArray+'[9]']+"']").attr('checked', true);
+								$(".mainBase .postBaseEdit input[value='"+theChosenArray[9]+"']").attr('checked', true);
 								
 				
 								$('.mainBase .postBaseEdit #w').hide();
@@ -735,39 +735,39 @@ var editObject = {
 											 if(confirmi!='X11' && confirmi!='X10'){ 
 											 editssSec = confirmi; 
 											 if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='g'){ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 'g'; 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); 
-											 if(reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 'g'; 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); 
+											 if(userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } 
 											 }else if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='s'){ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 's'; 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); 
-											 if(reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } } 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 's'; 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); 
+											 if(userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } } 
 											 if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val().length==0){ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = null; 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = null; 
 											 }else{ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(); } 
-											 if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val().length==0){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][16] = null; 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(); } 
+											 if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val().length==0){ userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][16] = null; 
 											 }else{ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][16] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(); } 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][16] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(); } 
 											 if($(".mainBase .postBaseEdit input[name='"+whichKind+"EmailNotes"+whichOne+"']").is(':checked')){ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '2'; 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '2'; 
 											 }else{ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '1'; 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '1'; 
 											 } 
-											 if(whichKind=='need'){ reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = '2'; } 
+											 if(whichKind=='need'){ userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = '2'; } 
 											 if($(".mainBase .postBaseEdit input[name="+whichKind+"Money"+whichOne+"]").is(':checked')){ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '2'; 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '2'; 
 											 }else{ 
-											 reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '1'; 
+											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '1'; 
 											 } 
-											 var specificPostingStateID = reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][6]; 
+											 var specificPostingStateID = userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][6]; 
 											 if(whichKind=='offer'){ tempPhotoEdit[5] = 'save'; 
 											 editFormPhotoAction(tempPhotoEdit, whichSubList, whichSubList);
 											 } 
 											 var theArray = new Array(); 
-											 theArray = {'s1':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][9], 's2':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][11], 's3':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][13], 's4':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][16], 's5':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][10], 's6':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][8], 's7':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][14], 's8':reviewsArrayParsed[tempPhotoEdit[0]][tempPhotoEdit[2]][15], 's9':whichKind}; 
+											 theArray = {'s1':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][9], 's2':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11], 's3':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][13], 's4':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][16], 's5':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][10], 's6':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][8], 's7':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][14], 's8':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][15], 's9':whichKind}; 
 											 genTimerObject.genTimer(); 
 											 var form = new Array(); form = {'di':'edit', 'd2':'editPost', 'i1':postID, 's2':userName, 's3':passWord, 's4':editssSec, 'i2':specificPostingStateID, 'a1': theArray}; 
 											 $.post("control/formValidate.php", {form:form}, function(confirmation){ 
@@ -995,7 +995,6 @@ var editObject = {
 		}//edit or post page
 	}
 }
-
 //fetchCategoryArray
 var fetchCategoryObject = {
 fetchCategoryArray:function(){
@@ -1306,7 +1305,7 @@ var genTimerObject = {
 //listDisplay
 var listArrayParsed = new Array();
 var postListArrayParsed = new Array();
-var reviewsArrayParsed = new Array();
+var userEditInfoArray = new Array();
 var uniqueArrayParsed = new Array();
 var listTitleAdj = new Array();
 var pageCount=null;
@@ -1441,7 +1440,7 @@ function populateList(tAdjusted, kind){
 							 listTicker = 0;
 							 postCount = needPostCount;
 							 listFinish = postCount;
-							 uniqueArrayParsed = reviewsArrayParsed[1];
+							 uniqueArrayParsed = userEditInfoArray[1];
 							 populateList(uniqueArrayParsed[listTicker][13], 'Needed');
 						 }
 					 }

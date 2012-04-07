@@ -90,14 +90,14 @@ class editList extends getReviews{
 		if($listRetrieval->fetchedArray[0][19]!=0){//numrows
 			$offeredPosts = $listRetrieval->fetchedArray;
 		}else{
-			$offeredPosts = 'noOffers';
+			$offeredPosts = NULL;
 		}
 		
 		$listRetrieval = new grabPosts("needed.user_id = '$this->editID'", 'needed');
 		if($listRetrieval->fetchedArray[0][19]!=0){//numrows
 			$neededPosts = $listRetrieval->fetchedArray;
 		}else{
-			$neededPosts = 'noNeeds';
+			$neededPosts = NULL;
 		}
 		$userInfoArray = array($this->editID, $this->editName, $this->editEmail, $this->editPass, $this->editCity, $this->editState, $this->editBusiness, $this->editFB, $this->editTW, $this->editGPlus, $this->editLinkedIn, $this->editURL, $this->editURLSuf, $this->editBusName);//user data
 		

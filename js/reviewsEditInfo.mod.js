@@ -25,15 +25,10 @@ var editLITxt = null;
 var editURL = null;
 var editURLSuf = null;
 var editURLTxt = null;
-var editssSec = null;
 var offerNeed = null;
-var postCount=0;
-var editssSec = null;
 var whichSubList=null;
 var greetingUserName=null;
-var offerPostCount = null;
-var needPostCount = null;
-var totalPostCount = null;
+
 
 chosenStateArray = fetchStateObject.fetchStateArray('default');
 function checkStateStatus(stateArray){
@@ -59,6 +54,7 @@ fetchCategoryObject.fetchCategoryArray();
 function displayCategories(parsedCategories){
 	categoriesArray = parsedCategories;
 }//display categories
+
 $.ajax({
 			type:'POST',
 			url:'control/pageQuery.php',
@@ -66,7 +62,7 @@ $.ajax({
 			success: function(editList){
             
             if(editList!='X10'){
-			reviewsArrayParsed = jQuery.parseJSON(editList);
+			userEditInfoArray = jQuery.parseJSON(editList);
       		
 			$('#preloader').fadeOut('fast', function(){$('#preloader').remove();});
             
@@ -74,74 +70,46 @@ $.ajax({
                 	$('.secondListBase').empty().html('<div id="review-postings-greeting"></div>');
                 	$('.thirdListBase').empty().html('<div class="reviews-greeting"></div>');
             
-			switch(reviewsArrayParsed[0][0]){
+			switch(userEditInfoArray[0][0]){
 				
 				case 'X10':
 				alertObject.alertBox('ALERT!', errorAlrt, 'ferror', reseter, null, null);
 				break;
 				
 				default:
-				editID = reviewsArrayParsed[2][0];
-				greetingUserName = reviewsArrayParsed[2][1];
+				editID = userEditInfoArray[2][0];
+				greetingUserName = userEditInfoArray[2][1];
 				editUname = '<div id="list-accountDetail">Username:&nbsp;<div id="listContent">'+greetingUserName+'</div>';
-				editEmail = reviewsArrayParsed[2][2];
-				editPSO = reviewsArrayParsed[2][3];
-				editCity = reviewsArrayParsed[2][4];
-				editState = reviewsArrayParsed[2][5];
-				editBus = reviewsArrayParsed[2][6];
-				editFB = reviewsArrayParsed[2][7];
+				editEmail = userEditInfoArray[2][2];
+				editPSO = userEditInfoArray[2][3];
+				editCity = userEditInfoArray[2][4];
+				editState = userEditInfoArray[2][5];
+				editBus = userEditInfoArray[2][6];
+				editFB = userEditInfoArray[2][7];
 				editFBTxt = (editFB ? "http://www.facebook.com/"+editFB : '');
 				editFB = (editFB ? editFB : '');
-				editTW = reviewsArrayParsed[2][8];
+				editTW = userEditInfoArray[2][8];
 				editTWTxt = (editTW ? "http://www.twitter.com/"+editTW : '');
 				editTW = (editTW ? editTW : '');
-				editGP = reviewsArrayParsed[2][9];
+				editGP = userEditInfoArray[2][9];
 				editGPTxt = (editGP ? "https://plus.google.com/"+editGP : '');
 				editGP = (editGP ? editGP : '');
-				editLI = reviewsArrayParsed[2][10];
+				editLI = userEditInfoArray[2][10];
 				editLITxt = (editLI ? "http://www.linkedin.com/"+editLI : '');
 				editLI = (editLI ? editLI : '');
-				editURL = reviewsArrayParsed[2][11];
+				editURL = userEditInfoArray[2][11];
 				editURL = (editURL ? editURL : '');
-				editURLSuf = (editURL ? reviewsArrayParsed[2][12] : '');
+				editURLSuf = (editURL ? userEditInfoArray[2][12] : '');
 				editURLTxt = (editURL ? "http://www."+editURL+editURLSuf : '');
                
-                if(reviewsArrayParsed[2][13]!=null){
-					editBusName = reviewsArrayParsed[2][13];
+                if(userEditInfoArray[2][13]!=null){
+					editBusName = userEditInfoArray[2][13];
                 }else{
                	 	editBusName = '';
                 }
-                
-                if(reviewsArrayParsed[0]!='noOffers'){//start with offers
-						offerPostCount = reviewsArrayParsed[0][0][19];
-                    	postCount = offerPostCount;//start with offers
-                    if(reviewsArrayParsed[1]!='noNeeds'){
-                    	needPostCount = reviewsArrayParsed[1][0][19];
-                    }else{
-                    	needPostCount = 0;
-                    }
-                }else if(reviewsArrayParsed[1]!='noNeeds'){//if there are no offers then default to needs
-                	offerPostCount = 0;
-                    if(reviewsArrayParsed[1]!='noNeeds'){
-						needPostCount = reviewsArrayParsed[1][0][19];
-                    	postCount = needPostCount;//start with needs
-                    }else{
-                        needPostCount = 0;
-                    }
-                    
-                }else{
-                    offerPostCount = 0;
-                    needPostCount = 0;
-                    postCount = 0;
-                }
-                
-                
-               
-				totalPostCount = offerPostCount+needPostCount;
-	
+
 				//get state name				
 				stateArrayCall = setInterval("checkStateStatus(fetchStateObject.fetchStateArray('default'))", 500);
-				
 				
 				//set business to 'yes' or 'no'
 				if(editBus=='1'){
@@ -155,10 +123,8 @@ $.ajax({
 					editEmail = '**********';
 				}
 				
-	
-				reviewsArrayParsed[2]=null;
+				userEditInfoArray[2]=null;
 			
-				
 				var business = '<img src="images/businessFollow.png" height="25" alt="I am a business" style="border:none;"/>&nbsp;&nbsp;Business:&nbsp;<div id="listContent">'+editBusTxt+'</div>&nbsp;&nbsp;&nbsp;Business Name:&nbsp;<div id="listContent">'+editBusName+'</div>';
 				var fb = '<img src="images/facebookFollow.png" height="25" alt="Find us on Facebook!" style="border:none;"/>&nbsp;&nbsp;Facebook:&nbsp;<div id="listContent"><a href="'+editFBTxt+'"target="_blank">'+editFBTxt+'</a></div>';
 				var tw = '<img src="images/twitterFollow.png" height="25" alt="Follow us on Twitter!" style="border:none;"/>&nbsp;&nbsp;Twitter:&nbsp;<div id="listContent"><a href="'+editTWTxt+'"target="_blank">'+editTWTxt+'</a></div>';
@@ -177,6 +143,31 @@ $.ajax({
                                     $('.list-deletePost:eq(0)').remove();
                             }
 				$('.firstListBase').fadeIn('fast');
+				
+				
+				sortListObject.sortListDisplay(userEditInfoArray[0],userEditInfoArray[1],greetingUserName);
+				/*if(userEditInfoArray[0]!='noOffers'){//start with offers
+						offerPostCount = userEditInfoArray[0][0][19];
+                    	postCount = offerPostCount;//start with offers
+                    if(userEditInfoArray[1]!='noNeeds'){
+                    	needPostCount = userEditInfoArray[1][0][19];
+                    }else{
+                    	needPostCount = 0;
+                    }
+                }else if(userEditInfoArray[1]!='noNeeds'){//if there are no offers then default to needs
+                	offerPostCount = 0;
+                    if(userEditInfoArray[1]!='noNeeds'){
+						needPostCount = userEditInfoArray[1][0][19];
+                    	postCount = needPostCount;//start with needs
+                    }else{
+                        needPostCount = 0;
+                    }
+                    
+                }else{
+                    offerPostCount = 0;
+                    needPostCount = 0;
+                    postCount = 0;
+                }
      
 				if(postCount>0){
 					$('.secondListBase').fadeIn('fast');
@@ -190,28 +181,28 @@ $.ajax({
 												  
 					//begin cycle
                     if(offerPostCount!=0){
-						uniqueArrayParsed = reviewsArrayParsed[0];
-						populateList(uniqueArrayParsed[listTicker][13], 'Offered');
+						uniqueArrayParsed = userEditInfoArray[0];
+						populateList(uniqueArrayParsed, 'Offered');
                      }else{
-                        uniqueArrayParsed = reviewsArrayParsed[1];
-						populateList(uniqueArrayParsed[listTicker][13], 'Needed');
+                        uniqueArrayParsed = userEditInfoArray[1];
+						populateList(uniqueArrayParsed, 'Needed');
                      }
 						
 					
 				}else{//no postings to edit
 				$('.secondListBase').fadeIn('fast');
 						$('#review-postings-greeting').html('<div class="boxGradient editUserPgDivider listPost">Postings from:&nbsp;<span style="color:#3366cc;">'+greetingUserName+'</span> &nbsp;&nbsp;&nbsp;A total of&nbsp;<span style="color:#3366cc">0</span>&nbsp;postings found under username:&nbsp;<span style="color:#3366cc">'+greetingUserName+'</span></div>');
-                }
+                }*/
 				
 				
 			//////REVIEWS
               $(".firstListBase .reviews-greeting").html('<div class="boxGradient editUserPgDivider listPost">ZooFaroo User Information for:&nbsp;<span style="color:#3366cc">'+greetingUserName+'</span></div>');
-			if(reviewsArrayParsed[3][0][0]!='X10'){
-				$(".thirdListBase .reviews-greeting").html('<div class="boxGradient editUserPgDivider listPost">User Ratings for:&nbsp;<span style="color:#3366cc">'+reviewsArrayParsed[3][0][0]+'</span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#3366cc">'+reviewsArrayParsed[3][0][10]+'</span>&nbsp;rating(s) &nbsp;&nbsp;&nbsp;'+reviewsArrayParsed[3][0][12]+'%&nbsp;<img src="images/plus.png" style="vertical-align:sub;"/>&nbsp;&nbsp;&nbsp;&nbsp;'+reviewsArrayParsed[3][0][13]+'%&nbsp;<img src="images/minus.png" style="vertical-align:sub;"/></h2></div>');
+			if(userEditInfoArray[3][0][0]!='X10'){
+				$(".thirdListBase .reviews-greeting").html('<div class="boxGradient editUserPgDivider listPost">User Ratings for:&nbsp;<span style="color:#3366cc">'+userEditInfoArray[3][0][0]+'</span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#3366cc">'+userEditInfoArray[3][0][10]+'</span>&nbsp;rating(s) &nbsp;&nbsp;&nbsp;'+userEditInfoArray[3][0][12]+'%&nbsp;<img src="images/plus.png" style="vertical-align:sub;"/>&nbsp;&nbsp;&nbsp;&nbsp;'+userEditInfoArray[3][0][13]+'%&nbsp;<img src="images/minus.png" style="vertical-align:sub;"/></h2></div>');
                 var rw=0;
-				reviews = reviewsArrayParsed[3];
-                reviewCount = reviewsArrayParsed[3][0][4][3];
-				ratingCount = reviewsArrayParsed[3][0][10];
+				reviews = userEditInfoArray[3];
+                reviewCount = userEditInfoArray[3][0][4][3];
+				ratingCount = userEditInfoArray[3][0][10];
 				for(rw=0; rw<ratingCount; rw++){
                                 
                         if(reviews[rw][8]=='2'){

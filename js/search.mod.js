@@ -155,23 +155,19 @@ function sendData(stateID, cityID, categoryID, ofNe, kWord){
 																					needPostCount=0;
 																					offerPostCount = searchListArrayParsed[0][0][19];
 																					postCountPaginator(offerPostCount,needPostCount);
-																					uniqueArrayParsed = searchListArrayParsed[0];
-																					populateList(uniqueArrayParsed[listTicker][13], 'Offered');
+																					populateList(searchListArrayParsed[0],searchListArrayParsed[1],'Offered');
 															
 																			}else if(searchListArrayParsed[0]=='noMatches' && searchListArrayParsed[1]!='noMatches'){//needs found
-																			
 																					offerPostCount=0;
 																					needPostCount = searchListArrayParsed[1][0][19];
 																					postCountPaginator(offerPostCount,needPostCount);
-																					uniqueArrayParsed = searchListArrayParsed[1];
-																					populateList(uniqueArrayParsed[listTicker][13], 'Needed');
+																					populateList(searchListArrayParsed[0],searchListArrayParsed[1],'Needed');
 																					
 																			}else if(searchListArrayParsed[0]!='noMatches' && searchListArrayParsed[1]!='noMatches'){//both found
 																					offerPostCount=searchListArrayParsed[0][0][19];
 																					needPostCount = searchListArrayParsed[1][0][19];
 																					postCountPaginator(offerPostCount,needPostCount);
-																					uniqueArrayParsed = searchListArrayParsed[0];
-																					populateList(uniqueArrayParsed[listTicker][13], 'Offered');
+																					populateList(searchListArrayParsed[0],searchListArrayParsed[1],'Offered');
 																			
 																			}
 																		}

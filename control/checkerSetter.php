@@ -52,7 +52,7 @@ include_once('../includes/connect.php');
 						$postingID = $_REQUEST['postingID'];//only for replies
 						
 						$timesConnected = new timesConnected();
-						
+							
 							$timesConnected->tConnected($user, $pass, $postingID, $offerNeed);
 							
 							if($timesConnected->connectedCount!='X10'){

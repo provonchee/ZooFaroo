@@ -1,5 +1,6 @@
 <div id='footer'>
-<script>(function() {var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;po.src = 'https://apis.google.com/js/plusone.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script>
+<script>$(document).ready(function(){(function() {$('.sideBar').html(' <div id="shareBtns"> <!--Facebook--> <div id="facebook"> <a href="http://www.facebook.com/ZooFaroo" target="_blank"><img src="images/facebookFollow.png" height="25" width="25" alt="Find us on Facebook!" style="border:none;"/></a> </div> <div id="twitter"> <!--Twitter--> <a href="https://twitter.com/ZooFaroo" target="_blank"><img src="images/twitterFollow.png" height="25" width="25" alt="Follow us on Twitter!" style="border:none;"/></a> </div> <!--Google--> <div id="plus1"> <link href="https://plus.google.com/103958829492703792482" rel="publisher" /> <a href="https://plus.google.com/103958829492703792482?prsrc=3" style="text-decoration: none;"><img src="images/googlePlusFollow.png" height="25" width="25" alt="Follow us on Twitter!" style="border:none;"/></a> </div> </div>');var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;po.src = 'https://apis.google.com/js/plusone.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();confirmUserObject.confirmUser();bcObject.bcInjector();quickSearchObject.quickSearch('<? echo $p; ?>', '<? echo $state; ?>', '<? echo $city; ?>', '<? echo $offerNeed; ?>', '<? echo $category; ?>');});</script>
+<script></script>
 <g:plusone size="medium" annotation="none"></g:plusone>
 <div id="likeBtn"><div class="fb-like" data-href="http://www.zoofaroo.com" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true" data-font="arial"></div></div>
 <div id="footer-menu">
@@ -7,6 +8,5 @@
 </div><!--footer-->
 
 </div><!--wrapper-->
-<script>$(document).ready(function(){confirmUserObject.confirmUser();bcObject.bcInjector();quickSearchObject.quickSearch('<? echo $p; ?>', '<? echo $state; ?>', '<? echo $city; ?>', '<? echo $offerNeed; ?>', '<? echo $category; ?>');});</script>
 </body>
 </html>

@@ -46,7 +46,7 @@ $.ajax({
 						$('.listBase').css('height', menuHeight+'px');
 						$('.listBase #preloader').fadeOut('fast', function(){
 						$('.listBase  #preloader').remove();
-						//$('.listBase .secondListBase').fadeIn('fast');
+						$('.listBase .secondListBase').fadeIn('fast');
 						});
 		   }else{
 						
@@ -81,7 +81,7 @@ $.ajax({
 							}
 						//begin cycle - sends offer title to function to be adjusted
 						uniqueArrayParsed = postListArrayParsed;
-						populateList(uniqueArrayParsed[listTicker][13], offerNeed);
+						populateList(uniqueArrayParsed, uniqueArrayParsed, offerNeed);
 						$('.listBase #preloader').fadeOut('fast');
 						$('.listBase #postsPerPageBtns').fadeIn('slow');
 			}

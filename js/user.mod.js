@@ -8,7 +8,7 @@ var reviewCount = null;
 
 function reseter(){window.open(''+baseHref+'user/'+chosenUser+'.html', '_self')};
 function retrieveEditList(ssSec){
-	$.getScript("js/reviewsEditInfo.mod.js", function(){editssSec = ssSec;});
+	$.getScript("js/reviewsEditInfo.mod.js");
 }
 if(!ssSec){
 	$.getScript("js/reviewsEditInfo.mod.js");

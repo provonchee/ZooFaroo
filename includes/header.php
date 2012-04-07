@@ -37,6 +37,8 @@
 <script src="js/genTimer.js"></script>
 <script src="js/abuseReport.js"></script>
 <script src="js/bcInjector.js"></script>
+<script src="js/sortList.js"></script>
+<script src="js/loginConfirmed.js"></script>
 <link rel="stylesheet" type="text/css" href="css/barter.css" />
 <script type="text/javascript">
 var baseHref = 'http://localhost:8888/ZooFaroo/';
@@ -52,7 +54,7 @@ chosenPage = '<? echo $p; ?>';
 <div class="boxDrop alert"><div id="alertHdrImg"></div><div id="alertHdr"></div><div id="alertMsg"></div></div>
 <script>$('html, body').animate({scrollTop:0});chosenPage = '<? echo $p; ?>';function pageRefresh(){clearTimeout(genericTimer);window.location.reload();}</script>
 <div class="wrapper">
-<div class="boxBasic sideBar"> <div id='shareBtns'> <!--Facebook--> <div id="facebook"> <a href="http://www.facebook.com/ZooFaroo" target="_blank"><img src="images/facebookFollow.png" height="25" width="25" alt="Find us on Facebook!" style="border:none;"/></a> </div> <div id="twitter"> <!--Twitter--> <a href="https://twitter.com/ZooFaroo" target="_blank"><img src="images/twitterFollow.png" height="25" width="25" alt="Follow us on Twitter!" style="border:none;"/></a> </div> <!--Google--> <div id="plus1"> <link href="https://plus.google.com/103958829492703792482" rel="publisher" /> <a href="https://plus.google.com/103958829492703792482?prsrc=3" style="text-decoration: none;"><img src="images/googlePlusFollow.png" height="25" width="25" alt="Follow us on Twitter!" style="border:none;"/></a> </div> </div><!--share btns--> </div>
+<div class="boxBasic sideBar"></div>
 <div class="boxDrop mainBase">
 <div class="boxBasic secondBase">
 <div class="header">
