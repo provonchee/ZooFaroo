@@ -4,7 +4,6 @@ var emailNeedTitleAdj=null;
 var thePostingArrayParsed=null;
 var loaderTimer=null;
 var postLoaded=false;
-var replyierHeight = 220;
 var userBusiness = null;
 var userRatingCount = null;
 var userRatingPercent = null;
@@ -15,18 +14,11 @@ var goodsCategoryID = new Array();
 var servicesCategoryID = new Array();
 var chosenPost = null;
 var chosenPostLocale = null;
-$('.primaryThePostBase').load('modules/mainPosting.php');
-//$('.secondListBase').empty();
-$('#postReply-message').hide();
-$('.postReplySecCode').hide();
-$('#postShare-layout').hide();
-$('#postShare-layout #postReply-form').load('modules/loginForm.php');
-if(chosenOfferNeed=='Needed'){
-	$('.replyPostingBtn').css({'margin-top':'0px'});
-	$('#postShare').css({'margin-top':'0px'});
-	$('.thePostBase .primaryThePostBase').height('250px')
-}
-$('.replyPostingBtn').click(function(){
+$('.primaryThePostBase').empty();
+	$('.secondListBase').empty().html('<div id="review-postings-greeting"></div>');
+$('.primaryThePostBase').load('modules/mainPosting.php', function(){
+	
+	$('.primaryThePostBase #postShare .replyPostingBtn').click(function(){
 	$(this).toggle();
 	$('#postShare-layout').fadeIn('fast');
 		if($('#postShare-layout #postReply-form').children().length>0){
@@ -40,14 +32,26 @@ $('.replyPostingBtn').click(function(){
 		}
 });
 	
+});
+$('#postReply-message').hide();
+$('.postReplySecCode').hide();
+$('#postShare-layout').hide();
+$('#postShare-layout #postReply-form').load('modules/loginForm.php');
+if(chosenOfferNeed=='Needed'){
+	$('.replyPostingBtn').css({'margin-top':'0px'});
+	$('#postShare').css({'margin-top':'0px'});
+	$('.thePostBase .primaryThePostBase').height('250px')
+}
+
+	
 function postHeightAdjuster(){
 	
 	if(postLoaded){
 		clearInterval(loaderTimer);
-		if($('#secondaryHouse').children().length!=0){
+		if(secondaryPosts.length!=0){
 		var secondaryHeight = 120;
-		secondaryHeight = $('#secondaryHouse').children().length*secondaryHeight;
-		var postingHeight = $('.thePostBase .primaryThePostBase').height()+175+secondaryHeight;
+		secondaryHeight = secondaryPosts.length*secondaryHeight;
+		var postingHeight = $('.thePostBase .primaryThePostBase').height()+250+secondaryHeight;
 			if($('.replyPostingBtn').is(':hidden')){
 				$('#postShare-layout #postReply-form').empty();
 				$('.postReplySecCode').show();
@@ -65,6 +69,7 @@ function postHeightAdjuster(){
 			}
 			$('.thePostBase').css({'height':postingHeight+'px'});
 		}
+		
 	}
 }
 

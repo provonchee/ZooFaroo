@@ -201,7 +201,7 @@ var editObject = {
 																												  
 							});
 		
-		}else{///IF EDIT PAGE
+		}else{///if REVIEWS/EDIT/USER/THE POST PAGE
 		
 		//RESET EDIT BOX BUTTONS
 			function btnReset(action){
@@ -423,7 +423,8 @@ var editObject = {
 											 }else{
 												 $('.mainBase .postBaseEdit .postBaseEdit2').empty(); 
 												 $('#alertScreen').css({'display':'none'}); 
-												 $('.postBaseEdit').css({'display':'none'}); 
+												 $('.postBaseEdit').css({'display':'none'});
+												 confirmUserObject.confirmUser();
 												 alertObject.alertBox('SUCCESS!', updatePostSuccess, 'alert', null, null, null);btnReset(editSave);retrieveEditList(editssSec); } }); 
 											}else if(confirmi=='X10'){
 												 alertObject.alertBox('ALERT!', invalidUP, 'gerrorPlus', editRefresh, '.postBaseEdit', editRefresh); 
@@ -452,8 +453,14 @@ var editObject = {
 													 switch(confirmer){ 
 													 case '1': 
 													 			if(chosenPage=='thePost'){
-																	$('#alertScreen').css({'display':'none'}); alertObject.alertBox('SUCCESS!', deleteSuccess, 'ferror', refreshBackOne, null, null); break;
+																	if(chosenPostingID==postID){
+																		$('#alertScreen').css({'display':'none'}); alertObject.alertBox('SUCCESS!', deleteSuccess, 'ferror', refreshBackOne, null, null); break;
+																	}else{
+																		confirmUserObject.confirmUser();
+																		$('#alertScreen').css({'display':'none'}); alertObject.alertBox('SUCCESS!', deleteSuccess, 'alert', null, null, null); retrieveEditList(editssSec); break;
+																	}
 																}else{
+																	confirmUserObject.confirmUser();
 																	cleanSlate(); $('#alertScreen').css({'display':'none'}); alertObject.alertBox('SUCCESS!', deleteSuccess, 'alert', null, null, null); retrieveEditList(editssSec); break;
 																}
 													 case'X10': $('#alertScreen').css({'display':'none'}); alertObject.alertBox('ALERT!', errorAlrt, 'alert', null, null, null); break; }

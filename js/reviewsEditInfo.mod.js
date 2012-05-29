@@ -146,54 +146,6 @@ $.ajax({
 				
 				
 				sortListObject.sortListDisplay(userEditInfoArray[0],userEditInfoArray[1],greetingUserName);
-				/*if(userEditInfoArray[0]!='noOffers'){//start with offers
-						offerPostCount = userEditInfoArray[0][0][19];
-                    	postCount = offerPostCount;//start with offers
-                    if(userEditInfoArray[1]!='noNeeds'){
-                    	needPostCount = userEditInfoArray[1][0][19];
-                    }else{
-                    	needPostCount = 0;
-                    }
-                }else if(userEditInfoArray[1]!='noNeeds'){//if there are no offers then default to needs
-                	offerPostCount = 0;
-                    if(userEditInfoArray[1]!='noNeeds'){
-						needPostCount = userEditInfoArray[1][0][19];
-                    	postCount = needPostCount;//start with needs
-                    }else{
-                        needPostCount = 0;
-                    }
-                    
-                }else{
-                    offerPostCount = 0;
-                    needPostCount = 0;
-                    postCount = 0;
-                }
-     
-				if(postCount>0){
-					$('.secondListBase').fadeIn('fast');
-					
-					//since user/edit page shows an all postings list, we bypass pagination here
-						pageCount = 1;
-						listFinish = postCount;
-					
-					/////POSTINGS
-						$('#review-postings-greeting').html('<div class="boxGradient editUserPgDivider listPost">A total of&nbsp;<span style="color:#3366cc">'+totalPostCount+'</span>&nbsp;posting(s) found under username:&nbsp;<span style="color:#3366cc">'+greetingUserName+'</span></div>');
-												  
-					//begin cycle
-                    if(offerPostCount!=0){
-						uniqueArrayParsed = userEditInfoArray[0];
-						populateList(uniqueArrayParsed, 'Offered');
-                     }else{
-                        uniqueArrayParsed = userEditInfoArray[1];
-						populateList(uniqueArrayParsed, 'Needed');
-                     }
-						
-					
-				}else{//no postings to edit
-				$('.secondListBase').fadeIn('fast');
-						$('#review-postings-greeting').html('<div class="boxGradient editUserPgDivider listPost">Postings from:&nbsp;<span style="color:#3366cc;">'+greetingUserName+'</span> &nbsp;&nbsp;&nbsp;A total of&nbsp;<span style="color:#3366cc">0</span>&nbsp;postings found under username:&nbsp;<span style="color:#3366cc">'+greetingUserName+'</span></div>');
-                }*/
-				
 				
 			//////REVIEWS
               $(".firstListBase .reviews-greeting").html('<div class="boxGradient editUserPgDivider listPost">ZooFaroo User Information for:&nbsp;<span style="color:#3366cc">'+greetingUserName+'</span></div>');

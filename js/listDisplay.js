@@ -5,7 +5,7 @@ var theListArray = new Array();
 var listTitleAdj = new Array();
 var pageCount=null;
 var pgBtnPosition=null;
-var postsPerPage=10;
+var postsPerPage=20;
 var listStart = 0;
 var listFinish = listStart+postsPerPage;//used only for search or postlist == pagination
 var listTicker = 0;
@@ -23,7 +23,7 @@ var listDisplayOfferNeed = null;
 
 //calls to fill the list
 function populateList(theFirstArray, theSecondArray, kind){
-			
+				
 				listDisplayOfferNeed = $.trim(kind);
 				if(listDisplayOfferNeed=='Needed'){theFirstArray=theSecondArray};//if offers is empty then default to the needs
 				 for(j=listStart; j<listFinish; j++){
@@ -64,7 +64,8 @@ function populateList(theFirstArray, theSecondArray, kind){
 					
 					
 				   if(listDisplayOfferNeed == 'Offered'){
-					   var remainingOffers = theFirstArray[j][20]-1;
+					   if(theFirstArray[j][15]!=chosenPostingID){
+					  	 var remainingOffers = theFirstArray[j][20]-1;
 						var primarySection = "<div id='list-offerTitle'><div id='list-offerIcon'><div id='list-offerTag'>offered</div></div><div id='list-offerLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+theFirstArray[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+theFirstArray[j][7]+"/"+theFirstArray[j][5]+"/"+listDisplayOfferNeed+"/"+theFirstArray[j][12].replace(/ /g, '_')+"/"+theFirstArray[j][15]+".html'> <div id='offerTitle'>"+theFirstArray[j][13]+"</div></a><div id='hasPic'>"+hasPhoto+"</div></div></div>";
 						if(theFirstArray[j][1]!=userName||chosenPage=='postList'||chosenPage=='search'||chosenPage=='searchAdvanced'){//not logged in
 							if(chosenPage!='user'){
@@ -78,7 +79,9 @@ function populateList(theFirstArray, theSecondArray, kind){
 							var secondarySection = "";
 							$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+theFirstArray[j][15]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+theFirstArray[j][15]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
 						}
+					   }
 				   }else if(listDisplayOfferNeed == 'Needed'){
+					   if(theFirstArray[j][15]!=chosenPostingID){
 					   var remainingNeeds = theFirstArray[j][21]-1;
 						var primarySection = "<div id='list-needTitle'><div id='list-needIcon'><div id='list-needTag'>needed</div></div><div id='list-needLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+theFirstArray[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+theFirstArray[j][7]+"/"+theFirstArray[j][5]+"/"+listDisplayOfferNeed+"/"+theFirstArray[j][12].replace(/ /g, '_')+"/"+theFirstArray[j][15]+".html'> <div id='needTitle'>"+theFirstArray[j][13]+"</div></a></div><div id='hasPic'>"+hasPhoto+"</div></div>";
 						if(theFirstArray[j][1]!=userName||chosenPage=='postList'||chosenPage=='search'||chosenPage=='searchAdvanced'){//not logged in
@@ -94,6 +97,7 @@ function populateList(theFirstArray, theSecondArray, kind){
 						$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+theFirstArray[j][15]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+theFirstArray[j][15]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
 						 
 						}
+					   }
 				   }
 				   
 				   if(theFirstArray[j][5]==theFirstArray[j][7]){//city and state are the same as in Maine/Maine for states that only have one section
@@ -147,7 +151,14 @@ function populateList(theFirstArray, theSecondArray, kind){
 							 populateList(theFirstArray, theSecondArray, 'Needed');
 						 }
 						 if(chosenPage=='thePost'){
-							$('#review-postings-greeting').html(''+userLink+'&nbsp;also&nbsp;has&nbsp;<div id="list-offerTag">'+offerPostCount+'&nbsp;other&nbsp;offer</div> postings and <div id="list-needTag">'+needPostCount+'&nbsp;other&nbsp;need</div> postings.').css({'font-size':'inherit'});
+							 if(chosenOfferNeed=='Offered'){
+								 var offerPostCountAdjusted = offerPostCount-1;
+								  var needPostCountAdjusted = needPostCount;
+							 }else{
+								 var needPostCountAdjusted = needPostCount-1;
+								  var offerPostCountAdjusted = offerPostCount;
+							 }
+							$('#review-postings-greeting').html(''+userLink+'&nbsp;also&nbsp;has&nbsp;<div id="list-offerTag">'+offerPostCountAdjusted+'&nbsp;other&nbsp;offer</div> postings and <div id="list-needTag">'+needPostCountAdjusted+'&nbsp;other&nbsp;need</div> postings.').css({'font-size':'inherit'});
 						 }else{
 							$('#review-postings-greeting').html('<div class="boxGradient editUserPgDivider listPost">A total of&nbsp;<span style="color:#3366cc">'+totalPostCount+'</span>&nbsp;posting(s) found under username:&nbsp;<span style="color:#3366cc">'+greetingUserName+'</span></div>');
 						 }

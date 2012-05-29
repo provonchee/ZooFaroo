@@ -367,7 +367,7 @@ h2 {
 }
 
 .listPostListPg {
-	height:75px;
+	height:80px;
 
 }
 
@@ -1458,20 +1458,20 @@ font-size:0.9em;
 	float: left;
 	margin-left: 785px;
 	margin-top: 6px;
-	padding-right: 15px;
+	padding-right: 10px;
 	font-size:0.8em;
 }
 
 #postShare-facebook {
 	float:left;
 	margin-top: 4px;
-	padding-right:10px;
+	padding-right:5px;
 	border:0;
 }
 #postShare-twitter {
 	float:left;
 	margin-top: 4px;
-	padding-right:10px;
+	padding-right:5px;
 	border:0;
 }
 

@@ -26,7 +26,6 @@ var loginConfirmedObject = { loginConfirmed:function(sdata, iddata, un){
 	$('.submitBtn').unbind('click').click(function(){
 				submitBtnAction();							 		  
 	});//submitBtn
-	replyierHeight = 660;
 	loaderTimer = setInterval('postHeightAdjuster()', 100);																		 
 	break;
 	

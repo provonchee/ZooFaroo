@@ -9,7 +9,7 @@ function __autoload($class_name) {
 		$errorCode = NULL;
 		$folder = $relPath;
 		$maxlimit = $maxSize;
-		$allowed_ext = "jpg,jpeg,gif,png,bmp";
+		$allowed_ext = "jpg,jpeg,gif,png,bmp,JPEG,JPG,PNG,BMP,GIF";
 		$match = "";
 		$filesize = $_FILES[$fileName]['size'];
 		if($filesize > 0){	
@@ -101,6 +101,27 @@ function __autoload($class_name) {
 								break;
 							}
 							@imagecopyresampled($image_p, $image, 0, $top_offset, 0, 0, $fwidth, $fheight, $width_orig, $height_orig);
+							
+							$exif = exif_read_data($_FILES[$fileName]['tmp_name'],'IFD0' ,0);
+							$ort = $exif['Orientation'];
+								switch($ort)
+								{
+									case 1: // nothing
+									break;
+							
+									case 3: // 180 rotate left
+										$image_p = imagerotate($image_p,180,0);
+									break;
+											
+									case 6: // 90 rotate right
+										$image_p = imagerotate($image_p, -90,0);
+									break;
+											
+									case 8: // 90 rotate left
+										$image_p = imagerotate($image_p, 90,0);
+									break;
+								}
+
 							switch($filetype){
 								case "gif":
 									if(!@imagegif($image_p, $save)){

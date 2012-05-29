@@ -77,18 +77,15 @@ $postNumber = $whichOne+1;
 <div id="post-<? echo $whichKind ?>FormPhoto">
 <div class='buttonWrap post-offerChangePhoto'>Change or Remove Photo</div>
 <div id="post-<? echo $whichKind ?>Photo" ><div class="moneyOption"><img src="images/photo.png"/></div>
-Do you have a photo of this offer you'd like to upload?&nbsp;&nbsp;(Accepted image formats: jpg, jpeg, png, gif)
+Do you have a photo of this offer you'd like to upload?&nbsp;&nbsp;<div style="color:#990000; display:inline;">(Accepted image formats: jpg, jpeg, png, gif)</div>
 <form action="control/ajaxuploadInput.php" method="post" name="pupload" id="pupload" enctype="multipart/form-data">
 <input type="hidden" name="maxSize" value="9999999999" />
 <input type="hidden" name="maxW" value="600" />
 <input type="hidden" name="fullPath" value="<? echo $baseHref; ?>photos/tempPhotos/" />
 <input type="hidden" name="relPath" value="../photos/tempPhotos/" />
-<input type="hidden" name="colorR" value="255" />
-<input type="hidden" name="colorG" value="255" />
-<input type="hidden" name="colorB" value="255" />
 <input type="hidden" name="maxH" value="3000" />
 <input type="hidden" name="filename" value="filename" />
-<input type="file" name="filename" onchange="ajaxUpload(this.form,'control/ajaxuploadInput.php?filename=name&amp;maxSize=9999999999&amp;maxW=600&amp;fullPath=<? echo $baseHref; ?>photos/tempPhotos/&amp;relPath=photos/tempPhotos/&amp;colorR=255&amp;colorG=255&amp;colorB=255&amp;maxH=3000','post-<? echo $whichKind ?>ActPhoto','','');photoListen(<? echo $whichOne; ?>, '<? echo $postOrEdit; ?>'); return false;" />
+<input type="file" name="filename" onchange="ajaxUpload(this.form,'control/ajaxuploadInput.php?filename=name&amp;maxSize=9999999999&amp;maxW=600&amp;fullPath=<? echo $baseHref; ?>photos/tempPhotos/&amp;relPath=photos/tempPhotos/&amp;maxH=3000','post-<? echo $whichKind ?>ActPhoto','','');photoListen(<? echo $whichOne; ?>, '<? echo $postOrEdit; ?>'); return false;" />
 </form>
 </div><div id="photoLoading"></div>
 <div id="post-<? echo $whichKind ?>ActPhoto" style="border:5px solid #ffffff"></div>

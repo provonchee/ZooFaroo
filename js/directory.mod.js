@@ -116,7 +116,7 @@ function sendDataU(stateID, cityID, kWord, busName){
 															
 																if(result!='X10' && result!='noMatches'){
 																  searchListArrayParsed = jQuery.parseJSON(result);
-																  console.log(searchListArrayParsed);
+																 
 																  for(i=0; i<searchListArrayParsed.length; i++){
 																	  if(searchListArrayParsed[i][1][1]>0){
 																		percentage = '<b><span style="color:#669900;">'+searchListArrayParsed[i][1][1]+'%</span></b>';

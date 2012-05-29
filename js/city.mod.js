@@ -29,6 +29,7 @@ for(i=0; i<parsedCities.length; i++){
 	}
 }
 }//displayCities
+
 if(requestCity!=requestState){
 $('#welcomeMsg').html('Welcome to ZooFaroo&nbsp;'+cityDisplay+', '+stateDisplay+'');
 $('#dynamicMsg').html('We\'re brand new and you\'re one of our very first visitors.  You\'re a ZooFaroo pioneer!  Join in (it\'s totally free!) the exciting new social marketplace.  Spread the word, tell your friends, family, co-workers and make the ZooFaroo <? echo str_replace("_"," ",$city); ?> community all your own!<div id="forgetCategory"><a href="contact.html">Did we forget a category?&nbsp;&nbsp;Let us know!</a>');

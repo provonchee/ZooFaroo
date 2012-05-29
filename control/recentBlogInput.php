@@ -1,17 +1,17 @@
 <?
 $host = "localhost";
 
-$usernameDB = "root";
+/*$usernameDB = "root";
 
 $passwordDB = "bird25";
 
-$whichDB = "blog";
+$whichDB = "blog";*/
 
-/*$usernameDB = "square18_joshua";
+$usernameDB = "square18_joshua";
 
 $passwordDB = "B1rdP01nt103";
 
-$whichDB = "square18_blog";*/
+$whichDB = "square18_blog";
 
 $con = mysql_connect($host,$usernameDB,$passwordDB);
 if (!$con) {

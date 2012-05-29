@@ -209,9 +209,8 @@ if(localeObject.localeAction('state')||localeObject.localeAction('city')){
 if($('#bcState').text()==$('#bcCity').text()){
 	$('#bcState').hide();
 }
-
-$("#breadCrumbs .backBtn").unbind("click").click(function(){history.go(-1)});
-	}
+$("#breadCrumbs .backBtn").unbind("click").click(function(){refreshBackOne();});
+}
 }
 
 //confirmUser
@@ -289,6 +288,7 @@ var displayCitiesObject = {
 
 ///displayStates
 
+
 var displayStates_states=null;
 var displayStates_statesID=null;
 
@@ -352,6 +352,7 @@ var  displayStatesObject = {
 }
 
 }
+
 
 
 
@@ -559,11 +560,11 @@ var editObject = {
 																												  
 							});
 		
-		}else{///IF EDIT PAGE
+		}else{///if REVIEWS/EDIT/USER/THE POST PAGE
 		
 		//RESET EDIT BOX BUTTONS
 			function btnReset(action){
-				$(".editCancelBtn").unbind('click').click(function(){tempPhotoEdit[5] = 'cancel';editFormPhotoAction(tempPhotoEdit, tempPhotoEdit[0], tempPhotoEdit[2]);$('.mainBase .postBaseEdit .postBaseEdit2').empty(); $('#alertScreen').css({'display':'none'});$('.postBaseEdit').css({'display':'none'});});
+				$(".editCancelBtn").unbind('click').click(function(){ clearTimeout(genericTimer); tempPhotoEdit[5] = 'cancel';editFormPhotoAction(tempPhotoEdit, theChosenArray);$('.mainBase .postBaseEdit .postBaseEdit2').empty(); $('#alertScreen').css({'display':'none'});$('.postBaseEdit').css({'display':'none'});});
 				$(".regEditSubmitBtn").html('Save and Continue');	
 				$('.regEditSubmitBtn').unbind('click').click(function(){action();});
 			}
@@ -575,6 +576,7 @@ var editObject = {
 			switch(subKind){
 				//EDITING A POSTING
 			case 'editPost':
+			editssSec = ssSec;
 				if(aux!='delete'){
 					
 					screenAndAlert();
@@ -594,7 +596,7 @@ var editObject = {
 						}
 						var theChosenArray = null;
 						if(chosenPage=='thePost'){
-							theChosenArray = theSelectedPostInfo;
+							theChosenArray = thePostingArrayParsed[oORn][whichSubList];
 						}else{
 							theChosenArray = userEditInfoArray[oORn][whichSubList];
 						}
@@ -626,6 +628,7 @@ var editObject = {
 								$(".mainBase .postBaseEdit #"+whichKind+"Categories").html("Listing category: <select name='"+whichKind+"GoodsCategory' id='"+whichKind+"GoodsCategory' style='display: inline;'></select><select name='"+whichKind+"ServicesCategory' id='"+whichKind+"ServicesCategory' style='display: inline;'></select>").css({"color": "#333333", "font-size": "1em", "margin-top":"30px"});
 								$(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory").prepend("<option value='please choose...'>please choose...</option>");
 								$(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory").prepend("<option value='please choose...'>please choose...</option>");
+									
 									
 									for(i=0; i<categoriesArray.length; i++){
 										if(categoriesArray[i][2]=="g"){
@@ -715,8 +718,9 @@ var editObject = {
 								}
 												
 								$(".mainBase .postBaseEdit #post-captchaEdit .editCancelBtn").unbind('click').click(function(){
+																										 clearTimeout(genericTimer); 
 																										tempPhotoEdit[5] = 'cancel';
-																										editFormPhotoAction(tempPhotoEdit, tempPhotoEdit[0], tempPhotoEdit[2]);
+																										editFormPhotoAction(tempPhotoEdit, theChosenArray);
 																										$(".mainBase .postBaseEdit .postBaseEdit2").empty();
 																										$('#alertScreen').css({'display':'none'});
 																										$('.postBaseEdit').css({'display':'none'});
@@ -732,42 +736,43 @@ var editObject = {
 										 genTimerObject.genTimer();
 										 $.ajax({ type: "POST", url:'control/verifyUser.php', data: "type=basic&user="+userName+"&pass="+passWord+"&ssSec="+editssSec+"", success: function(confirmi){
 											 clearTimeout(genericTimer); confirmi = $.trim(confirmi); 
-											 if(confirmi!='X11' && confirmi!='X10'){ 
-											 editssSec = confirmi; 
+											 if(confirmi!='X11' && confirmi!='X10'){
+											 ssSec = confirmi; 
+											 editssSec = ssSec;
 											 if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='g'){ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 'g'; 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); 
-											 if(userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } 
+											 theChosenArray[9] = 'g'; 
+											 theChosenArray[11] = $(".mainBase .postBaseEdit #"+whichKind+"GoodsCategory option:selected").val(); 
+											 if(theChosenArray[11]=='please choose...'){ 
+											 theChosenArray[11]=null; } 
 											 }else if($(".mainBase .postBaseEdit input[name='"+whichKind+"GoodsServices"+whichOne+"']:checked").val()=='s'){ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][9] = 's'; 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); 
-											 if(userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=='please choose...'){ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11]=null; } } 
+											 theChosenArray[9] = 's'; 
+											 theChosenArray[11] = $(".mainBase .postBaseEdit #"+whichKind+"ServicesCategory option:selected").val(); 
+											 if(theChosenArray[11]=='please choose...'){ 
+											 theChosenArray[11]=null; } } 
 											 if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val().length==0){ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = null; 
+											 theChosenArray[13] = null; 
 											 }else{ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][13] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(); } 
-											 if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val().length==0){ userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][16] = null; 
+											 theChosenArray[13] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Title"+whichOne+"").val(); } 
+											 if($(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val().length==0){ theChosenArray[16] = null; 
 											 }else{ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][16] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(); } 
+											 theChosenArray[16] = $(".mainBase .postBaseEdit #post-"+whichKind+"FormMiddle #"+whichKind+"Posting"+whichOne+"").val(); } 
 											 if($(".mainBase .postBaseEdit input[name='"+whichKind+"EmailNotes"+whichOne+"']").is(':checked')){ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '2'; 
+											 theChosenArray[10] = '2'; 
 											 }else{ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][10] = '1'; 
+											 theChosenArray[10] = '1'; 
 											 } 
-											 if(whichKind=='need'){ userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][8] = '2'; } 
+											 if(whichKind=='need'){ theChosenArray[8] = '2'; } 
 											 if($(".mainBase .postBaseEdit input[name="+whichKind+"Money"+whichOne+"]").is(':checked')){ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '2'; 
+											 theChosenArray[14] = '2'; 
 											 }else{ 
-											 userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][14] = '1'; 
+											 theChosenArray[14] = '1'; 
 											 } 
-											 var specificPostingStateID = userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][6]; 
+											 var specificPostingStateID = theChosenArray[6]; 
 											 if(whichKind=='offer'){ tempPhotoEdit[5] = 'save'; 
-											 editFormPhotoAction(tempPhotoEdit, whichSubList, whichSubList);
+											 editFormPhotoAction(tempPhotoEdit, theChosenArray);
 											 } 
 											 var theArray = new Array(); 
-											 theArray = {'s1':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][9], 's2':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][11], 's3':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][13], 's4':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][16], 's5':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][10], 's6':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][8], 's7':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][14], 's8':userEditInfoArray[tempPhotoEdit[0]][tempPhotoEdit[2]][15], 's9':whichKind}; 
+											 theArray = {'s1':theChosenArray[9], 's2':theChosenArray[11], 's3':theChosenArray[13], 's4':theChosenArray[16], 's5':theChosenArray[10], 's6':theChosenArray[8], 's7':theChosenArray[14], 's8':theChosenArray[15], 's9':whichKind}; 
 											 genTimerObject.genTimer(); 
 											 var form = new Array(); form = {'di':'edit', 'd2':'editPost', 'i1':postID, 's2':userName, 's3':passWord, 's4':editssSec, 'i2':specificPostingStateID, 'a1': theArray}; 
 											 $.post("control/formValidate.php", {form:form}, function(confirmation){ 
@@ -777,10 +782,11 @@ var editObject = {
 											 }else{
 												 $('.mainBase .postBaseEdit .postBaseEdit2').empty(); 
 												 $('#alertScreen').css({'display':'none'}); 
-												 $('.postBaseEdit').css({'display':'none'}); 
-												 alertObject.alertBox('SUCCESS!', updatePostSuccess, 'ferror', editRefresh, null, null); } }); 
-											}else if(confirmi=='X10'){ 
-												 alertObject.alertBox('ALERT!', invalidUP, 'ferror', editRefresh, null, null); 
+												 $('.postBaseEdit').css({'display':'none'});
+												 confirmUserObject.confirmUser();
+												 alertObject.alertBox('SUCCESS!', updatePostSuccess, 'alert', null, null, null);btnReset(editSave);retrieveEditList(editssSec); } }); 
+											}else if(confirmi=='X10'){
+												 alertObject.alertBox('ALERT!', invalidUP, 'gerrorPlus', editRefresh, '.postBaseEdit', editRefresh); 
 											}else if(confirmi=='X11'){ 
 												 alertObject.alertBox('ALERT!', codeAlrt, 'gerrorPlus', btnReset, '.postBaseEdit', editSave); } } }); }
 											
@@ -798,13 +804,24 @@ var editObject = {
 							    genTimerObject.genTimer();//start the timeout timer
 								 $('.list-deletePost:eq('+whichOne+')').html('Please wait...<img src="images/loaderSm.gif"/>');
 												 var form = new Array();
-												 form = {'di':'edit', 'd2':'deletePost', 'i1':postID, 's2':greetingUserName, 's3':passWord, 's4':editssSec, 's5':whichKind};
+												 form = {'di':'edit', 'd2':'deletePost', 'i1':postID, 's2':userName, 's3':passWord, 's4':editssSec, 's5':whichKind};
 												
 												 $.post('control/formValidate.php', {'form':form}, function(confirmer){
 														clearTimeout(genericTimer);
 														confirmer = $.trim(confirmer);
 													 switch(confirmer){ 
-													 case '1': cleanSlate(); $('#alertScreen').css({'display':'none'}); alertObject.alertBox('SUCCESS!', deleteSuccess, 'alert', null, null, null); retrieveEditList(editssSec); break; 
+													 case '1': 
+													 			if(chosenPage=='thePost'){
+																	if(chosenPostingID==postID){
+																		$('#alertScreen').css({'display':'none'}); alertObject.alertBox('SUCCESS!', deleteSuccess, 'ferror', refreshBackOne, null, null); break;
+																	}else{
+																		confirmUserObject.confirmUser();
+																		$('#alertScreen').css({'display':'none'}); alertObject.alertBox('SUCCESS!', deleteSuccess, 'alert', null, null, null); retrieveEditList(editssSec); break;
+																	}
+																}else{
+																	confirmUserObject.confirmUser();
+																	cleanSlate(); $('#alertScreen').css({'display':'none'}); alertObject.alertBox('SUCCESS!', deleteSuccess, 'alert', null, null, null); retrieveEditList(editssSec); break;
+																}
 													 case'X10': $('#alertScreen').css({'display':'none'}); alertObject.alertBox('ALERT!', errorAlrt, 'alert', null, null, null); break; }
 												});
 				}
@@ -1144,7 +1161,7 @@ fetchCityArray:function(state, citiesDropDown){
 							try {
 							 	localStorage.setItem("zoofaroo_"+state+"_cities",JSON.stringify(stateResults));
 							 } catch (e) {if(e=='Error: QUOTA_EXCEEDED_ERR: DOM Exception 22'){
-	 									 	alert('An error has occured while loading page.  This site utlizes HTML 5\'s local storage to speed up page loading.  Please check to make sure that your browser is not in \'Private Browsing\' mode.'); //data wasn't successfully saved due to quota exceed so throw an error
+	 									 	alert('An error has occured while loading page.  Please check to make sure that your browser is not in \'Private Browsing\' mode.'); //data wasn't successfully saved due to quota exceed so throw an error
 									 	}
 								}
 						}
@@ -1278,11 +1295,11 @@ fetchStateArray:function(whichPage){
 								   //commit results to localStorage
 								   if(setStates && Modernizr.localstorage){
 									   try {
-									 localStorage.setItem('zoofaroo_states',JSON.stringify(homeResults));
-									 } catch (e) {if(e=='Error: QUOTA_EXCEEDED_ERR: DOM Exception 22'){
+									 		localStorage.setItem('zoofaroo_states',JSON.stringify(homeResults));
+									 	} catch (e) {if(e=='Error: QUOTA_EXCEEDED_ERR: DOM Exception 22'){
 	 									 	alert('An error has occured while loading page.  This site utlizes HTML 5\'s local storage to speed up page loading.  Please check to make sure that your browser is not in \'Private Browsing\' mode.'); //data wasn't successfully saved due to quota exceed so throw an error
 									 	}
-									 }
+								}  
 								   }
 						   }else{
 							 alertObject.alertBox('ALERT!', errorAlrt, 'ferror', errorReset, null, null);   
@@ -1306,11 +1323,11 @@ var genTimerObject = {
 var listArrayParsed = new Array();
 var postListArrayParsed = new Array();
 var userEditInfoArray = new Array();
-var uniqueArrayParsed = new Array();
+var theListArray = new Array();
 var listTitleAdj = new Array();
 var pageCount=null;
 var pgBtnPosition=null;
-var postsPerPage=10;
+var postsPerPage=20;
 var listStart = 0;
 var listFinish = listStart+postsPerPage;//used only for search or postlist == pagination
 var listTicker = 0;
@@ -1320,88 +1337,100 @@ var userBusiness = null;
 var userRatingCount = null;
 var userRatingPercent = null;
 var userLink = null;
+var offerPostCount = null;
+var needPostCount = null;
+var totalPostCount = null;
+var postCount=0;
+var listDisplayOfferNeed = null;
 
 //calls to fill the list
-function populateList(tAdjusted, kind){
-			chosenOfferNeed = $.trim(kind);
-			//listTicker++;
+function populateList(theFirstArray, theSecondArray, kind){
+				
+				listDisplayOfferNeed = $.trim(kind);
+				if(listDisplayOfferNeed=='Needed'){theFirstArray=theSecondArray};//if offers is empty then default to the needs
 				 for(j=listStart; j<listFinish; j++){
-					var year = uniqueArrayParsed[j][3].substring(0,4);
-					var month = uniqueArrayParsed[j][3].substring(5,7);
-					var day = uniqueArrayParsed[j][3].substring(8);
+					var year = theFirstArray[j][3].substring(0,4);
+					var month = theFirstArray[j][3].substring(5,7);
+					var day = theFirstArray[j][3].substring(8);
 					
 					var dateAdjusted = ''+month+'-'+day+'-'+year+'';
 					
-					var postLocaleLinkPkg = '<div id="headerFooter-city">Post Location:&nbsp;'+uniqueArrayParsed[j][17]+'&nbsp;&nbsp;(<a href="'+uniqueArrayParsed[j][7]+'/'+uniqueArrayParsed[j][5]+'.html">'+uniqueArrayParsed[j][5].replace(/__/g, '/').replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a href="'+uniqueArrayParsed[j][7]+'.html">'+uniqueArrayParsed[j][7].replace(/__/g, '/').replace(/_/g, ' ')+'</a></div>)';
+					var postLocaleLinkPkg = '<div id="headerFooter-city">Post Location:&nbsp;'+theFirstArray[j][17]+'&nbsp;&nbsp;(<a href="'+theFirstArray[j][7]+'/'+theFirstArray[j][5]+'.html">'+theFirstArray[j][5].replace(/__/g, '/').replace(/_/g, ' ')+'</a></div><div id="headerFooter-state">&nbsp;,&nbsp;<a href="'+theFirstArray[j][7]+'.html">'+theFirstArray[j][7].replace(/__/g, '/').replace(/_/g, ' ')+'</a></div>)';
 					
 				
-					 if(uniqueArrayParsed[j][18][0]!='0'){
-						 userRatingCount = uniqueArrayParsed[j][18][0];
-			 	 		 userRatingPercent = "<span style='color:#669900;'>"+uniqueArrayParsed[j][18][1]+"%</span>";
-						 userBusiness = uniqueArrayParsed[j][18][2];
+					 if(theFirstArray[j][18][0]!='0'){
+						 userRatingCount = theFirstArray[j][18][0];
+			 	 		 userRatingPercent = "<span style='color:#669900;'>"+theFirstArray[j][18][1]+"%</span>";
+						 userBusiness = theFirstArray[j][18][2];
 					 }else{
 						userRatingCount = '0'; 
 						userRatingPercent = "";
 					 }
 					
-					userLink = '<a href="user/'+uniqueArrayParsed[j][1]+'.html" style="text-decoration:none"><div class="buttonWrap reviewLink">'+uniqueArrayParsed[j][1]+'('+userRatingCount+')&nbsp;<b>'+userRatingPercent+'</b></div></a>';
+					userLink = '<a href="user/'+theFirstArray[j][1]+'.html" style="text-decoration:none"><div class="buttonWrap reviewLink">'+theFirstArray[j][1]+'('+userRatingCount+')&nbsp;<b>'+userRatingPercent+'</b></div></a>';
 					
-					var postUserLinkPkg = '<div id="list-Username" name="'+uniqueArrayParsed[j][1]+'"><span style="float:left;">Posted by:&nbsp;</span>'+userLink+'</div>';
+					var postUserLinkPkg = '<div id="list-Username" name="'+theFirstArray[j][1]+'"><span style="float:left;">Posted by:&nbsp;</span>'+userLink+'</div>';
 					
 					var hasPhoto='';
-					if(uniqueArrayParsed[j][8]!='1' && chosenOfferNeed!='Needed'){
+					if(theFirstArray[j][8]!='1' && listDisplayOfferNeed!='Needed'){
 						hasPhoto = '&nbsp;&nbsp;<img src="images/photo.png" alt="This posting has a photo" title="This posting has a photo"/>';
 					}else{
 						hasPhoto = '';
 					}
 					
-					if(uniqueArrayParsed[j][8]!='1' && chosenOfferNeed!='Needed'){
+					if(theFirstArray[j][8]!='1' && listDisplayOfferNeed!='Needed'){
 						$('.secondListBase .listPost:eq('+j+') #list-offerTitle #list-offerLink #hasPic').unbind('click').click(function(){
 						alertObject.alertBox('THIS POST HAS A PHOTO', hasPhotoGraph, 'alert', null, null, null);																		 
 																				});
 					}
 					
 					
-				   if(chosenOfferNeed == 'Offered'){
-						var primarySection = "<div id='list-offerTitle'><div id='list-offerIcon'><div id='list-offerTag'>offered</div></div><div id='list-offerLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+uniqueArrayParsed[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+uniqueArrayParsed[j][7]+"/"+uniqueArrayParsed[j][5]+"/"+chosenOfferNeed+"/"+uniqueArrayParsed[j][12].replace(/ /g, '_')+"/"+uniqueArrayParsed[j][15]+".html'> <div id='offerTitle'>"+uniqueArrayParsed[j][13]+"</div></a><div id='hasPic'>"+hasPhoto+"</div></div></div>";
-						if(uniqueArrayParsed[j][1]!=userName||chosenPage=='postList'||chosenPage=='search'||chosenPage=='searchAdvanced'){//not logged in
+				   if(listDisplayOfferNeed == 'Offered'){
+					   if(theFirstArray[j][15]!=chosenPostingID){
+					  	 var remainingOffers = theFirstArray[j][20]-1;
+						var primarySection = "<div id='list-offerTitle'><div id='list-offerIcon'><div id='list-offerTag'>offered</div></div><div id='list-offerLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+theFirstArray[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+theFirstArray[j][7]+"/"+theFirstArray[j][5]+"/"+listDisplayOfferNeed+"/"+theFirstArray[j][12].replace(/ /g, '_')+"/"+theFirstArray[j][15]+".html'> <div id='offerTitle'>"+theFirstArray[j][13]+"</div></a><div id='hasPic'>"+hasPhoto+"</div></div></div>";
+						if(theFirstArray[j][1]!=userName||chosenPage=='postList'||chosenPage=='search'||chosenPage=='searchAdvanced'){//not logged in
 							if(chosenPage!='user'){
-								var secondarySection = "<div id='list-needTitle'  style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;also&nbsp;has&nbsp;<div id='list-needIcon'><div id='list-needTag'>"+uniqueArrayParsed[j][21]+"&nbsp;needs</div></div>&nbsp;and&nbsp;<div id='list-offerIcon'><div id='list-offerTag'>"+uniqueArrayParsed[j][20]+"&nbsp;more&nbsp;offers</div></div></div>";
-								$('.secondListBase').append('<div class="boxGradient listPostListPg listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
+								var secondarySection = "<div id='list-needTitle'  style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;also&nbsp;has&nbsp;<div id='list-needIcon'><div id='list-needTag'>"+theFirstArray[j][21]+"&nbsp;needs</div></div>&nbsp;and&nbsp;<div id='list-offerIcon'><div id='list-offerTag'>"+remainingOffers+"&nbsp;more&nbsp;offers</div></div></div>";
+								$('.secondListBase').append('<div class="boxGradient listPostListPg listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+theFirstArray[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}else if(chosenPage=='user'){
 								var secondarySection = "";	
-								$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
+								$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+theFirstArray[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}
-						}else if(uniqueArrayParsed[j][1]==userName&&passWord!=null&&chosenPage!='postList'&&chosenPage!='search'&&chosenPage!='searchAdvanced'){//logged in
+						}else if(theFirstArray[j][1]==userName&&passWord!=null&&chosenPage!='postList'&&chosenPage!='search'&&chosenPage!='searchAdvanced'){//logged in
 							var secondarySection = "";
-							$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
+							$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+theFirstArray[j][15]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+theFirstArray[j][15]+'" aux="'+j+'" type="offer" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
 						}
-				   }else if(chosenOfferNeed == 'Needed'){
-						var primarySection = "<div id='list-needTitle'><div id='list-needIcon'><div id='list-needTag'>needed</div></div><div id='list-needLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+uniqueArrayParsed[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+uniqueArrayParsed[j][7]+"/"+uniqueArrayParsed[j][5]+"/"+chosenOfferNeed+"/"+uniqueArrayParsed[j][12].replace(/ /g, '_')+"/"+uniqueArrayParsed[j][15]+".html'> <div id='needTitle'>"+uniqueArrayParsed[j][13]+"</div></a></div><div id='hasPic'>"+hasPhoto+"</div></div>";
-						if(uniqueArrayParsed[j][1]!=userName||chosenPage=='postList'||chosenPage=='search'||chosenPage=='searchAdvanced'){//not logged in
+					   }
+				   }else if(listDisplayOfferNeed == 'Needed'){
+					   if(theFirstArray[j][15]!=chosenPostingID){
+					   var remainingNeeds = theFirstArray[j][21]-1;
+						var primarySection = "<div id='list-needTitle'><div id='list-needIcon'><div id='list-needTag'>needed</div></div><div id='list-needLink'>&nbsp;&#187;&nbsp;<div id='titleCategory'>"+theFirstArray[j][12].replace(/_/g, ' ')+"</div>&nbsp;&#187;&nbsp;<a href='"+theFirstArray[j][7]+"/"+theFirstArray[j][5]+"/"+listDisplayOfferNeed+"/"+theFirstArray[j][12].replace(/ /g, '_')+"/"+theFirstArray[j][15]+".html'> <div id='needTitle'>"+theFirstArray[j][13]+"</div></a></div><div id='hasPic'>"+hasPhoto+"</div></div>";
+						if(theFirstArray[j][1]!=userName||chosenPage=='postList'||chosenPage=='search'||chosenPage=='searchAdvanced'){//not logged in
 							if(chosenPage!='user'){
-								var secondarySection = "<div id='list-offerTitle' style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;has&nbsp;<div id='list-offerIcon'><div id='list-offerTag'>"+uniqueArrayParsed[j][20]+"&nbsp;offers</div></div>&nbsp;and&nbsp;<div id='list-needIcon'><div id='list-needTag'>"+uniqueArrayParsed[j][21]+"&nbsp;more&nbsp;needs</div></div></div>";
-								$('.secondListBase').append('<div class="boxGradient listPostListPg listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
+								var secondarySection = "<div id='list-offerTitle' style='font-size: 0.85em; float: right; padding-right: 10px;'>"+userLink+"&nbsp;has&nbsp;<div id='list-offerIcon'><div id='list-offerTag'>"+theFirstArray[j][20]+"&nbsp;offers</div></div>&nbsp;and&nbsp;<div id='list-needIcon'><div id='list-needTag'>"+remainingNeeds+"&nbsp;more&nbsp;needs</div></div></div>";
+								$('.secondListBase').append('<div class="boxGradient listPostListPg listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+theFirstArray[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}else if(chosenPage=='user'){
 								var secondarySection = "";
-								$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+uniqueArrayParsed[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
+								$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1"><div class="buttonWrap abuseReport" aux="'+theFirstArray[j][15]+'">!</div>'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'</div>'+primarySection+''+secondarySection+'</div><br/>');
 							}
-				   		}else if(uniqueArrayParsed[j][1]==userName&&passWord!=null&&chosenPage!='postList'&&chosenPage!='search'&&chosenPage!='searchAdvanced'){//logged in
+				   		}else if(theFirstArray[j][1]==userName&&passWord!=null&&chosenPage!='postList'&&chosenPage!='search'&&chosenPage!='searchAdvanced'){//logged in
 						var secondarySection = "";
-						$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+uniqueArrayParsed[j][15]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
+						$('.secondListBase').append('<div class="boxGradient listPost"><div class="sectionHeaderFormat ltGrayHeader sectionHeader1">'+postUserLinkPkg+'<div id="list-Date">Posted on:&nbsp;&nbsp;'+dateAdjusted+'</div>'+postLocaleLinkPkg+'<div class="buttonWrap deletePostColor list-deletePost" postID="'+theFirstArray[j][15]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">delete</div><div class="buttonWrap editPostColor list-editPost" postID="'+theFirstArray[j][15]+'" aux="'+j+'" type="need" style="margin-top:-4px; font-weight:normal;">edit</div></div>'+primarySection+''+secondarySection+'</div><br/>');
 						 
 						}
+					   }
 				   }
 				   
-				   if(uniqueArrayParsed[j][5]==uniqueArrayParsed[j][7]){//city and state are the same as in Maine/Maine for states that only have one section
+				   if(theFirstArray[j][5]==theFirstArray[j][7]){//city and state are the same as in Maine/Maine for states that only have one section
 					//hide the state in the header
 					$('.secondListBase .listPost .sectionHeader1 #headerFooter-state').hide();
 					}
 				   
 					
-					mOfferObject.mOffer(j, chosenOfferNeed);
+					mOfferObject.mOffer(theFirstArray, j, listDisplayOfferNeed);
 					
-					if(uniqueArrayParsed[j][8]!='1' && chosenOfferNeed!='Needed'){
+					if(theFirstArray[j][8]!='1' && listDisplayOfferNeed!='Needed'){
 						var jPlus = j;
 						$('.secondListBase .listPost:eq('+jPlus+') #list-offerTitle #list-offerLink #hasPic').unbind('click').click(function(){
 						alertObject.alertBox('THIS POST HAS A PHOTO', hasPhotoGraph, 'alert', null, null, null);																		 
@@ -1409,21 +1438,21 @@ function populateList(tAdjusted, kind){
 					}
 					
 					//user name link alt info
-					$('.secondListBase .listPost:eq('+j+') .reviewLink').attr({ title: "Check out "+uniqueArrayParsed[j][1]+"'s User Page", alt:"Check out "+uniqueArrayParsed[j][1]+"'s User Page"});
+					$('.secondListBase .listPost:eq('+j+') .reviewLink').attr({ title: "Check out "+theFirstArray[j][1]+"'s User Page", alt:"Check out "+theFirstArray[j][1]+"'s User Page"});
 					
-					
-					if(uniqueArrayParsed[j][1]==userName&&passWord!=null){//this doesn't need to check the page but rather if the user is logged in and these are his/her posts
+					var editBtnsPosi = $('.secondListBase .listPost').length-1;
+					if(theFirstArray[j][1]==userName&&passWord!=null&&$('.secondListBase .listPost:eq('+editBtnsPosi+') .list-editPost').is(":visible")&&$('.secondListBase .listPost:eq('+editBtnsPosi+') .list-deletePost').is(":visible")){//this doesn't need to check the page but rather if the user is logged in and these are his/her posts
 						//EDIT BUTTONS
-						var editBtnsPosi = $('.secondListBase .listPost').length-1;
-								$('.secondListBase .listPost:eq('+editBtnsPosi+') .list-editPost').unbind('click').click(function(){editObject.editBox($(this).attr('type'), editBtnsPosi, $(this).attr('postID'), $(this).attr('aux'), 'editPost');});
+								$('.secondListBase .listPost:eq('+editBtnsPosi+') .list-editPost').unbind('click').click(function(){editObject.editBox($(this).attr('type'), $('.secondListBase .listPost').length-1, $(this).attr('postID'), $(this).attr('aux'), 'editPost');});
 								   $('.secondListBase .listPost:eq('+editBtnsPosi+') .list-deletePost').unbind('click').click(function(){								
-											editObject.editBox($(this).attr('type'), editBtnsPosi, $(this).attr('postID'), 'delete', 'editPost');
+											editObject.editBox($(this).attr('type'), $('.secondListBase .listPost').length-1, $(this).attr('postID'), 'delete', 'editPost');
 									});
 					}else{
+						
 					//abuse buttons
 					 $('.secondListBase .listPost:eq('+j+') .abuseReport').unbind('click').click(function(){
 							var thisOne = $(this).attr('aux');
-							alertObject.alertBox('ALERT!', reportConfirm, 'decision', sendReport, thisOne, chosenOfferNeed);
+							alertObject.alertBox('ALERT!', reportConfirm, 'decision', sendReport, thisOne, listDisplayOfferNeed);
 					 });
 					 
 					 $('.secondListBase .listPost:eq('+j+') .abuseReport').attr({ 
@@ -1433,27 +1462,39 @@ function populateList(tAdjusted, kind){
 			
 					} 
 					 
-					 ///if REVIEWS/EDIT PAGE
-					 if(j==listFinish-1 && (chosenPage=='user' || chosenPage=='edit')){
-						 if(chosenOfferNeed!='Needed' && needPostCount!='0'){
+					 ///if REVIEWS/EDIT/USER/THE POST PAGE
+					 if(j==listFinish-1 && (chosenPage=='user' || chosenPage=='edit' || chosenPage=='thePost')){
+						 if(listDisplayOfferNeed!='Needed' && needPostCount!='0'){
 							 pageCount = 1;
 							 listTicker = 0;
 							 postCount = needPostCount;
 							 listFinish = postCount;
-							 uniqueArrayParsed = userEditInfoArray[1];
-							 populateList(uniqueArrayParsed[listTicker][13], 'Needed');
+							 theFirstArray = theSecondArray
+							 populateList(theFirstArray, theSecondArray, 'Needed');
+						 }
+						 if(chosenPage=='thePost'){
+							 if(chosenOfferNeed=='Offered'){
+								 var offerPostCountAdjusted = offerPostCount-1;
+								  var needPostCountAdjusted = needPostCount;
+							 }else{
+								 var needPostCountAdjusted = needPostCount-1;
+								  var offerPostCountAdjusted = offerPostCount;
+							 }
+							$('#review-postings-greeting').html(''+userLink+'&nbsp;also&nbsp;has&nbsp;<div id="list-offerTag">'+offerPostCountAdjusted+'&nbsp;other&nbsp;offer</div> postings and <div id="list-needTag">'+needPostCountAdjusted+'&nbsp;other&nbsp;need</div> postings.').css({'font-size':'inherit'});
+						 }else{
+							$('#review-postings-greeting').html('<div class="boxGradient editUserPgDivider listPost">A total of&nbsp;<span style="color:#3366cc">'+totalPostCount+'</span>&nbsp;posting(s) found under username:&nbsp;<span style="color:#3366cc">'+greetingUserName+'</span></div>');
 						 }
 					 }
 					 
 					 //if SEARCH PAGE
 					  if(j==listFinish-1 && (chosenPage=='search'||chosenPage=='searchAdvanced')){
 						  
-						 if(chosenOfferNeed!='Needed' && needPostCount!='0'){
+						 if(listDisplayOfferNeed!='Needed' && needPostCount!='0'){
 							 listTicker = 0;
 							 postCount = needPostCount;
 							 listFinish = needPostCount;
-							 uniqueArrayParsed = searchListArrayParsed[1];
-							 populateList(uniqueArrayParsed[listTicker][13], 'Needed');
+							 theFirstArray = theSecondArray
+							 populateList(theFirstArray, theSecondArray, 'Needed');
 						 }
 					 }
 					
@@ -1493,7 +1534,7 @@ function populateList(tAdjusted, kind){
 									//$('#preloader').append(myImagePR);
 									$('.secondListBase').empty();
 									//begin cycle for new page - sends offer title to function to be adjusted
-									populateList(uniqueArrayParsed[listTicker][13], chosenOfferNeed);
+									populateList(theFirstArray, listDisplayOfferNeed);
 									
 								});
 							});
@@ -1504,6 +1545,7 @@ function populateList(tAdjusted, kind){
 					 
 					$('.secondListBase').fadeIn('fast');
 				 }
+	
 }
 
 function cleanSlate(){
@@ -1552,8 +1594,9 @@ var localeObject = {
 
 
 
+
 //loginAction
-	var whereTo = null;
+		var whereTo = null;
 	var userName = null;
 	var passWord = null;
 	var ssSec = null;
@@ -1578,7 +1621,7 @@ var localeObject = {
 		passWord = datap;
 		userName = uN;
 		loggedInInformation(userName);
-		if(chosenPage=='post' || chosenPage=='edit' || chosenPage=='login' || chosenPage=='user' || chosenPage=='thePost'){
+		//if(chosenPage=='post' || chosenPage=='edit' || chosenPage=='login' || chosenPage=='user' || chosenPage=='thePost'){
 		if(Modernizr.localstorage){
 			try {
 				localStorage.setItem('zoofaroo_username',userName); 
@@ -1591,11 +1634,12 @@ var localeObject = {
 								}
 		}
 		return datas;
-		}
+		//}
 	}
 	
 								 
 							function lValidate(un,pw,org){
+								
 								genTimerObject.genTimer();//start the timeout timer
 								
 								var cform = new Array();
@@ -1682,14 +1726,12 @@ var localeObject = {
 														
 												if(returned=='houstonMatch'){
 															
-															ssSec = startSession(userN,data,1);
-															if(chosenPage=='post' || chosenPage=='edit' || chosenPage=='login' || chosenPage=='user' || chosenPage=='thePost'){
-															loginConfirmed(datas, dataid, userName);
-															}
+															ssSec = startSession(userN,data);
+															loginConfirmedObject.loginConfirmed(ssSec, dataid, userName);
 															
 												}else if(returned=='sameuseMatch'){
 															
-															ssSec = startSession(userN,data,0);
+															ssSec = startSession(userN,data);
 													
 															$('.replyPostingBtn').hide();
 															$('.postReplySecCode').hide();
@@ -1700,7 +1742,7 @@ var localeObject = {
 															
 												}else if(returned=='mltcnctMatch'){
 															
-															ssSec = startSession(userN,data,0);
+															ssSec = startSession(userN,data);
 													
 															$('.replyPostingBtn').hide();
 															$('.postReplySecCode').hide();
@@ -1711,7 +1753,7 @@ var localeObject = {
 															
 												}else if(returned=='alrdyrnMatch'){//user has already left a review AND rating for this user
 															
-															ssSec = startSession(userN,data,0);
+															ssSec = startSession(userN,data);
 															
 															$('.reviewFormBase1 #post-form #loginFormBody').empty();
 															$('.reviewFormBase1 #post-form #loginFormBody').html('Our records show that you\'ve already left a rating and review for this user.<br/>If you feel you are getting this message in error please feel free to contact us.').css({'color':'#990000', 'text-align':'center'});
@@ -1728,8 +1770,8 @@ var localeObject = {
 															$('.reviewFormBase2 #reviews-recommend').html('Our records show that you\'ve left a rating for this user but not a review.  Why not leave a review too?').css({'color':'#669900', 'font-size':'1em', 'text-align':'center'});
 															recUser = 'alrdyraMatch';
 															
-															ssSec = startSession(userN,data,1);
-															loginConfirmed(datas, dataid, userName);
+															ssSec = startSession(userN,data);
+															loginConfirmedObject.loginConfirmed(datas, dataid, userName);
 															
 												}else if(returned=='mltismnMatch'){//cannot leave a review for yourself
 															$('.reviewFormBase1').css({'height':'60px'}); 
@@ -1737,8 +1779,7 @@ var localeObject = {
 															$('.reviewFormBase1 #post-form #loginFormBody').empty().html('We\'re sorry, but you cannot leave a review for yourself.');
 															$('#review-account-greeting-btns #leaveReview').hide();//hide the 'leave a review' button
 															
-															ssSec = startSession(userN,data,0);
-															retrieveEditList(ssSec);
+															ssSec = startSession(userN,data);
 															
 												}else if(returned=='sorryNoMatch'){
 													userName = null;
@@ -1763,12 +1804,75 @@ function clearUser(){
 				window.location.reload();	
 }
 
-//mOffer
-var mOfferObject = {
-	mOffer:function(j, kind){
-switch(chosenPage){
+//loginConfirmed
+var loginConfirmedObject = { loginConfirmed:function(sdata, iddata, un){
+	
+	switch(chosenPage){
+			
+	case 'post':
+	chosenUserID = iddata;
+	ssSec = sdata;
+	$('.loginBase2').html('<div class="sectionHeaderFormat grayHeader"><h2 id="header-title">Post Your Own Offers and Needs!</h2></div>');
+	$('#postingForms').fadeIn('fast');//postingForms fade in
+	$('#post-message').show();
+	$('#post-Explained').show();
+	$('.startOverBtnBottom').unbind('click').click(function(){window.location.reload();});
+	$('.secCodeRefresh').unbind('click').click(function(){secCodeRefresh();}); ///REFRESH captcha
+	$('.submitBtn').unbind('click').click(function(){
+				submitBtnAction();
+	});//submitBtn
+	break;
 	
 	case 'thePost':
+	ssSec = sdata;
+	$('#postShare-layout #postReply-form').empty();
+	$('#postingForms').fadeIn('fast');
+	$('.postReplySecCode').hide();
+	$('#postReply-message').val('').show();
+	$('.secCodeRefresh').unbind('click').click(function(){javascript:Recaptcha.reload();});
+	$('.submitBtn').unbind('click').click(function(){
+				submitBtnAction();							 		  
+	});//submitBtn
+	loaderTimer = setInterval('postHeightAdjuster()', 100);																		 
+	break;
+	
+	case 'edit':
+	ssSec = sdata;
+	chosenUserID = iddata;
+	chosenUser = un;
+	$('.loginBase2').html('<div class="sectionHeaderFormat grayHeader"><h2 id="header-title">Your ZooFaroo User Account</h2></div>');
+	retrieveEditList(ssSec);
+	break;
+	
+	case 'user':
+	ssSec = sdata;
+	$('.reviewFormBase1').css({'height':'auto'}); 
+	$('.reviewFormBase1 #post-form').hide();
+	$('.reviewFormBase1 .reviewFormBox').fadeIn('slow');
+	$('.reviewFormBase1 #review-form').fadeIn('fast');
+	$('.submitBtn').unbind('click').click(function(){
+			checkForm();									   
+	 });//review-submitBtn
+	break;
+	
+	case 'login':
+	ssSec = sdata;
+	$('.loginBase2 #post-form').hide();
+	$('.loginBase2 .grayHeader #header-title').html('You are currently logged in<div id="logStatus"><div class="logOut" style="float:right; color:#FFF;"></div></div>');
+	break;
+	
+	}//switch
+
+	
+}
+}
+
+//mOffer
+var mOfferObject = {
+	mOffer:function(theFirstArray, j, kind){
+switch(theFirstArray){
+	
+	case 'theMainPost':
 			
 			if(j=='2'){
 				if(kind=='offer'){
@@ -1784,7 +1888,7 @@ switch(chosenPage){
 	
 	default://search, edit, postList
 		
-			if(uniqueArrayParsed[j][14]=='2'){
+			if(theFirstArray[j][14]=='2'){
 				if(kind=='Offered'){
 					$('.secondListBase #list-offerLink:eq('+j+')').append('&nbsp;&nbsp;<div class=" moneyOption"><img src="images/onlyMoney.png"/></div>');
 					$('.secondListBase #list-offerLink:eq('+j+') .moneyOption').unbind('click').click(function(){
@@ -1953,32 +2057,62 @@ var quickSearchDisplayStates = {
 		}
 	}
 }
-	
-//resize
+//sortList
+var sortListObject = { sortListDisplay:function(offerArray, needArray, greetingUserName){
 
-//shareBox
-var shareObject = {
-	shareBox:function(emailOfferTitleAdj, emailNeedTitleAdj, url, oC, oT, nC, nT){
-		$('#alertScreen').css({'display':'block', 'opacity':'0.5', 'filter':'alpha(opacity=50)', 'width':$(document).width(), 'height':$(document).height()});
-		if($(window).width()<1200){
-		$('#alertScreen').css({'-webkit-transform':'scale(1.11)', '-moz-transform':'scale(1.11)', '-o-transform':'scale(1.11)', '-ms-transform':'scale(1.11)',  'margin-top':'0%'});
-		}
-		$('.postBaseShare').css({'display':'block'});
-		var scrollTop = $(window).scrollTop();
-		if(navigator.appName=='Microsoft Internet Explorer'){
-		var scrollTop = $('html').scrollTop();
-		}
-		var scrollAdjust = scrollTop-250;
-		$('.postBaseShare').css({'margin-top':scrollAdjust+'px'});
-		
-		$('.postBaseShare').load("modules/emailShareForm.php?oTAdj="+emailOfferTitleAdj+"&nTAdj="+emailNeedTitleAdj+"&u="+url+"&oC="+oC+"&oT="+oT+"&nC="+nC+"&nT="+nT+"", function(){
-																															
-																															});
+
+if(offerArray){//start with offers
+		offerPostCount = offerArray[0][19];
+		postCount = offerPostCount;//start with offers
+	if(needArray){
+		needPostCount = needArray[0][19];
+	}else{
+		needPostCount = 0;
 	}
+}else if(needArray){//if there are no offers then default to needs
+	offerPostCount = 0;
+	if(needArray){
+		needPostCount = needArray[0][19];
+		postCount = needPostCount;//start with needs
+	}else{
+		needPostCount = 0;
+	}
+	
+}else{
+	offerPostCount = 0;
+	needPostCount = 0;
+	postCount = 0;
+}
+
+totalPostCount = offerPostCount+needPostCount;
+
+if(postCount>0){
+	$('.secondListBase').fadeIn('fast');
+	
+	//since user/edit page shows an all postings list, we bypass pagination here
+		pageCount = 1;
+		listFinish = postCount;
+							  
+	//begin cycle
+	if(offerPostCount!=0){
+		//uniqueArrayParsed = offerArray;
+		populateList(offerArray, needArray, 'Offered');
+		//uniqueArrayParsed = needArray;
+	 }else{
+		//uniqueArrayParsed = needArray;
+		populateList(offerArray, needArray, 'Needed');
+		//uniqueArrayParsed = offerArray;
+	 }
+		
+}else{//no postings to edit
+$('.secondListBase').fadeIn('fast');
+$('#review-postings-greeting').html('<div class="boxGradient editUserPgDivider listPost">A total of&nbsp;<span style="color:#3366cc">0</span>&nbsp;postings found under username:&nbsp;<span style="color:#3366cc">'+greetingUserName+'</span></div>');
+}
+
+}
 }
 
 //variables
-//static variables
 //static variables
 var chosenPage = null;
 var chosenRegionName = null;
