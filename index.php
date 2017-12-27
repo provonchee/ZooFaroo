@@ -274,6 +274,7 @@ if (!file_exists('./modules/'.$page)) {
 	$page_title = 'ZooFaroo - Be social.  Trade local.';
 }
 
+
 if($p!='comingSoon' && $p!='updateIE'){
 include_once ('./includes/header.php');
 }
